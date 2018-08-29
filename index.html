@@ -74,7 +74,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.4.0" color="#222">
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
 
 
 
@@ -828,7 +828,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/搞定css三列布局/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/水平且垂直居中方法（9种）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -847,8 +847,8 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/搞定css三列布局/" itemprop="url">
-                  搞定css三列布局
+                <a class="post-title-link" href="/2018/08/27/水平且垂直居中方法（9种）/" itemprop="url">
+                  水平且垂直居中方法（9种）
                 </a>
               
             
@@ -874,7 +874,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
                 
               
 
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:38:15" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:39:05" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
             
 
             
@@ -893,8 +893,8 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/27/搞定css三列布局/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/搞定css三列布局/" itemprop="commentCount"></span>
+                <a href="/2018/08/27/水平且垂直居中方法（9种）/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/水平且垂直居中方法（9种）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -924,344 +924,14 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
       
         
           
-          
-谈到布局，首先就要想到定位，当别人问我，css的position定位有哪些取值，分别表示什么意思？呃…..
-
-定位position有六个属性值：static、relative、absolute、fixed、sticky和inherit。
-
-static（默认）：元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分；行内元素则会创建一个或多个行框，置于父级元素中。
-relative：元素框相对于之前正常文档流中的位置发生偏移，并且原先的位置仍然被占据。发生偏移的时候，可能会覆盖其他元素。
-absolute：元素框不再占有文档位置，并且相对于包含块进行偏移（所谓包含块就是最近一级外层元素p
+          水平且垂直居中方法有哪些？这在实际工作中经常用到，小记一下。
+演示HTML结构1234567&lt;div id="div1" class="div"&gt;	&lt;div id="div2"&gt;		&lt;div id="div3"&gt;		    &lt;span&gt;i&lt;/span&gt;		&lt;/div&gt;	&lt;/div&gt;&lt;/div&gt;
+一般的，水平居中相对垂直居中简单很多，对于内联元素，父级元素设置text-align: center;；对于块级元素，子级元素设置margin: 0 auto;。以下结合水平居中强调实现垂直居中。
+1、已知父
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/搞定css三列布局/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTTP协议总结（整理版）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/HTTP协议总结（整理版）/" itemprop="url">
-                  HTTP协议总结（整理版）
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:26:34" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/27/HTTP协议总结（整理版）/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/HTTP协议总结（整理版）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、基本概念1.1 web基础
-HTTP（HyperText Transfer Protocol）：超文本传输协议。
-WWW（World Wide Web）的三种技术：HTML、HTTP、URL。
-RFC（Request for Comments）：征求修正意见书，互联网的设计文档。
-
-1.2 URL
-URI（Uniform Resource Indentifier）：统一资源标识符。
-URL（Uniform Resource Locator）：统一资源定位符。
-URN（Uniform Resource Name）：统一资源名称。
-
-
-ps:URI 包含 URL 和 URN，目前 WEB 只有
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/HTTP协议总结（整理版）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/html5 新型api/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/html5 新型api/" itemprop="url">
-                  html5 新型api
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:25:47" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/27/html5 新型api/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/html5 新型api/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Page Visibility API为了解决隐藏或最小化标签页，让开发人员知道，有哪些功能可以停下来，```,```  visibilitychange ```事件12
-document.addEventListener(‘msvisibilitychange’, handleVisibilityChange);document.addEventListener(‘webkitvisibilitychange’, handleVisibilityChange);
-function handleVisibilityChange () {    var msg = ‘’;
-// 检测当前页面是否
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/html5 新型api/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/水平且垂直居中方法（9种）/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1484,7 +1154,7 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTML5离线存储之Application Cache/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTTP缓存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1503,8 +1173,8 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/HTML5离线存储之Application Cache/" itemprop="url">
-                  HTML5离线存储之Application Cache
+                <a class="post-title-link" href="/2018/08/27/HTTP缓存机制/" itemprop="url">
+                  HTTP缓存机制
                 </a>
               
             
@@ -1530,7 +1200,7 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
                 
               
 
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:26:42" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:27:25" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
             
 
             
@@ -1549,8 +1219,8 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/27/HTML5离线存储之Application Cache/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/HTML5离线存储之Application Cache/" itemprop="commentCount"></span>
+                <a href="/2018/08/27/HTTP缓存机制/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/HTTP缓存机制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1580,22 +1250,18 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
       
         
           
-          关于html5的离线存储，大致可分为：
+          只关注前端方面缓存机制的，可能只清楚在HTML页meta标签处理
+1&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-store&quot;&gt;
+目的是为了不让浏览器缓存当前页面。但是代理服务器不解析HTML内容。这样一般在服务器端对HTTP请求头进行处理控制缓存。
+HTTP头控制缓存
+大致分为两种：强缓存和协商缓存。强缓存如果命中缓存不需要和服务器发生交互，而协商缓存不管是否命中都要和服务器端进行交互，强制缓存的优先级高于协商缓存。
 
-localStorage, sessionStorage
-indexedDB
-web sql
-application cache
-
-可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。
-访问流程
-当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。
-特点
-离线浏览: 用户可以在离线状
+匹配流程示意图：
+==敲黑板：强缓存根据Expire或Cache-Control判断，协商缓
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/HTML5离线存储之Application Cache/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/HTTP缓存机制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1651,7 +1317,7 @@ application cache
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/xss攻击/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/html5 新型api/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1670,8 +1336,8 @@ application cache
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/xss攻击/" itemprop="url">
-                  xss攻击
+                <a class="post-title-link" href="/2018/08/27/html5 新型api/" itemprop="url">
+                  html5 新型api
                 </a>
               
             
@@ -1697,7 +1363,7 @@ application cache
                 
               
 
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:54:31" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:25:47" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
             
 
             
@@ -1716,8 +1382,8 @@ application cache
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/27/xss攻击/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/xss攻击/" itemprop="commentCount"></span>
+                <a href="/2018/08/27/html5 新型api/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/html5 新型api/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1747,25 +1413,179 @@ application cache
       
         
           
-          XSS（cross-site scripting跨域脚本攻击）攻击是最常见的web攻击，其重点是“跨域”和“客户端执行”。XSS攻击分为三种，分别是：
-
-Reflected XSS（基于反射的XSS攻击）
-Stored XSS（基于存储的XSS攻击）
-DOM-based or local XSS（基于DOM或本地的XSS攻击）
-
-1、Reflected XSS基于反射的XSS攻击，主要依靠站点服务端返回脚本，再客户端触发执行从而发起Web攻击。
-
-例子
-
-
-1、做个假设，当亚马逊在搜索书籍，搜不到书的时候显示提交的名称。
-
-
-2、在搜索框搜索内容，填入“alert(‘handsome boy’
+          Page Visibility API为了解决隐藏或最小化标签页，让开发人员知道，有哪些功能可以停下来，```,```  visibilitychange ```事件12
+document.addEventListener(‘msvisibilitychange’, handleVisibilityChange);document.addEventListener(‘webkitvisibilitychange’, handleVisibilityChange);
+function handleVisibilityChange () {    var msg = ‘’;
+// 检测当前页面是否
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/xss攻击/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/html5 新型api/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/inter-js/" itemprop="url">
+                  前端面试之javascript
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:53:50" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/inter-js/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/inter-js/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          介绍js的基本数据类型Undefined、Null、Boolean、Number、String、ECMAScript 2015 新增Symbol（创建后独一无二且不可变的数据类型）
+介绍js有哪些内置对象？
+Object 是 JavaScript 中所有对象的父对象
+数据封装类对象：Object、Array、Boolean、Number 和 String
+其他对象：Function、Arguments、Math、Date、RegExp、Error
+
+说几条写JavaScript的基本规范？
+不要在同一行声明多个变量。
+请使用 ===/!==来比较true/false或者数值
+使用对象字面量替代
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/inter-js/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1930,6 +1750,193 @@ BFC块级格式化上下文
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/27/interview/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/js数据类型转化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/js数据类型转化/" itemprop="url">
+                  js数据类型转化
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:54:06" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/js数据类型转化/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/js数据类型转化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          数据类型转化表首先上数据类型转化表，便于遇到问题直接查看
+
+
+
+值
+字符串
+数字
+布尔值
+对象
+
+
+
+
+undefined  null
+“undefined”  “null”
+NaN
+false  false
+throws TypeError  throws TypeError
+
+
+true  false
+“true”  “false”
+1  0
+
+new Boolean(true)  new Boolean(false)
+
+
+“”(空字符串)  “1.2”(非空，数字)  “one”（非空，非数字）
+
+0  1.2  NaN
+false  true  true
+new String(“”) 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/js数据类型转化/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2324,7 +2331,7 @@ BFC块级格式化上下文
         notify: false,
         appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
         appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
-        placeholder: 'Just go go',
+        placeholder: '看完说两句呗~',
         avatar:'mm',
         meta:guest,
         pageSize:'10' || 10,
