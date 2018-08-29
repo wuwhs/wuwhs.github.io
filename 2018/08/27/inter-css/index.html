@@ -116,7 +116,7 @@
 <meta name="keywords" content="css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端面试之css">
-<meta property="og:url" content="http://yoursite.com/2018/08/27/inter-css/index.html">
+<meta property="og:url" content="https://wuwhs.github.io/2018/08/27/inter-css/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="Front-end-Developer-Questions FE-interview 介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？ 有两种：IE盒模型、W3C盒模型 盒模型：内容（content）、填充（padding）、边框（border）、边界（margin） 区别：IE盒模型box-sizing为border-box，把border和padding计算在内  CSS选择">
 <meta property="og:locale" content="zh-CN">
@@ -132,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/27/inter-css/"/>
+  <link rel="canonical" href="https://wuwhs.github.io/2018/08/27/inter-css/"/>
 
 
 
@@ -350,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/inter-css/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-css/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -407,15 +407,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/inter-css/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/08/27/inter-css/" itemprop="commentsCount"></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/inter-css/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/inter-css/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -773,7 +772,7 @@
     <strong>本文作者： </strong>wuwhs</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/08/27/inter-css/" title="前端面试之css">http://yoursite.com/2018/08/27/inter-css/</a>
+    <a href="https://wuwhs.github.io/2018/08/27/inter-css/" title="前端面试之css">https://wuwhs.github.io/2018/08/27/inter-css/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -819,8 +818,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/27/element-ui更换主题和按需引入组件/" rel="next" title="element-ui更换主题和按需引入组件">
-                <i class="fa fa-chevron-left"></i> element-ui更换主题和按需引入组件
+              <a href="/2018/08/27/daily reading note/" rel="next" title="daily reading note">
+                <i class="fa fa-chevron-left"></i> daily reading note
               </a>
             
           </div>
@@ -855,9 +854,7 @@
 
   
     <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
     </div>
-
   
 
 
@@ -1212,24 +1209,34 @@
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   
-    <script type="text/javascript">
-    (function(){
-      var appid = 'cytMWNYce';
-      var conf = 'c9b1b09f6062662e6e77099e52bf47e6';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
-        window.changyan.api.config({appid:appid,conf:conf})});
-      }
-    })();
-    </script>
-    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-
-
-
-
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
+        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 

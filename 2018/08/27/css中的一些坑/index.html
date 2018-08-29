@@ -116,7 +116,7 @@
 <meta name="keywords" content="css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css中的一些坑">
-<meta property="og:url" content="http://yoursite.com/2018/08/27/css中的一些坑/index.html">
+<meta property="og:url" content="https://wuwhs.github.io/2018/08/27/css中的一些坑/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="1、如果子元素全部设置为浮动，则父元素是塌陷的 在元素末尾加块级空元素设置clear:both；  1234.last &amp;#123;    display: block;    clear: both;&amp;#125;  在父级容器设置before/after模拟一个块级空元素  12345.clearfix:after &amp;#123;    content: &quot;&quot;;    display: block">
 <meta property="og:locale" content="zh-CN">
@@ -134,7 +134,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/27/css中的一些坑/"/>
+  <link rel="canonical" href="https://wuwhs.github.io/2018/08/27/css中的一些坑/"/>
 
 
 
@@ -352,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/css中的一些坑/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/css中的一些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -409,15 +409,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/css中的一些坑/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/08/27/css中的一些坑/" itemprop="commentsCount"></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/css中的一些坑/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/css中的一些坑/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -539,7 +538,7 @@
     <strong>本文作者： </strong>wuwhs</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/08/27/css中的一些坑/" title="css中的一些坑">http://yoursite.com/2018/08/27/css中的一些坑/</a>
+    <a href="https://wuwhs.github.io/2018/08/27/css中的一些坑/" title="css中的一些坑">https://wuwhs.github.io/2018/08/27/css中的一些坑/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -621,9 +620,7 @@
 
   
     <div class="comments" id="comments">
-      <div id="SOHUCS"></div>
     </div>
-
   
 
 
@@ -978,24 +975,34 @@
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   
-    <script type="text/javascript">
-    (function(){
-      var appid = 'cytMWNYce';
-      var conf = 'c9b1b09f6062662e6e77099e52bf47e6';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
-        window.changyan.api.config({appid:appid,conf:conf})});
-      }
-    })();
-    </script>
-    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
   
-
-
-
-
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
+        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 

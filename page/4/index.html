@@ -112,10 +112,10 @@
 
 
 
-  <meta name="keywords" content="前端开发">
+  <meta name="keywords" content="前端开发 javascript css html nodejs">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wuwh&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:url" content="https://wuwhs.github.io/page/4/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/4/"/>
+  <link rel="canonical" href="https://wuwhs.github.io/page/4/"/>
 
 
 
@@ -343,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/css中的一些坑/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/css中的一些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -404,15 +404,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/css中的一些坑/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/css中的一些坑/" class="cy_cmt_count" data-xid="2018/08/27/css中的一些坑/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/css中的一些坑/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/css中的一些坑/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -511,7 +510,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/flex-布局/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/07/23/flex-布局/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -584,15 +583,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/07/23/flex-布局/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/07/23/flex-布局/" class="cy_cmt_count" data-xid="2018/07/23/flex-布局/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/23/flex-布局/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/07/23/flex-布局/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -1035,13 +1033,34 @@ flex-flow 属性是flex-direction属性和flex
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytMWNYce"></script>
   
-
-
-
-
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
+        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 

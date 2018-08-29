@@ -112,10 +112,10 @@
 
 
 
-  <meta name="keywords" content="前端开发">
+  <meta name="keywords" content="前端开发 javascript css html nodejs">
 <meta property="og:type" content="website">
 <meta property="og:title" content="wuwh&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:url" content="https://wuwhs.github.io/page/3/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/3/"/>
+  <link rel="canonical" href="https://wuwhs.github.io/page/3/"/>
 
 
 
@@ -343,7 +343,170 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/理解同步、异步和事件循环/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/深入理解IFC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/深入理解IFC/" itemprop="url">
+                  深入理解IFC
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:40:09" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/深入理解IFC/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/深入理解IFC/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概念规则
+FC(Inline formatting context)，即行内格式化上下文，它和BFC一样，既不是属性也不是元素，而是一种，一种上下文。
+
+在IFC中，框（boxs）一个接一个水平排列，起点是包含块的顶部。水平方向上的margin，border和padding在框之间得到保留。框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐。包括那些框的长方形区域，会形成一行，叫做行框（line box）。
+
+一个line box的宽度由包含它的元素的宽度和包含它的元素里面有没有float元素来决定，而高度由内部元素中实际高度最高的元素计算出来。
+
+line b
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/深入理解IFC/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/理解同步、异步和事件循环/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -404,15 +567,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/理解同步、异步和事件循环/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/理解同步、异步和事件循环/" class="cy_cmt_count" data-xid="2018/08/27/理解同步、异步和事件循环/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/理解同步、异步和事件循环/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/理解同步、异步和事件循环/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -512,165 +674,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/深入理解BFC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/深入理解BFC/" itemprop="url">
-                  深入理解BFC
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:39:53" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/深入理解BFC/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/深入理解BFC/" class="cy_cmt_count" data-xid="2018/08/27/深入理解BFC/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1、相关定义1.1 Formatting contextFormatting context是W3C CSS2.1规定中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素如何定位，以及和其他元素的关系和相互作用。最常见的Formatting context有Block formatting context（简称BFC）和Inline formatting context（简称IFC）。css2.1中只有BFC和IFC，css3中还增加了GFC和FFC。
-1.2 BFC定义BFC(Block formatting context)直译为“块级格式化上下文”。它是独立的渲染
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/深入理解BFC/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/移动端适配-rem/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/移动端适配-rem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -731,15 +735,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/移动端适配-rem/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/移动端适配-rem/" class="cy_cmt_count" data-xid="2018/08/27/移动端适配-rem/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/移动端适配-rem/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/移动端适配-rem/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -828,7 +831,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/纯css三角形及其应用/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/纯css三角形及其应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -889,15 +892,14 @@
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/纯css三角形及其应用/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/纯css三角形及其应用/" class="cy_cmt_count" data-xid="2018/08/27/纯css三角形及其应用/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/纯css三角形及其应用/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/纯css三角形及其应用/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -992,7 +994,7 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/HTTP协议总结（整理版）/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/JavaScript思维导图/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1011,8 +1013,8 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/HTTP协议总结（整理版）/" itemprop="url">
-                  HTTP协议总结（整理版）
+                <a class="post-title-link" href="/2018/08/27/JavaScript思维导图/" itemprop="url">
+                  JavaScript思维导图
                 </a>
               
             
@@ -1038,7 +1040,7 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
                 
               
 
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:26:34" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:53:59" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
             
 
             
@@ -1053,15 +1055,14 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/HTTP协议总结（整理版）/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/HTTP协议总结（整理版）/" class="cy_cmt_count" data-xid="2018/08/27/HTTP协议总结（整理版）/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/JavaScript思维导图/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/JavaScript思维导图/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -1089,22 +1090,25 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
       
         
           
-          一、基本概念1.1 web基础
-HTTP（HyperText Transfer Protocol）：超文本传输协议。
-WWW（World Wide Web）的三种技术：HTML、HTTP、URL。
-RFC（Request for Comments）：征求修正意见书，互联网的设计文档。
+          
+《JavaScript高级程序》已过一遍，梳理js基础知识点，思维导图是极有帮助的，搜了一下，还真有整理得很全的，收藏一波。
 
-1.2 URL
-URI（Uniform Resource Indentifier）：统一资源标识符。
-URL（Uniform Resource Locator）：统一资源定位符。
-URN（Uniform Resource Name）：统一资源名称。
+1. 变量
+2. 数组
+3. 运算符
+4. 流程语句
+5. 字符串函数
+6. DOM操作
+7. BOM操作
+8. window对象
+9. 函数
+10. 正则表达式
+11. DOM对象
 
-
-ps:URI 包含 URL 和 URN，目前 WEB 只有
-          ...
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/HTTP协议总结（整理版）/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/JavaScript思维导图/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1160,7 +1164,7 @@ ps:URI 包含 URL 和 URN，目前 WEB 只有
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/inter-html/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1221,15 +1225,14 @@ ps:URI 包含 URL 和 URN，目前 WEB 只有
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/inter-html/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/inter-html/" class="cy_cmt_count" data-xid="2018/08/27/inter-html/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/inter-html/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/inter-html/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -1323,175 +1326,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/grid栅格布局/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/grid栅格布局/" itemprop="url">
-                  grid栅格布局
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：20:25:52" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/grid栅格布局/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/grid栅格布局/" class="cy_cmt_count" data-xid="2018/08/27/grid栅格布局/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1、历史四个布局阶段网页布局经历了四个历史阶段：
-
-table布局；
-float和position布局；
-flex布局，解决了传统布局方案三大痛点：排列方向、对齐方式和自适应尺寸；
-grid布局，二维布局模块，具有强大的内容尺寸和定位能力。
-
-
-flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
-
-2、grid布局-网格容器2.1 显示网格使用grid-template-columns和grid-template-rows可以显式设置一个网格的列（宽）和行（高）。
-12345&lt;!--grid布局设置行高--&gt;.grid &#123;    display: grid;
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/grid栅格布局/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/inter-js/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-js/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1552,15 +1387,14 @@ flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/inter-js/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/inter-js/" class="cy_cmt_count" data-xid="2018/08/27/inter-js/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/inter-js/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/inter-js/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -1657,7 +1491,7 @@ Object 是 JavaScript 中所有对象的父对象
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/inter-css/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-css/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1718,15 +1552,14 @@ Object 是 JavaScript 中所有对象的父对象
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/inter-css/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/inter-css/" class="cy_cmt_count" data-xid="2018/08/27/inter-css/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/inter-css/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/inter-css/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -1828,7 +1661,166 @@ id选择器（#myid）
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/element-ui更换主题和按需引入组件/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/daily reading note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/daily reading note/" itemprop="url">
+                  daily reading note
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30 / 修改时间：21:00:27" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/daily reading note/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/daily reading note/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          记录日常看书、看博客小记DOM2 DOM3有关属性检测节点是否相等 isSomeNode isEqualNode
+123456div1 = document.createElement(&quot;div&quot;);div2 = document.createElement(&quot;div&quot;);div1.isSameNode(div1); // truediv1.isSameNode(div2); // falsediv1.isEqualNode(div2); // true
+获取框架文档对象 contentDocument contentWindow
+12var ifram
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/daily reading note/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/element-ui更换主题和按需引入组件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1901,15 +1893,14 @@ id选择器（#myid）
           
             
               <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/08/27/element-ui更换主题和按需引入组件/#SOHUCS" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span id="url::http://yoursite.com/2018/08/27/element-ui更换主题和按需引入组件/" class="cy_cmt_count" data-xid="2018/08/27/element-ui更换主题和按需引入组件/" itemprop="commentsCount" ></span>
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/27/element-ui更换主题和按需引入组件/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/element-ui更换主题和按需引入组件/" itemprop="commentCount"></span>
                 </a>
-              
+              </span>
             
           
 
@@ -2320,13 +2311,34 @@ id选择器（#myid）
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
   
-    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytMWNYce"></script>
   
-
-
-
-
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
+        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 
