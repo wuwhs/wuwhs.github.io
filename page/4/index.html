@@ -343,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTML5离线存储之Application Cache/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/interview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -362,8 +362,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/HTML5离线存储之Application Cache/" itemprop="url">
-                  HTML5离线存储之Application Cache
+                <a class="post-title-link" href="/2018/08/27/interview/" itemprop="url">
+                  前端面试
                 </a>
               
             
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:09:08" itemprop="dateModified" datetime="2018-08-29T18:09:08+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:05:57" itemprop="dateModified" datetime="2018-08-29T18:05:57+08:00">2018-08-29</time>
               
             
           </span>
@@ -423,7 +423,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span>
 
                 
                 
@@ -438,8 +438,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/08/27/HTML5离线存储之Application Cache/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/HTML5离线存储之Application Cache/" itemprop="commentCount"></span>
+                <a href="/2018/08/27/interview/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/27/interview/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -469,22 +469,19 @@
       
         
           
-          关于html5的离线存储，大致可分为：
+          task1：上下高度固定，中间自适应
+css盒模型标准模型、IE模型 box-sizing:content-box/border-boxjs如何获取盒模型的宽（或高）dom.style.widthdom.currentStyle.width –IEwindow.getComputedStyle(dom).widthdom.getBoundingClientRect().width
+上下边界重叠，取最大值父子元素兄弟元素空元素（margin-top margin-bottom）
+BFC块级格式化上下文
+原理就是渲染规则
 
-localStorage, sessionStorage
-indexedDB
-web sql
-application cache
-
-可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。
-访问流程
-当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。
-特点
-离线浏览: 用户可以在离线状
+垂直方向边距会发生重叠
+不会浮动元素重叠
+独立容器，外面的元素不会影响里面
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/HTML5离线存储之Application Cache/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/interview/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
