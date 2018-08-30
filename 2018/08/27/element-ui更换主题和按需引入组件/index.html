@@ -120,16 +120,16 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用vue-cli生成初始项目，在这仅对element-ui主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将ui和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/lib/them">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/9ACB4AA84F6C4BF5A31894E862473674/17981">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/C07B357A10A0402D80D2E778DF4BE026/17928">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/2B075F3F1EB94BC3BB5B70677A8E3EEB/18201">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/A1313A097D104F76ACF5D8F0EE047186/18121">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/81D3354FBC96433DA313C971168A9C86/18158">
-<meta property="og:updated_time" content="2018-08-29T10:09:58.552Z">
+<meta property="og:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/0.bmp">
+<meta property="og:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/1.bmp">
+<meta property="og:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/2.bmp">
+<meta property="og:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/3.bmp">
+<meta property="og:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/4.bmp">
+<meta property="og:updated_time" content="2018-08-30T09:05:30.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="element-ui更换主题和按需引入组件">
 <meta name="twitter:description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用vue-cli生成初始项目，在这仅对element-ui主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将ui和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/lib/them">
-<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/9ACB4AA84F6C4BF5A31894E862473674/17981">
+<meta name="twitter:image" content="https://wuwhs.github.io/gb/element-ui更换主题和按需引入组件/0.bmp">
 
 
 
@@ -254,7 +254,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">23</span></a>
   </li>
         
         
@@ -270,7 +270,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">35</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">34</span></a>
   </li>
 
       
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:09:58" itemprop="dateModified" datetime="2018-08-29T18:09:58+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-30 17:05:30" itemprop="dateModified" datetime="2018-08-30T17:05:30+08:00">2018-08-30</time>
               
             
           </span>
@@ -488,12 +488,12 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br></pre></td></tr></table></figure>
 <p>在页面简单使用三个组件，看看效果。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"block"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"demonstration"</span>&gt;</span>区分颜色<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-rate</span> <span class="attr">v-model</span>=<span class="string">"value1"</span> <span class="attr">:colors</span>=<span class="string">"['#99A9BF', '#F7BA2A', '#FF9900']"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-rate</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">icon</span>=<span class="string">"el-icon-edit"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">icon</span>=<span class="string">"el-icon-search"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">icon</span>=<span class="string">"el-icon-edit"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"success"</span> <span class="attr">icon</span>=<span class="string">"el-icon-check"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"info"</span> <span class="attr">icon</span>=<span class="string">"el-icon-message"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"warning"</span> <span class="attr">icon</span>=<span class="string">"el-icon-star-off"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-button</span> <span class="attr">type</span>=<span class="string">"danger"</span> <span class="attr">icon</span>=<span class="string">"el-icon-delete"</span> <span class="attr">circle</span>&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/9ACB4AA84F6C4BF5A31894E862473674/17981" alt=""></p>
+<p><img src="/gb/element-ui更换主题和按需引入组件/0.bmp" alt=""></p>
 <p>再看一下打包后的资源大小情况<code>npm run build --report</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Hash: fa47514a97341329a7c0</span><br><span class="line">Version: webpack 3.11.0</span><br><span class="line">Time: 20363ms</span><br><span class="line">                                                  Asset       Size  Chunks                    Chunk Names</span><br><span class="line">                 static/fonts/element-icons.6f0a763.ttf      11 kB          [emitted]</span><br><span class="line">               static/js/vendor.5efcf828140d5dbedda9.js     714 kB       0  [emitted]  [big]  vendor</span><br><span class="line">                  static/js/app.a4a31db472f653b911e7.js      12 kB       1  [emitted]         app</span><br><span class="line">             static/js/manifest.2ae2e69a05c33dfc65f8.js  857 bytes       2  [emitted]         manifest</span><br><span class="line">    static/css/app.f24bb0ae3686720fe2e00c5a2024b8f1.css     185 kB       1  [emitted]         app</span><br><span class="line">static/css/app.f24bb0ae3686720fe2e00c5a2024b8f1.css.map     267 kB          [emitted]</span><br><span class="line">           static/js/vendor.5efcf828140d5dbedda9.js.map    2.73 MB       0  [emitted]         vendor</span><br><span class="line">              static/js/app.a4a31db472f653b911e7.js.map    22.8 kB       1  [emitted]         app</span><br><span class="line">         static/js/manifest.2ae2e69a05c33dfc65f8.js.map    4.97 kB       2  [emitted]         manifest</span><br><span class="line">                                             index.html  508 bytes          [emitted]</span><br></pre></td></tr></table></figure>
 <p>发现打包后提取公共模块<code>static/js/vendor.js</code>有714kb</p>
 <p>再看一下各个模块占用情况：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/C07B357A10A0402D80D2E778DF4BE026/17928" alt=""></p>
+<p><img src="/gb/element-ui更换主题和按需引入组件/1.bmp" alt=""></p>
 <p>发现<code>elment-ui.common.js</code>占用最大。所有模块资源总共有708kb。怎么才能减小打包后的大小呢？很容易就会想到ui的引入和样式的引入中，实际我们只使用了三个组件，却整体都被打包了，在这里引入这三个组件即可。</p>
 <h3 id="按需引入组件样式"><a href="#按需引入组件样式" class="headerlink" title="按需引入组件样式"></a>按需引入组件样式</h3><p>新建一个<code>element-variables.scss</code>文件（为什么是SCSS文件，后面自定义主题会用到）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/*icon字体路径变量*/</span><br><span class="line">$--font-path: &quot;~element-ui/lib/theme-chalk/fonts&quot;;</span><br><span class="line"></span><br><span class="line">/*按需引入用到的组件的scss文件和基础scss文件*/</span><br><span class="line">@import &quot;~element-ui/packages/theme-chalk/src/base.scss&quot;;</span><br><span class="line">@import &quot;~element-ui/packages/theme-chalk/src/rate.scss&quot;;</span><br><span class="line">@import &quot;~element-ui/packages/theme-chalk/src/button.scss&quot;;</span><br><span class="line">@import &quot;~element-ui/packages/theme-chalk/src/row.scss&quot;;</span><br></pre></td></tr></table></figure>
@@ -505,7 +505,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Hash: <span class="number">3</span>ba9b74482f121efd3aa</span><br><span class="line">Version: webpack <span class="number">3.11</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">18854</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks                    Chunk Names</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.6</span>f0a763.ttf      <span class="number">11</span> kB          [emitted]</span><br><span class="line">               <span class="keyword">static</span>/js/vendor<span class="number">.11</span>c71f168a2d61b547a0.js     <span class="number">714</span> kB       <span class="number">0</span>  [emitted]  [big]  vendor</span><br><span class="line">                  <span class="keyword">static</span>/js/app.dbb5b49dad2d42b3598c.js    <span class="number">11.2</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">    <span class="keyword">static</span>/css/app.bf52525d6279e7fb87b4db770d119a8d.css    <span class="number">25.7</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line"><span class="keyword">static</span>/css/app.bf52525d6279e7fb87b4db770d119a8d.css.map      <span class="number">63</span> kB          [emitted]</span><br><span class="line">           <span class="keyword">static</span>/js/vendor<span class="number">.11</span>c71f168a2d61b547a0.js.map    <span class="number">2.73</span> MB       <span class="number">0</span>  [emitted]         vendor</span><br><span class="line">              <span class="keyword">static</span>/js/app.dbb5b49dad2d42b3598c.js.map      <span class="number">21</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">                                             index.html  <span class="number">508</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
 <p>结果可知，<code>static/js/vendor.js</code>还是714kb！</p>
 <p>再看各个模块占用情况：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/2B075F3F1EB94BC3BB5B70677A8E3EEB/18201" alt=""></p>
+<p><img src="/gb/element-ui更换主题和按需引入组件/2.bmp" alt=""></p>
 <p>WHAT?竟然模块都没什么变化，岂不是竹篮打水，事与愿违。</p>
 <h3 id="再次打包优化尝试"><a href="#再次打包优化尝试" class="headerlink" title="再次打包优化尝试"></a>再次打包优化尝试</h3><p>后来查到有人同样遇到这个问题，提出一个<a href="https://github.com/ElemeFE/element/issues/6362#issuecomment-323517538" target="_blank" rel="noopener">issues#6362</a>，原来只引入需要的<code>element-ui</code>组件，<code>webpack</code>还是把整体的ui库和样式都打包了，需要一个<code>webpack</code>的<code>babel</code>插件<code>babel-plugin-component</code>，这样才能真正按需引入打包。这块其实被写到官方文档更换 <a href="http://element-cn.eleme.io/#/zh-CN/component/custom-theme" target="_blank" rel="noopener">自定义主题</a> 的配置了。</p>
 <p>于是<code>npm i babel-pugin-componet -D</code>安装后，在增加<code>.babelrc</code>文件插件配置</p>
@@ -513,13 +513,13 @@
 <p>页面运行正常，再次打包。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Hash: <span class="number">9</span>cc71dead6d7646c9ed4</span><br><span class="line">Version: webpack <span class="number">3.11</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">9963</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks             Chunk Names</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.6</span>f0a763.ttf      <span class="number">11</span> kB          [emitted]</span><br><span class="line">                  <span class="keyword">static</span>/js/app<span class="number">.77</span>c0883f4f0fc0bf5cbc.js    <span class="number">11.4</span> kB       <span class="number">0</span>  [emitted]  app</span><br><span class="line">               <span class="keyword">static</span>/js/vendor<span class="number">.942130</span>fd13274b901889.js     <span class="number">126</span> kB       <span class="number">1</span>  [emitted]  vendor</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">    <span class="keyword">static</span>/css/app.b140020e5dbee406ae70780b43ba7ddc.css    <span class="number">27.8</span> kB       <span class="number">0</span>  [emitted]  app</span><br><span class="line"><span class="keyword">static</span>/css/app.b140020e5dbee406ae70780b43ba7ddc.css.map    <span class="number">91.4</span> kB          [emitted]</span><br><span class="line">              <span class="keyword">static</span>/js/app<span class="number">.77</span>c0883f4f0fc0bf5cbc.js.map    <span class="number">21.1</span> kB       <span class="number">0</span>  [emitted]  app</span><br><span class="line">           <span class="keyword">static</span>/js/vendor<span class="number">.942130</span>fd13274b901889.js.map     <span class="number">613</span> kB       <span class="number">1</span>  [emitted]  vendor</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">                                             index.html  <span class="number">508</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
 <p><code>static/js/vendor.js</code>确实变小了，126kB。再来看各个模块分析图。</p>
-<p><img src="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/A1313A097D104F76ACF5D8F0EE047186/18121" alt=""></p>
+<p><img src="/gb/element-ui更换主题和按需引入组件/3.bmp" alt=""></p>
 <p>模块总共135.03KB，少了5倍！</p>
 <h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p><code>element-ui</code>的<code>theme-chalk</code>使用<code>SCSS</code>编写，如果在自己的项目中也是用<code>SCSS</code>，那么可以直接在项目中改变样式变量，因此可以在前面新建的<code>element-variables.scss</code>文件用新的主题颜色变量覆盖即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*主题颜色变量*/</span><br><span class="line">$--color-primary: #f0f;</span><br><span class="line"></span><br><span class="line">/*icon字体路径变量*/</span><br><span class="line">$--font-path: &quot;~element-ui/lib/theme-chalk/fonts&quot;;</span><br></pre></td></tr></table></figure>
 <p>可能你已经注意到了，这里没有分别引入用到的组件样式了，是因为<code>babel-plugin-component</code>帮我们按需引入了对应的样式。</p>
 <p>现在我们的主题就变成了</p>
-<p><img src="https://note.youdao.com/yws/public/resource/813e8f68e489060d70ccfdff42b3aecc/xmlnote/81D3354FBC96433DA313C971168A9C86/18158" alt=""></p>
+<p><img src="/gb/element-ui更换主题和按需引入组件/4.bmp" alt=""></p>
 <p>如果你没有用到<code>SCSS</code>，可以用<code>element-theme</code>主题编译插件，生成自定义主题文件引入。</p>
 <p>完~ps：个人见解有限，欢迎指正。</p>
 
@@ -709,7 +709,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -801,9 +801,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
