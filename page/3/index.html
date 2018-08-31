@@ -347,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/深入理解IFC/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTTP缓存机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -366,8 +366,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/深入理解IFC/" itemprop="url">
-                  深入理解IFC
+                <a class="post-title-link" href="/2018/08/27/HTTP缓存机制/" itemprop="url">
+                  HTTP缓存机制
                 </a>
               
             
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:00:26" itemprop="dateModified" datetime="2018-08-29T18:00:26+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:08:36" itemprop="dateModified" datetime="2018-08-29T18:08:36+08:00">2018-08-29</time>
               
             
           </span>
@@ -427,7 +427,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其它/" itemprop="url" rel="index"><span itemprop="name">其它</span></a></span>
 
                 
                 
@@ -463,18 +463,18 @@
       
         
           
-          概念规则
-FC(Inline formatting context)，即行内格式化上下文，它和BFC一样，既不是属性也不是元素，而是一种，一种上下文。
+          只关注前端方面缓存机制的，可能只清楚在HTML页meta标签处理
+1&lt;meta http-equiv=&quot;Pragma&quot; content=&quot;no-store&quot;&gt;
+目的是为了不让浏览器缓存当前页面。但是代理服务器不解析HTML内容。这样一般在服务器端对HTTP请求头进行处理控制缓存。
+HTTP头控制缓存
+大致分为两种：强缓存和协商缓存。强缓存如果命中缓存不需要和服务器发生交互，而协商缓存不管是否命中都要和服务器端进行交互，强制缓存的优先级高于协商缓存。
 
-在IFC中，框（boxs）一个接一个水平排列，起点是包含块的顶部。水平方向上的margin，border和padding在框之间得到保留。框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐。包括那些框的长方形区域，会形成一行，叫做行框（line box）。
-
-一个line box的宽度由包含它的元素的宽度和包含它的元素里面有没有float元素来决定，而高度由内部元素中实际高度最高的元素计算出来。
-
-line b
+匹配流程示意图：
+==敲黑板：强缓存根据Expire或Cache-Control判断，协商缓
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/深入理解IFC/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/HTTP缓存机制/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -530,7 +530,7 @@ line b
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/水平且垂直居中方法（9种）/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/深入理解BFC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -549,8 +549,8 @@ line b
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/水平且垂直居中方法（9种）/" itemprop="url">
-                  水平且垂直居中方法（9种）
+                <a class="post-title-link" href="/2018/08/27/深入理解BFC/" itemprop="url">
+                  深入理解BFC
                 </a>
               
             
@@ -593,7 +593,7 @@ line b
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-30 17:11:12" itemprop="dateModified" datetime="2018-08-30T17:11:12+08:00">2018-08-30</time>
+                <time title="修改时间：2018-08-29 18:00:34" itemprop="dateModified" datetime="2018-08-29T18:00:34+08:00">2018-08-29</time>
               
             
           </span>
@@ -646,15 +646,12 @@ line b
       
         
           
-          水平且垂直居中方法有哪些？这在实际工作中经常用到，小记一下。
-演示HTML结构1234567&lt;div id="div1" class="div"&gt;	&lt;div id="div2"&gt;		&lt;div id="div3"&gt;		    &lt;span&gt;i&lt;/span&gt;		&lt;/div&gt;	&lt;/div&gt;&lt;/div&gt;
-
-一般的，水平居中相对垂直居中简单很多，对于内联元素，父级元素设置text-align: center;；对于块级元素，子级元素设置margin: 0 auto;。以下结合水平居中强调实现垂直居中。
-1、已知
+          1、相关定义1.1 Formatting contextFormatting context是W3C CSS2.1规定中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素如何定位，以及和其他元素的关系和相互作用。最常见的Formatting context有Block formatting context（简称BFC）和Inline formatting context（简称IFC）。css2.1中只有BFC和IFC，css3中还增加了GFC和FFC。
+1.2 BFC定义BFC(Block formatting context)直译为“块级格式化上下文”。它是独立的渲染
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/水平且垂直居中方法（9种）/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/深入理解BFC/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -898,7 +895,7 @@ line b
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/深入理解BFC/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/深入理解IFC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -917,8 +914,8 @@ line b
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/深入理解BFC/" itemprop="url">
-                  深入理解BFC
+                <a class="post-title-link" href="/2018/08/27/深入理解IFC/" itemprop="url">
+                  深入理解IFC
                 </a>
               
             
@@ -961,7 +958,7 @@ line b
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:00:34" itemprop="dateModified" datetime="2018-08-29T18:00:34+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:00:26" itemprop="dateModified" datetime="2018-08-29T18:00:26+08:00">2018-08-29</time>
               
             
           </span>
@@ -1014,189 +1011,18 @@ line b
       
         
           
-          1、相关定义1.1 Formatting contextFormatting context是W3C CSS2.1规定中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素如何定位，以及和其他元素的关系和相互作用。最常见的Formatting context有Block formatting context（简称BFC）和Inline formatting context（简称IFC）。css2.1中只有BFC和IFC，css3中还增加了GFC和FFC。
-1.2 BFC定义BFC(Block formatting context)直译为“块级格式化上下文”。它是独立的渲染
+          概念规则
+FC(Inline formatting context)，即行内格式化上下文，它和BFC一样，既不是属性也不是元素，而是一种，一种上下文。
+
+在IFC中，框（boxs）一个接一个水平排列，起点是包含块的顶部。水平方向上的margin，border和padding在框之间得到保留。框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐。包括那些框的长方形区域，会形成一行，叫做行框（line box）。
+
+一个line box的宽度由包含它的元素的宽度和包含它的元素里面有没有float元素来决定，而高度由内部元素中实际高度最高的元素计算出来。
+
+line b
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/深入理解BFC/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/移动端适配-rem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/移动端适配-rem/" itemprop="url">
-                  移动端适配-rem
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-29 17:59:33" itemprop="dateModified" datetime="2018-08-29T17:59:33+08:00">2018-08-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mobile/" itemprop="url" rel="index"><span itemprop="name">mobile</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-通过js去动态计算根元素的font-size，这样所有设备分辨率都能兼容适应1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950//designWidth:设计稿的实际宽度值，需要根据实际设置//maxWidth:制作稿的最大宽度值，需要根据实际设置//这段js的最后面有两个参数记得要设置，一个为设计稿实际宽度，一个为制作稿最大宽度，例如设计稿为750，最大宽度为750，则为(750,750);(function(designWidth, maxWidth) &#
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/移动端适配-rem/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/深入理解IFC/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1379,6 +1205,183 @@ css写三角形原理首先我们设置一个div元素的宽高和边框，观�
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/27/纯css三角形及其应用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/移动端适配-rem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/移动端适配-rem/" itemprop="url">
+                  移动端适配-rem
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-29 17:59:33" itemprop="dateModified" datetime="2018-08-29T17:59:33+08:00">2018-08-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/mobile/" itemprop="url" rel="index"><span itemprop="name">mobile</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+通过js去动态计算根元素的font-size，这样所有设备分辨率都能兼容适应1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950//designWidth:设计稿的实际宽度值，需要根据实际设置//maxWidth:制作稿的最大宽度值，需要根据实际设置//这段js的最后面有两个参数记得要设置，一个为设计稿实际宽度，一个为制作稿最大宽度，例如设计稿为750，最大宽度为750，则为(750,750);(function(designWidth, maxWidth) &#
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/移动端适配-rem/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1803,7 +1806,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/html5 新型api/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/grid栅格布局/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1822,8 +1825,8 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/html5 新型api/" itemprop="url">
-                  html5 新型api
+                <a class="post-title-link" href="/2018/08/27/grid栅格布局/" itemprop="url">
+                  grid栅格布局
                 </a>
               
             
@@ -1866,7 +1869,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:09:21" itemprop="dateModified" datetime="2018-08-29T18:09:21+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:09:31" itemprop="dateModified" datetime="2018-08-29T18:09:31+08:00">2018-08-29</time>
               
             
           </span>
@@ -1883,7 +1886,7 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
 
                 
                 
@@ -1919,14 +1922,22 @@ HTML4.01 strict：不允许使用表现性、废弃元素（如font）以及fram
       
         
           
-          Page Visibility API为了解决隐藏或最小化标签页，让开发人员知道，有哪些功能可以停下来，```,```  visibilitychange ```事件12
-document.addEventListener(‘msvisibilitychange’, handleVisibilityChange);document.addEventListener(‘webkitvisibilitychange’, handleVisibilityChange);
-function handleVisibilityChange () {    var msg = ‘’;
-// 检测当前页面是否
+          1、历史四个布局阶段网页布局经历了四个历史阶段：
+
+table布局；
+float和position布局；
+flex布局，解决了传统布局方案三大痛点：排列方向、对齐方式和自适应尺寸；
+grid布局，二维布局模块，具有强大的内容尺寸和定位能力。
+
+
+flex分为伸缩容器和伸缩项目，grid分为网格容器和网格项目。
+
+2、grid布局-网格容器2.1 显示网格使用grid-template-columns和grid-template-rows可以显式设置一个网格的列（宽）和行（高）。
+12345&lt;!--grid布局设置行高--&gt;.grid &#123;    display: grid;
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/html5 新型api/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/grid栅格布局/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
