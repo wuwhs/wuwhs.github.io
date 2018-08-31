@@ -124,7 +124,7 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-30T10:46:41.856Z">
+<meta property="og:updated_time" content="2018-08-31T11:52:20.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建自己的博客">
 <meta name="twitter:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
@@ -394,12 +394,24 @@
                 
               
 
-              <time title="创建时间：2018-08-30 18:40:30 / 修改时间：18:46:41" itemprop="dateCreated datePublished" datetime="2018-08-30T18:40:30+08:00">2018-08-30</time>
+              <time title="创建时间：2018-08-30 18:40:30" itemprop="dateCreated datePublished" datetime="2018-08-30T18:40:30+08:00">2018-08-30</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-31 19:52:20" itemprop="dateModified" datetime="2018-08-31T19:52:20+08:00">2018-08-31</time>
               
             
           </span>
@@ -432,7 +444,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/08/30/构建自己的博客/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/30/构建自己的博客/" itemprop="commentsCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/30/构建自己的博客/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -477,7 +489,15 @@
 <p>关于更多的Git讲解参看：</p>
 <p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
 <p>安装Hexo<br>什么是 Hexo？<br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo官方网站：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a></p>
+<p>Hexo官方网站：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>当前版本是v6.4.0</p>
+<h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>当前版本配置，支持<a href="https://changyan.kuaizhan.com/" target="_blank" rel="noopener">畅言</a>，<a href="http://www.disqus.com/" target="_blank" rel="noopener">Disqus</a>，<a href="https://leancloud.cn/" target="_blank" rel="noopener">valine</a>，<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">gitment</a>。</p>
+<ul>
+<li>畅言 - 搜狐提供的评论组件，功能丰富，体验优异，防止注水；但必须进行域名备案。只要域名备过案就可以通过审核。</li>
+<li>Disqus - 国外使用较多的评论组件。万里长城永不倒，一枝红杏出墙来，你懂的。</li>
+<li>valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用<code>App ID</code>和<code>App Key</code>即可使用。</li>
+<li>Ditment - Gitment 是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</li>
+</ul>
+<p>畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，我在评论仓库</p>
 
       
     </div>
@@ -610,11 +630,7 @@
 
   
     <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
     </div>
-
   
 
 
@@ -811,7 +827,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备"><span class="nav-number">1.1.</span> <span class="nav-text">二、准备</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备"><span class="nav-number">1.1.</span> <span class="nav-text">二、准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">1.2.</span> <span class="nav-text">评论功能</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1024,49 +1040,32 @@
 
 
 
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: '1535625630000',
-            owner: 'wuwhs',
-            repo: 'wuwhs.github.io',
-            
-            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: '919ba729526f67646651e2800517b55121c3f1ff',
-            
-                client_id: '05a1c78379a7d64939ca'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      renderGitment();
-      
-      </script>
-    
 
 
-
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
+        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
+        placeholder: '看完说两句呗~',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
 
 
 
