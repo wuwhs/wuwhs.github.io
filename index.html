@@ -1375,7 +1375,7 @@ https://www.liaoxuefeng.com/wiki/0013739
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/搞定css三列布局/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/对MVC、MVP和MVVM的简单认识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1394,8 +1394,8 @@ https://www.liaoxuefeng.com/wiki/0013739
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/搞定css三列布局/" itemprop="url">
-                  搞定css三列布局
+                <a class="post-title-link" href="/2018/08/27/对MVC、MVP和MVVM的简单认识/" itemprop="url">
+                  对MVC、MVP和MVVM的简单认识
                 </a>
               
             
@@ -1438,7 +1438,7 @@ https://www.liaoxuefeng.com/wiki/0013739
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:02:10" itemprop="dateModified" datetime="2018-08-29T18:02:10+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:02:44" itemprop="dateModified" datetime="2018-08-29T18:02:44+08:00">2018-08-29</time>
               
             
           </span>
@@ -1455,7 +1455,7 @@ https://www.liaoxuefeng.com/wiki/0013739
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/其它/" itemprop="url" rel="index"><span itemprop="name">其它</span></a></span>
 
                 
                 
@@ -1491,18 +1491,195 @@ https://www.liaoxuefeng.com/wiki/0013739
       
         
           
-          
-谈到布局，首先就要想到定位，当别人问我，css的position定位有哪些取值，分别表示什么意思？呃…..
-
-定位position有六个属性值：static、relative、absolute、fixed、sticky和inherit。
-
-static（默认）：元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分；行内元素则会创建一个或多个行框，置于父级元素中。
-relative：元素框相对于之前正常文档流中的位置发生偏移，并且原先的位置仍然被占据。发生偏移的时候，可能会覆盖其他元素。
-absolute：元素框不再占有文档位置，并且相对于包含块进行偏移（所谓包含块就是最近一级外层元素p
+          1. 先聊一下MVCMVC：Model（模型） View（视图） Controller（控制器），主要是基于分层的目的，让彼此的职责分开。
+View通过Controller和Model联系，Controller是View和Model的协调者，view和Model不直接联系，基本联系都是单向的。
+2. 顺带提下MVPMVP：是从MVC模式演变而来的，都是通过Controller/Presenter负责逻辑的处理+Model提供数据+View负责显示。
+在MVP中，Presenter完全把View和Model进行分离，主要的程序逻辑在Presenter里实现。并且，Presenter和View是没
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/搞定css三列布局/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/对MVC、MVP和MVVM的简单认识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/js中的位运算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/27/js中的位运算/" itemprop="url">
+                  js中的位运算
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-27 19:42:30" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-08-29 18:05:31" itemprop="dateModified" datetime="2018-08-29T18:05:31+08:00">2018-08-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前言在平常的工作中位运算用得比较少，一般用其他更容易理解得方式去达到相同目的。在计算机内部，一切运算最终都转化成二级制元算，直接使用二级制运算执行得效率是最高的。偶尔看到一道面试题，复习一下这方面知识，先来看一下这道面试题：
+123var a = 10;a ^= (1&lt;&lt;4) - 1;a的值
+题目先放一放，看看js中有哪些位运算。
+1. 位与(&amp;)真真为真，其余为假
+1234569和10二进制位与运算      1001    &amp; 1010    -------      1000
+由于奇数的二进制末位为1，偶数为0，跟1的位与运算后，分别为1和0，因此可以用位与运
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/27/js中的位运算/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1742,7 +1919,7 @@ BFC块级格式化上下文
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/js数据类型转化/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/HTML5离线存储之Application Cache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -1761,8 +1938,8 @@ BFC块级格式化上下文
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/27/js数据类型转化/" itemprop="url">
-                  js数据类型转化
+                <a class="post-title-link" href="/2018/08/27/HTML5离线存储之Application Cache/" itemprop="url">
+                  HTML5离线存储之Application Cache
                 </a>
               
             
@@ -1805,7 +1982,7 @@ BFC块级格式化上下文
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-29 18:05:06" itemprop="dateModified" datetime="2018-08-29T18:05:06+08:00">2018-08-29</time>
+                <time title="修改时间：2018-08-29 18:09:08" itemprop="dateModified" datetime="2018-08-29T18:09:08+08:00">2018-08-29</time>
               
             
           </span>
@@ -1822,7 +1999,7 @@ BFC块级格式化上下文
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a></span>
 
                 
                 
@@ -1858,227 +2035,22 @@ BFC块级格式化上下文
       
         
           
-          数据类型转化表首先上数据类型转化表，便于遇到问题直接查看
+          关于html5的离线存储，大致可分为：
 
+localStorage, sessionStorage
+indexedDB
+web sql
+application cache
 
-
-值
-字符串
-数字
-布尔值
-对象
-
-
-
-
-undefined  null
-“undefined”  “null”
-NaN
-false  false
-throws TypeError  throws TypeError
-
-
-true  false
-“true”  “false”
-1  0
-
-new Boolean(true)  new Boolean(false)
-
-
-“”(空字符串)  “1.2”(非空，数字)  “one”（非空，非数字）
-
-0  1.2  NaN
-false  true  true
-new String(“”) 
+可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。
+访问流程
+当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。
+特点
+离线浏览: 用户可以在离线状
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/js数据类型转化/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/08/27/inter-js/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/inter-js/" itemprop="url">
-                  前端面试之javascript
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-27 19:42:30" itemprop="dateCreated datePublished" datetime="2018-08-27T19:42:30+08:00">2018-08-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-08-30 00:15:32" itemprop="dateModified" datetime="2018-08-30T00:15:32+08:00">2018-08-30</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          介绍js的基本数据类型Undefined、Null、Boolean、Number、String、ECMAScript 2015 新增Symbol（创建后独一无二且不可变的数据类型）
-介绍js有哪些内置对象？
-Object 是 JavaScript 中所有对象的父对象
-数据封装类对象：Object、Array、Boolean、Number 和 String
-其他对象：Function、Arguments、Math、Date、RegExp、Error
-
-说几条写JavaScript的基本规范？
-不要在同一行声明多个变量。
-请使用 ===/!==来比较true/false或者数值
-使用对象字面量替代
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/27/inter-js/#more" rel="contents">
+            <a class="btn" href="/2018/08/27/HTML5离线存储之Application Cache/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
