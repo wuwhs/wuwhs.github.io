@@ -54,6 +54,10 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
 
 
 
@@ -91,7 +95,7 @@
     scheme: 'Gemini',
     version: '6.4.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
+    fancybox: true,
     fastclick: false,
     lazyload: false,
     tabs: true,
@@ -244,7 +248,7 @@
           
           <li class="menu-item menu-item-tags menu-item-active">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">23</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
   </li>
         
         
@@ -260,7 +264,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">34</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">35</span></a>
   </li>
 
       
@@ -420,9 +424,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2018/08/27/js数据类型转化/" itemprop="url">
+            <a class="post-title-link" href="/2018/08/27/js中的位运算/" itemprop="url">
               
-                <span itemprop="name">js数据类型转化</span>
+                <span itemprop="name">js中的位运算</span>
               
             </a>
         
@@ -448,9 +452,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2018/08/27/js中的位运算/" itemprop="url">
+            <a class="post-title-link" href="/2018/08/27/js数据类型转化/" itemprop="url">
               
-                <span itemprop="name">js中的位运算</span>
+                <span itemprop="name">js数据类型转化</span>
               
             </a>
         
@@ -661,7 +665,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -753,7 +757,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -900,6 +906,8 @@
 
 
 
+  
+
 
 
 
@@ -932,6 +940,11 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
   
@@ -989,32 +1002,20 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
 
 
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-  
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick';
-    guest = guest.split(',').filter(function (item) {
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
-        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
-        placeholder: '看完说两句呗~',
-        avatar:'mm',
-        meta:guest,
-        pageSize:'10' || 10,
-        visitor: false
-    });
-  </script>
+
 
 
 
