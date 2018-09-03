@@ -124,7 +124,7 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-31T11:52:20.118Z">
+<meta property="og:updated_time" content="2018-09-03T03:27:20.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建自己的博客">
 <meta name="twitter:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-31 19:52:20" itemprop="dateModified" datetime="2018-08-31T19:52:20+08:00">2018-08-31</time>
+                <time title="修改时间：2018-09-03 11:27:20" itemprop="dateModified" datetime="2018-09-03T11:27:20+08:00">2018-09-03</time>
               
             
           </span>
@@ -444,7 +444,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/08/30/构建自己的博客/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/30/构建自己的博客/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/08/30/构建自己的博客/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -495,9 +495,14 @@
 <li>畅言 - 搜狐提供的评论组件，功能丰富，体验优异，防止注水；但必须进行域名备案。只要域名备过案就可以通过审核。</li>
 <li>Disqus - 国外使用较多的评论组件。万里长城永不倒，一枝红杏出墙来，你懂的。</li>
 <li>valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用<code>App ID</code>和<code>App Key</code>即可使用。</li>
-<li>Ditment - Gitment 是作者实现的一款基于 GitHub Issues 的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的 Markdown / GFM 和代码高亮支持。尤为适合各种基于 GitHub Pages 的静态博客或项目页面。</li>
+<li>Ditment - Gitment 是一款基于<code>GitHub Issues</code>的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的<code>Markdown / GFM</code>和代码高亮支持。尤为适合各种基于<code>GitHub Pages</code>的静态博客或项目页面。</li>
 </ul>
-<p>畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，我在评论仓库</p>
+<p>畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。</p>
+<h4 id="gitment配置"><a href="#gitment配置" class="headerlink" title="gitment配置"></a>gitment配置</h4><p>gitment的全部配置项如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line">gitment:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span><br><span class="line">  count: true # Show comments count in post meta area</span><br><span class="line">  lazy: false # Comments lazy loading with a button</span><br><span class="line">  cleanly: true # Hide 'Powered by ...' on footer, and more</span><br><span class="line">  language: zh-CN  # Force language, or auto switch by theme</span><br><span class="line">  github_user: xxx # MUST HAVE, Your Github Username</span><br><span class="line">  github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments</span><br><span class="line">  client_id: xxx # MUST HAVE, Github client id for the Gitment</span><br><span class="line">  client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment</span><br><span class="line">  proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect</span><br><span class="line">  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled</span><br></pre></td></tr></table></figure></p>
+<p>其中要注意的是：</p>
+<blockquote>
+<p><code>client_id</code>和<code>client_secret</code>要用自己的<code>github</code>账号注册一个应用许可证书，即<code>OAuth application</code>，步骤：你的<code>github</code>首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如<a href="https://xxx.github.io/，点击Register" target="_blank" rel="noopener">https://xxx.github.io/，点击Register</a> application即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。<br>这样，用户</p>
+</blockquote>
 
       
     </div>
@@ -630,7 +635,11 @@
 
   
     <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
     </div>
+
   
 
 
@@ -827,7 +836,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备"><span class="nav-number">1.1.</span> <span class="nav-text">二、准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">1.2.</span> <span class="nav-text">评论功能</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备"><span class="nav-number">1.1.</span> <span class="nav-text">二、准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">1.2.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gitment配置"><span class="nav-number">1.2.1.</span> <span class="nav-text">gitment配置</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1040,32 +1049,49 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1535625630000',
+            owner: 'wuwhs',
+            repo: 'wuwhs.github.io',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919ba729526f67646651e2800517b55121c3f1ff',
+            
+                client_id: '05a1c78379a7d64939ca'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-  
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick';
-    guest = guest.split(',').filter(function (item) {
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
-        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
-        placeholder: '看完说两句呗~',
-        avatar:'mm',
-        meta:guest,
-        pageSize:'10' || 10,
-        visitor: false
-    });
-  </script>
+
 
 
 

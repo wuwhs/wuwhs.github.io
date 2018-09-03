@@ -117,7 +117,7 @@
 
 
   <meta name="description" content="关于html5的离线存储，大致可分为：  localStorage, sessionStorage indexedDB web sql application cache  可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。 访问流程 当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest">
-<meta name="keywords" content="缓存,html5">
+<meta name="keywords" content="html5,缓存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTML5离线存储之Application Cache">
 <meta property="og:url" content="https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/index.html">
@@ -451,7 +451,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2018/05/23/HTML5离线存储之Application Cache/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/05/23/HTML5离线存储之Application Cache/" itemprop="commentCount"></span>
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/23/HTML5离线存储之Application Cache/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -568,14 +568,14 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/04/18/HTTP缓存机制/" rel="bookmark">HTTP缓存机制</a></div>
+      <div class="popular-posts-title"><a href="/2018/05/24/html5 新型api/" rel="bookmark">html5 新型api</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/05/24/html5 新型api/" rel="bookmark">html5 新型api</a></div>
+      <div class="popular-posts-title"><a href="/2018/04/18/HTTP缓存机制/" rel="bookmark">HTTP缓存机制</a></div>
       
     </li>
   
@@ -641,9 +641,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
-          
             <a href="/tags/html5/" rel="tag"># html5</a>
+          
+            <a href="/tags/缓存/" rel="tag"># 缓存</a>
           
         </div>
       
@@ -712,7 +712,11 @@
 
   
     <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
     </div>
+
   
 
 
@@ -1122,32 +1126,49 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1527075630000',
+            owner: 'wuwhs',
+            repo: 'wuwhs.github.io',
+            
+            lang: "zh-CN" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '919ba729526f67646651e2800517b55121c3f1ff',
+            
+                client_id: '05a1c78379a7d64939ca'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-  
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick';
-    guest = guest.split(',').filter(function (item) {
-      return GUEST.indexOf(item)>-1;
-    });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: 'ecvcHiDPF4b00k29Y1S85ODk-gzGzoHsz',
-        appKey: 'kzuhR5tADsrx3AhFUbm2xYMx',
-        placeholder: '看完说两句呗~',
-        avatar:'mm',
-        meta:guest,
-        pageSize:'10' || 10,
-        visitor: false
-    });
-  </script>
+
 
 
 
