@@ -117,7 +117,7 @@
 
 
   <meta name="description" content="Page Visibility API为了解决隐藏或最小化标签页，让开发人员知道，有哪些功能可以停下来，```,```  visibilitychange ```事件12 document.addEventListener(‘msvisibilitychange’, handleVisibilityChange);document.addEventListener(‘webkitvisibilit">
-<meta name="keywords" content="html5,javascript">
+<meta name="keywords" content="javascript,html5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="html5 新型api">
 <meta property="og:url" content="https://wuwhs.github.io/2018/05/24/html5 新型api/index.html">
@@ -505,13 +505,6 @@ console.log(msg);
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/05/23/HTML5离线存储之Application Cache/" rel="bookmark">HTML5离线存储之Application Cache</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
       <div class="popular-posts-title"><a href="/2017/04/04/JavaScript思维导图/" rel="bookmark">JavaScript思维导图</a></div>
       
     </li>
@@ -534,6 +527,13 @@ console.log(msg);
       
       
       <div class="popular-posts-title"><a href="/2017/11/08/区分substring、substr和slice/" rel="bookmark">区分substring、substr和slice</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/07/27/尾调用/" rel="bookmark">尾调用</a></div>
       
     </li>
   
@@ -599,9 +599,9 @@ console.log(msg);
       
         <div class="post-tags">
           
-            <a href="/tags/html5/" rel="tag"># html5</a>
-          
             <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/html5/" rel="tag"># html5</a>
           
         </div>
       
@@ -1103,7 +1103,7 @@ console.log(msg);
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1527159630000',
+            id: window.location.pathname,
             owner: 'wuwhs',
             repo: 'wuwhs.github.io',
             

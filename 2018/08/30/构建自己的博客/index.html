@@ -124,10 +124,12 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-03T03:27:20.034Z">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/commit.png">
+<meta property="og:updated_time" content="2018-09-03T06:04:20.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建自己的博客">
 <meta name="twitter:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
+<meta name="twitter:image" content="https://wuwhs.github.io/gb/构建自己的博客/commit.png">
 
 
 
@@ -411,7 +413,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-03 11:27:20" itemprop="dateModified" datetime="2018-09-03T11:27:20+08:00">2018-09-03</time>
+                <time title="修改时间：2018-09-03 14:04:20" itemprop="dateModified" datetime="2018-09-03T14:04:20+08:00">2018-09-03</time>
               
             
           </span>
@@ -497,12 +499,14 @@
 <li>valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用<code>App ID</code>和<code>App Key</code>即可使用。</li>
 <li>Ditment - Gitment 是一款基于<code>GitHub Issues</code>的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的<code>Markdown / GFM</code>和代码高亮支持。尤为适合各种基于<code>GitHub Pages</code>的静态博客或项目页面。</li>
 </ul>
-<p>畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。</p>
-<h4 id="gitment配置"><a href="#gitment配置" class="headerlink" title="gitment配置"></a>gitment配置</h4><p>gitment的全部配置项如下<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line">gitment:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span><br><span class="line">  count: true # Show comments count in post meta area</span><br><span class="line">  lazy: false # Comments lazy loading with a button</span><br><span class="line">  cleanly: true # Hide 'Powered by ...' on footer, and more</span><br><span class="line">  language: zh-CN  # Force language, or auto switch by theme</span><br><span class="line">  github_user: xxx # MUST HAVE, Your Github Username</span><br><span class="line">  github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments</span><br><span class="line">  client_id: xxx # MUST HAVE, Github client id for the Gitment</span><br><span class="line">  client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment</span><br><span class="line">  proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect</span><br><span class="line">  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled</span><br></pre></td></tr></table></figure></p>
-<p>其中要注意的是：</p>
-<blockquote>
-<p><code>client_id</code>和<code>client_secret</code>要用自己的<code>github</code>账号注册一个应用许可证书，即<code>OAuth application</code>，步骤：你的<code>github</code>首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如<a href="https://xxx.github.io/，点击Register" target="_blank" rel="noopener">https://xxx.github.io/，点击Register</a> application即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。<br>这样，用户</p>
-</blockquote>
+<p>畅言要备案，对于对于挂靠在<code>GitHub</code>的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。</p>
+<h4 id="gitment配置"><a href="#gitment配置" class="headerlink" title="gitment配置"></a>gitment配置</h4><p>gitment的全部配置项如下，<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line">gitment:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span><br><span class="line">  count: true # Show comments count in post meta area</span><br><span class="line">  lazy: false # Comments lazy loading with a button</span><br><span class="line">  cleanly: true # Hide 'Powered by ...' on footer, and more</span><br><span class="line">  language: zh-CN  # Force language, or auto switch by theme</span><br><span class="line">  github_user: xxx # MUST HAVE, Your Github Username</span><br><span class="line">  github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments</span><br><span class="line">  client_id: xxx # MUST HAVE, Github client id for the Gitment</span><br><span class="line">  client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment</span><br><span class="line">  proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect</span><br><span class="line">  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled</span><br></pre></td></tr></table></figure></p>
+<p>开启<code>enable</code>为<code>true</code>就显示评论框了，不过要真正实现评论可用，需要<br>用自己的<code>github</code>账号注册一个应用许可证书，即<code>OAuth application</code>，注册成功就生成了<code>client_id</code>和<code>client_secret</code>。</p>
+<p>步骤：你的<code>github</code>首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如<code>https://xxx.github.io/</code>，点击Register application即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。</p>
+<p>这样，用户点击评论框右边登入跳转到<code>github</code>授权，允许授权跳转回来就可以评论啦！</p>
+<p><img src="/gb/构建自己的博客/commit.png" alt="commit"></p>
+<p><strong>坑一：有些文章初始化弹出validation failed错误</strong></p>
+<p>因为GitHub的issue限定了标签长度不超过50个字符，而</p>
 
       
     </div>
@@ -1068,7 +1072,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1535625630000',
+            id: window.location.pathname,
             owner: 'wuwhs',
             repo: 'wuwhs.github.io',
             
