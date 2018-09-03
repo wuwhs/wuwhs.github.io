@@ -125,7 +125,8 @@
 <meta property="og:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/commit.png">
-<meta property="og:updated_time" content="2018-09-03T06:04:20.497Z">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/gitment.png">
+<meta property="og:updated_time" content="2018-09-03T06:29:38.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建自己的博客">
 <meta name="twitter:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
@@ -413,7 +414,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-03 14:04:20" itemprop="dateModified" datetime="2018-09-03T14:04:20+08:00">2018-09-03</time>
+                <time title="修改时间：2018-09-03 14:29:38" itemprop="dateModified" datetime="2018-09-03T14:29:38+08:00">2018-09-03</time>
               
             
           </span>
@@ -505,8 +506,10 @@
 <p>步骤：你的<code>github</code>首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如<code>https://xxx.github.io/</code>，点击Register application即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。</p>
 <p>这样，用户点击评论框右边登入跳转到<code>github</code>授权，允许授权跳转回来就可以评论啦！</p>
 <p><img src="/gb/构建自己的博客/commit.png" alt="commit"></p>
-<p><strong>坑一：有些文章初始化弹出validation failed错误</strong></p>
-<p>因为GitHub的issue限定了标签长度不超过50个字符，而</p>
+<p><strong>小坑：有些文章评论初始化弹出validation failed错误</strong></p>
+<p>因为<code>GitHub</code>的每个<code>issues</code>有两个<code>lables</code>，一个是<code>gitment</code>，另一个是<code>id</code>，<code>id</code>取的是页面<code>pathname</code>，标签长度限定不超过50个字符，而像一般中文标题文章，转义后字符很容易超过50个字符。</p>
+<p><img src="/gb/构建自己的博客/gitment.png" alt="gitment.swig"></p>
+<p>在这里我用文章创建时间戳来当作<code>id</code>，这样长度就不会超过50个字符，成功解决！</p>
 
       
     </div>

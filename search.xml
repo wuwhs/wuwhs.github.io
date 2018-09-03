@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[构建自己的博客]]></title>
     <url>%2F2018%2F08%2F30%2F%E6%9E%84%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
-    <content type="text"><![CDATA[一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载地址：https://git-scm.com/download 安装过程一路默认安装即可。 关于更多的Git讲解参看： https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000 安装Hexo什么是 Hexo？Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 Hexo官方网站：https://hexo.io/zh-cn/当前版本是v6.4.0 评论功能当前版本配置，支持畅言，Disqus，valine，gitment。 畅言 - 搜狐提供的评论组件，功能丰富，体验优异，防止注水；但必须进行域名备案。只要域名备过案就可以通过审核。 Disqus - 国外使用较多的评论组件。万里长城永不倒，一枝红杏出墙来，你懂的。 valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用App ID和App Key即可使用。 Ditment - Gitment 是一款基于GitHub Issues的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的Markdown / GFM和代码高亮支持。尤为适合各种基于GitHub Pages的静态博客或项目页面。 畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。 gitment配置gitment的全部配置项如下，123456789101112131415# Gitment# Introduction: https://imsun.net/posts/gitment-introduction/gitment: enable: true mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway count: true # Show comments count in post meta area lazy: false # Comments lazy loading with a button cleanly: true # Hide 'Powered by ...' on footer, and more language: zh-CN # Force language, or auto switch by theme github_user: xxx # MUST HAVE, Your Github Username github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments client_id: xxx # MUST HAVE, Github client id for the Gitment client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled 开启enable为true就显示评论框了，不过要真正实现评论可用，需要用自己的github账号注册一个应用许可证书，即OAuth application，注册成功就生成了client_id和client_secret。 步骤：你的github首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如https://xxx.github.io/，点击Register application即可完成注册，生成Client ID和Client Secret。 这样，用户点击评论框右边登入跳转到github授权，允许授权跳转回来就可以评论啦！ 坑一：有些文章初始化弹出validation failed错误 因为GitHub的issue限定了标签长度不超过50个字符，而]]></content>
+    <content type="text"><![CDATA[一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载地址：https://git-scm.com/download 安装过程一路默认安装即可。 关于更多的Git讲解参看： https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000 安装Hexo什么是 Hexo？Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 Hexo官方网站：https://hexo.io/zh-cn/当前版本是v6.4.0 评论功能当前版本配置，支持畅言，Disqus，valine，gitment。 畅言 - 搜狐提供的评论组件，功能丰富，体验优异，防止注水；但必须进行域名备案。只要域名备过案就可以通过审核。 Disqus - 国外使用较多的评论组件。万里长城永不倒，一枝红杏出墙来，你懂的。 valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用App ID和App Key即可使用。 Ditment - Gitment 是一款基于GitHub Issues的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的Markdown / GFM和代码高亮支持。尤为适合各种基于GitHub Pages的静态博客或项目页面。 畅言要备案，对于对于挂靠在GitHub的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。 gitment配置gitment的全部配置项如下，123456789101112131415# Gitment# Introduction: https://imsun.net/posts/gitment-introduction/gitment: enable: true mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway count: true # Show comments count in post meta area lazy: false # Comments lazy loading with a button cleanly: true # Hide 'Powered by ...' on footer, and more language: zh-CN # Force language, or auto switch by theme github_user: xxx # MUST HAVE, Your Github Username github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments client_id: xxx # MUST HAVE, Github client id for the Gitment client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled 开启enable为true就显示评论框了，不过要真正实现评论可用，需要用自己的github账号注册一个应用许可证书，即OAuth application，注册成功就生成了client_id和client_secret。 步骤：你的github首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如https://xxx.github.io/，点击Register application即可完成注册，生成Client ID和Client Secret。 这样，用户点击评论框右边登入跳转到github授权，允许授权跳转回来就可以评论啦！ 小坑：有些文章评论初始化弹出validation failed错误 因为GitHub的每个issues有两个lables，一个是gitment，另一个是id，id取的是页面pathname，标签长度限定不超过50个字符，而像一般中文标题文章，转义后字符很容易超过50个字符。 在这里我用文章创建时间戳来当作id，这样长度就不会超过50个字符，成功解决！]]></content>
       <categories>
         <category>其它</category>
       </categories>
@@ -88,8 +88,8 @@
         <category>html</category>
       </categories>
       <tags>
-        <tag>html5</tag>
         <tag>缓存</tag>
+        <tag>html5</tag>
       </tags>
   </entry>
   <entry>
@@ -178,8 +178,8 @@
         <category>其它</category>
       </categories>
       <tags>
-        <tag>缓存</tag>
         <tag>http</tag>
+        <tag>缓存</tag>
       </tags>
   </entry>
   <entry>
