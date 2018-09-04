@@ -30,6 +30,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -117,20 +124,27 @@
 
 
   <meta name="description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
-<meta name="keywords" content="git nodejs">
+<meta name="keywords" content="git nodejs hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="构建自己的博客">
 <meta property="og:url" content="https://wuwhs.github.io/2018/08/30/构建自己的博客/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/landscape.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/tomorrow_theme.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/categories.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/tags.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/baidu_analytics.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/oAuth.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/commit.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/issues.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/构建自己的博客/gitment.png">
-<meta property="og:updated_time" content="2018-09-03T06:29:38.260Z">
+<meta property="og:updated_time" content="2018-09-04T09:02:41.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建自己的博客">
 <meta name="twitter:description" content="一、前言看过很多人，用github创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。 二、准备安装Node.jsNode.js下载地址：https://nodejs.org/en/download/ 安装过程一路默认安装即可。 详细安装文档参看：http://www.runoob.com/nodejs/nodejs-install-setup.html 安装Git软件Git软件下载">
-<meta name="twitter:image" content="https://wuwhs.github.io/gb/构建自己的博客/commit.png">
+<meta name="twitter:image" content="https://wuwhs.github.io/gb/构建自己的博客/landscape.png">
 
 
 
@@ -255,7 +269,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">24</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">25</span></a>
   </li>
         
         
@@ -414,7 +428,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-03 14:29:38" itemprop="dateModified" datetime="2018-09-03T14:29:38+08:00">2018-09-03</time>
+                <time title="修改时间：2018-09-04 17:02:41" itemprop="dateModified" datetime="2018-09-04T17:02:41+08:00">2018-09-04</time>
               
             
           </span>
@@ -484,15 +498,80 @@
 
       
         <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>看过很多人，用<code>github</code>创建个人博客，最近抽空也实现的自己的博客，下面就把摸索过程记录下。</p>
-<h3 id="二、准备"><a href="#二、准备" class="headerlink" title="二、准备"></a>二、准备</h3><p>安装Node.js<br>Node.js下载地址：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
+<h2 id="二、准备"><a href="#二、准备" class="headerlink" title="二、准备"></a>二、准备</h2><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><p>Node.js下载地址：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a></p>
 <p>安装过程一路默认安装即可。</p>
 <p>详细安装文档参看：<a href="http://www.runoob.com/nodejs/nodejs-install-setup.html" target="_blank" rel="noopener">http://www.runoob.com/nodejs/nodejs-install-setup.html</a></p>
-<p>安装Git软件<br>Git软件下载地址：<a href="https://git-scm.com/download" target="_blank" rel="noopener">https://git-scm.com/download</a></p>
+<h3 id="安装Git软件"><a href="#安装Git软件" class="headerlink" title="安装Git软件"></a>安装Git软件</h3><p>Git软件下载地址：<a href="https://git-scm.com/download" target="_blank" rel="noopener">https://git-scm.com/download</a></p>
 <p>安装过程一路默认安装即可。</p>
 <p>关于更多的Git讲解参看：</p>
 <p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
-<p>安装Hexo<br>什么是 Hexo？<br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>Hexo官方网站：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a><br>当前版本是v6.4.0</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>什么是 Hexo？Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用<code>Markdown</code>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>Hexo官方网站：<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a> ，我用的当前版本是v6.4.0，基本步骤：</p>
+<ol>
+<li>新建一个blog空文件夹，cmd窗口或vscode终端，输入命令<code>npm install -g hexo-cli</code>全局安装hexo；</li>
+<li>安装完成后输入<code>hexo -v</code>显示hexo的相关信息说明安装成功；</li>
+<li><p>输入命令<code>hexo init</code>初始化hexo项目，安装相关依赖，安装完成后的目录结构：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- node_modules <span class="comment">// 依赖包</span></span><br><span class="line">- public <span class="comment">// 存放生成的页面</span></span><br><span class="line">- scaffolds <span class="comment">// 生成页模板</span></span><br><span class="line">- source <span class="comment">// 创建的源文章</span></span><br><span class="line">- themes <span class="comment">// 主题</span></span><br><span class="line">- _config.yml <span class="comment">// 博客配置（站点配置）</span></span><br><span class="line">- db.json <span class="comment">// 解析source得到的库文件</span></span><br><span class="line">- package.json <span class="comment">// 项目依赖配置</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上一步安装完成，输入命令<code>hexo s</code>或<code>hexo server</code>，开启服务，成功后，在浏览器访问<code>http://localhost:4000</code>生成的默认主题博客。PS：在这里可以<code>npm install hexo-browsersync --save</code>实现热更新，不必每次更改都去刷新浏览器。</p>
+</li>
+</ol>
+<p><img src="/gb/构建自己的博客/landscape.png" alt="landscape"></p>
+<h2 id="三、修改站点配置"><a href="#三、修改站点配置" class="headerlink" title="三、修改站点配置"></a>三、修改站点配置</h2><p><code>_config.yml</code>文件是对整个站点基本信息的配置，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: <span class="comment">// 博客名称</span></span><br><span class="line">subtitle: <span class="comment">// 副标题</span></span><br><span class="line">description: <span class="comment">// 描述 用于seo</span></span><br><span class="line">keywords: <span class="comment">// 关键字 用于seo</span></span><br><span class="line">author: <span class="comment">// 作者 用于seo</span></span><br><span class="line">language: <span class="comment">// 语言</span></span><br><span class="line">timezone: <span class="comment">// 时区</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="四、Github创建一个hexo的代码库"><a href="#四、Github创建一个hexo的代码库" class="headerlink" title="四、Github创建一个hexo的代码库"></a>四、Github创建一个hexo的代码库</h2><p>和创建其它git仓库一样，只不过名称必须为<code>yourname.github.io</code>这种形式，其中<code>yourname</code>是你github个人账号名，创建好后，找到站点配置文件（blog下的<code>_config.yml</code>文件），找到：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type:</span><br></pre></td></tr></table></figure>
+<p>改成你的 博客git仓库地址和分支：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:<span class="comment">//github.com/YourgithubName/YourgithubName.github.io.git</span></span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>这样，远程仓库配置完成。接下来</p>
+<ol>
+<li>输入命令<code>hexo generate</code>或<code>hexo g</code>将原<code>markedown</code>文章生成静态页面，放置在生成的<code>public</code>目录下；</li>
+<li><code>npm install hexo-deployer-git --save</code>安装<code>hexo</code>的<code>git</code>插件；</li>
+<li>再输入命令<code>hexo deploy</code>或<code>hexo d</code>将生成的静态页面推送到远程仓库；</li>
+<li>完成后，在浏览器访问<code>https://yourname.github.io/</code>，就能看到你构建好的个人博客啦！</li>
+</ol>
+<h2 id="五、写文章"><a href="#五、写文章" class="headerlink" title="五、写文章"></a>五、写文章</h2><p><code>hexo</code>支持用<code>markdown</code>写作，在目录<code>blog/source/_posts</code>新建<code>markdown</code>文件，或者使用命令<code>hexo new posts 你的文章标题</code>。</p>
+<p><strong>小坑：&#123;&#123;&#125;&#125;符号编译出错</strong></p>
+<p>markdown生成静态页面，&#123;&#123;&#125;&#125;是swig模板符号，属于特殊字符，在编译时解析不了双大括号中间字符串就会报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FATAL Something<span class="string">'s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span></span><br><span class="line"><span class="string">Template render error: (unknown path) [Line 3, Column 8]</span></span><br><span class="line"><span class="string">  unexpected token: &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>解决方案：用转义字符代替</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; -&gt; &amp;#123; — 大括号左边部分Left curly brace</span><br><span class="line">&#125; -&gt; &amp;#125; — 大括号右边部分Right curly brace</span><br></pre></td></tr></table></figure>
+<h2 id="六、配置主题"><a href="#六、配置主题" class="headerlink" title="六、配置主题"></a>六、配置主题</h2><p><code>hexo</code>默认主题是<code>landscape</code>，样式可能不是每个人都喜爱的，官方页提供了一些<a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a>，可以按自己的风格安装，只需在站点配置文件<code>_config.yml</code>更改主题名称。</p>
+<p><code>Next</code>主题是目前比较流行的主题，文档相对比较成熟。<a href="http://theme-next.iissnan.com" target="_blank" rel="noopener">next主题文档</a></p>
+<p>安装<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br><span class="line">git clone https:<span class="comment">//github.com/theme-next/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure></p>
+<p>更换主题<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https://hexo.io/plugins/</span><br><span class="line">## Themes: https://hexo.io/themes/</span><br><span class="line">theme: next</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改Next主题配置文件"><a href="#修改Next主题配置文件" class="headerlink" title="修改Next主题配置文件"></a>修改Next主题配置文件</h3><p>目录<code>blog/themes/next</code>找到<code>_config.yml</code>文件，其中有很多配置项，下面列举几个常用的。</p>
+<h3 id="更换头像"><a href="#更换头像" class="headerlink" title="更换头像"></a>更换头像</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Sidebar Avatar</span><br><span class="line">avatar:</span><br><span class="line">  # in theme directory(source/images): /images/avatar.gif</span><br><span class="line">  # in site  directory(source/uploads): /uploads/avatar.gif</span><br><span class="line">  # You can also use other linking images.</span><br><span class="line">  url: <span class="regexp">/images/</span>avatar.png</span><br><span class="line">  # If true, the avatar would be dispalyed in circle.</span><br><span class="line">  rounded: <span class="literal">true</span></span><br><span class="line">  # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.</span><br><span class="line">  opacity: <span class="number">1</span></span><br><span class="line">  # If true, the avatar would be rotated with the cursor.</span><br><span class="line">  rotated: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>只需将头像的url换成你自己头像的url或者直接覆盖头像图片即可。</p>
+<blockquote>
+<p>注意这里的根<code>/</code>的绝对路径是<code>blog/themes/next/source/</code>，以后写文章引用本地图片的话，注意放到这个目录下！</p>
+</blockquote>
+<h3 id="代码高亮"><a href="#代码高亮" class="headerlink" title="代码高亮"></a>代码高亮</h3><p><code>NexT</code>使用<a href="https://github.com/chriskempson/tomorrow-theme" target="_blank" rel="noopener">Tomorrow Theme</a>作为代码高亮，共有5款主题供你选择。 <code>NexT</code>默认使用的是白色的<code>normal</code>主题，可选的值有<code>normal</code>，<code>night</code>，<code>night blue</code>， <code>night bright</code>，<code>night eighties</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Code Highlight theme</span><br><span class="line"># Available values: normal | night | night eighties | night blue | night bright</span><br><span class="line"># https://github.com/chriskempson/tomorrow-theme</span><br><span class="line">highlight_theme: normal</span><br></pre></td></tr></table></figure>
+<p><img src="/gb/构建自己的博客/tomorrow_theme.png" alt="tomorrow_theme"></p>
+<h3 id="添加分类页"><a href="#添加分类页" class="headerlink" title="添加分类页"></a>添加分类页</h3><p>文章可能需要分类，添加分类页</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br><span class="line">hexo <span class="keyword">new</span> page categories</span><br></pre></td></tr></table></figure>
+<p>此时在<code>blog/source</code>目录下就生成了<code>categories/index.md</code>文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 分类</span><br><span class="line">date: <span class="number">2018</span><span class="number">-08</span><span class="number">-28</span> <span class="number">14</span>:<span class="number">59</span>:<span class="number">48</span></span><br><span class="line">type: categories</span><br><span class="line">comments: <span class="literal">false</span> <span class="comment">// 分类页不需要添加评论</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>然后，放开主题配置文件<code>_config.yml</code>中<code>menu setting</code>对<code>categories</code>注释</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: <span class="regexp">/ || home</span></span><br><span class="line"><span class="regexp">  categories: /</span>categories/ || th</span><br></pre></td></tr></table></figure>
+<p>以后文章的内容头声明的分类就会在分类页有索引了。</p>
+<p><img src="/gb/构建自己的博客/categories.png" alt=""></p>
+<h3 id="添加标签页"><a href="#添加标签页" class="headerlink" title="添加标签页"></a>添加标签页</h3><p>跟添加分类页一样，文章也需要标签</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd blog</span><br><span class="line">hexo <span class="keyword">new</span> page tags</span><br></pre></td></tr></table></figure>
+<p>此时在<code>blog/source</code>目录下就生成了<code>tags/index.md</code>文件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: <span class="number">2018</span><span class="number">-08</span><span class="number">-28</span> <span class="number">14</span>:<span class="number">34</span>:<span class="number">22</span></span><br><span class="line">type: tags</span><br><span class="line">comments: <span class="literal">false</span> <span class="comment">// 标签页不需要评论</span></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>然后，放开主题配置文件<code>_config.yml</code>中<code>menu setting</code>对<code>tags</code>注释</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: <span class="regexp">/ || home</span></span><br><span class="line"><span class="regexp">  tags: /</span>tags/ || tags</span><br></pre></td></tr></table></figure>
+<p>以后文章的内容头声明的分类就会在分类页有分类了。</p>
+<p><img src="/gb/构建自己的博客/tags.png" alt=""></p>
+<h3 id="404页"><a href="#404页" class="headerlink" title="404页"></a>404页</h3><p>当访问当前站点，页面找不到，跳转到404页，推荐用腾讯公益404页面，寻找丢失儿童，让大家一起关注此项公益事业！使用方法，新建404.html页面，放到主题的<code>source</code>目录下，内容如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"content-type"</span> <span class="attr">content</span>=<span class="string">"text/html;charset=utf-8;"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"all"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span> <span class="attr">content</span>=<span class="string">"index,follow"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"https://qzone.qq.com/gy/404/style/404style.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/plain"</span> <span class="attr">src</span>=<span class="string">"http://www.qq.com/404/search_children.js"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">homePageUrl</span>=<span class="string">"/"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">homePageName</span>=<span class="string">"回到我的主页"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://qzone.qq.com/gy/404/data.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://qzone.qq.com/gy/404/page.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="站点分析统计"><a href="#站点分析统计" class="headerlink" title="站点分析统计"></a>站点分析统计</h3><p>对于个人站点，我们需要统计用户访问量，用户分布，跳转率等。Next主题推荐使用的有百度统计、Google分析、腾讯分析了，使用均一样，注册获取站点统计id。</p>
+<h4 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h4><p>我一直用的<a href="https://tongji.baidu.com" target="_blank" rel="noopener">百度统计</a>，注册百度统计，<code>管理</code> &gt; <code>网站列表</code> &gt; <code>新增网站</code>完成后，<code>代码管理</code> &gt; <code>代码获取</code>，就能得到统计id。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Baidu Analytics ID</span><br><span class="line">baidu_analytics: 统计id</span><br></pre></td></tr></table></figure>
+<p><img src="/gb/构建自己的博客/baidu_analytics.png" alt="baidu_analytics"></p>
+<h4 id="不蒜子统计"><a href="#不蒜子统计" class="headerlink" title="不蒜子统计"></a>不蒜子统计</h4><p>不蒜子统计可以统计站点以及每个页面的<code>PV</code>、<code>UV</code>和站点总的访问数，以小眼睛的形式展现。</p>
+<p>编辑主题配置文件中的<code>busuanzi_count</code>的配置项。当<code>enable: true</code>时，代表开启全局开关。若<code>total_visitors</code>、<code>total_views</code>、<code>post_views</code>的值均为false时，不蒜子仅作记录而不会在页面上显示。</p>
+<h3 id="内容分享服务"><a href="#内容分享服务" class="headerlink" title="内容分享服务"></a>内容分享服务</h3><p>Next主题还提供了对外提供分享接口，包括<a href="addthis">百度分享</a>、<a href="https://www.addthis.com/" target="_blank" rel="noopener">addthis Share</a>和<a href="https://github.com/theme-next/theme-next-needmoreshare2" target="_blank" rel="noopener">NeedMoreShare2</a>，要用到哪个，只需把相应<code>enable: true</code>，注册账号获取id即可。</p>
 <h3 id="评论功能"><a href="#评论功能" class="headerlink" title="评论功能"></a>评论功能</h3><p>当前版本配置，支持<a href="https://changyan.kuaizhan.com/" target="_blank" rel="noopener">畅言</a>，<a href="http://www.disqus.com/" target="_blank" rel="noopener">Disqus</a>，<a href="https://leancloud.cn/" target="_blank" rel="noopener">valine</a>，<a href="https://imsun.net/posts/gitment-introduction/" target="_blank" rel="noopener">gitment</a>。</p>
 <ul>
 <li>畅言 - 搜狐提供的评论组件，功能丰富，体验优异，防止注水；但必须进行域名备案。只要域名备过案就可以通过审核。</li>
@@ -500,16 +579,21 @@
 <li>valine - LeanCloud提供的后端云服务，可用于统计网址访问数据，分为开发版和商用版，只需要注册生成应用<code>App ID</code>和<code>App Key</code>即可使用。</li>
 <li>Ditment - Gitment 是一款基于<code>GitHub Issues</code>的评论系统。支持在前端直接引入，不需要任何后端代码。可以在页面进行登录、查看、评论、点赞等操作，同时有完整的<code>Markdown / GFM</code>和代码高亮支持。尤为适合各种基于<code>GitHub Pages</code>的静态博客或项目页面。</li>
 </ul>
-<p>畅言要备案，对于对于挂靠在<code>GitHub</code>的博客非常的不友好，放弃！Disqus，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用Gitment，让用户用自己的GitHub账号才能评论，用git的一个仓库来存储评论（评论以该仓库的issue形式展现）。</p>
-<h4 id="gitment配置"><a href="#gitment配置" class="headerlink" title="gitment配置"></a>gitment配置</h4><p>gitment的全部配置项如下，<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line">gitment:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span><br><span class="line">  count: true # Show comments count in post meta area</span><br><span class="line">  lazy: false # Comments lazy loading with a button</span><br><span class="line">  cleanly: true # Hide 'Powered by ...' on footer, and more</span><br><span class="line">  language: zh-CN  # Force language, or auto switch by theme</span><br><span class="line">  github_user: xxx # MUST HAVE, Your Github Username</span><br><span class="line">  github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments</span><br><span class="line">  client_id: xxx # MUST HAVE, Github client id for the Gitment</span><br><span class="line">  client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment</span><br><span class="line">  proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect</span><br><span class="line">  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled</span><br></pre></td></tr></table></figure></p>
+<p>畅言要备案，对于对于挂靠在<code>GitHub</code>的博客非常的不友好，放弃！<code>Disqus</code>，目前国内网络环境访问不了，放弃！valine在用户没有认证登录可以评论，不能防止恶意注水，放弃！我选择用<code>Gitment</code>，让用户用自己的<code>GitHub</code>账号才能评论，用git的一个仓库来存储评论（评论以该仓库的<code>issue</code>形式展现）。</p>
+<h4 id="gitment配置"><a href="#gitment配置" class="headerlink" title="gitment配置"></a>gitment配置</h4><p><code>Gitment</code>的全部配置项如下，</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line">gitment:</span><br><span class="line">  enable: <span class="literal">true</span></span><br><span class="line">  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway</span><br><span class="line">  count: true # Show comments count in post meta area</span><br><span class="line">  lazy: false # Comments lazy loading with a button</span><br><span class="line">  cleanly: true # Hide 'Powered by ...' on footer, and more</span><br><span class="line">  language: zh-CN  # Force language, or auto switch by theme</span><br><span class="line">  github_user: xxx # MUST HAVE, Your Github Username</span><br><span class="line">  github_repo: xxx # MUST HAVE, The name of the repo you use to store Gitment comments</span><br><span class="line">  client_id: xxx # MUST HAVE, Github client id for the Gitment</span><br><span class="line">  client_secret: xxx # EITHER this or proxy_gateway, Github access secret token for the Gitment</span><br><span class="line">  proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect</span><br><span class="line">  redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled</span><br></pre></td></tr></table></figure>
 <p>开启<code>enable</code>为<code>true</code>就显示评论框了，不过要真正实现评论可用，需要<br>用自己的<code>github</code>账号注册一个应用许可证书，即<code>OAuth application</code>，注册成功就生成了<code>client_id</code>和<code>client_secret</code>。</p>
-<p>步骤：你的<code>github</code>首页 –&gt; settings –&gt; Developer settings –&gt; OAuth Apps –&gt; New oAuth App。填写好相关信息，其中，Homepage URL和Authorization callback URL都写上你的github博客首页地址，比如<code>https://xxx.github.io/</code>，点击Register application即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。</p>
+<p>步骤：你的<code>github首页</code> &gt; <code>settings</code> &gt; <code>Developer settings</code> &gt; <code>OAuth Apps</code> &gt; <code>New oAuth App</code>。填写好相关信息，其中，<code>Homepage URL</code>和<code>Authorization callback URL</code>都写上你的<code>github</code>博客首页地址，比如<code>https://xxx.github.io/</code>，点击<code>Register application</code>即可完成注册，生成<code>Client ID</code>和<code>Client Secret</code>。</p>
+<p><img src="/gb/构建自己的博客/oAuth.png" alt="oAuth"></p>
 <p>这样，用户点击评论框右边登入跳转到<code>github</code>授权，允许授权跳转回来就可以评论啦！</p>
 <p><img src="/gb/构建自己的博客/commit.png" alt="commit"></p>
 <p><strong>小坑：有些文章评论初始化弹出validation failed错误</strong></p>
+<p><img src="/gb/构建自己的博客/issues.png" alt="issues"></p>
 <p>因为<code>GitHub</code>的每个<code>issues</code>有两个<code>lables</code>，一个是<code>gitment</code>，另一个是<code>id</code>，<code>id</code>取的是页面<code>pathname</code>，标签长度限定不超过50个字符，而像一般中文标题文章，转义后字符很容易超过50个字符。</p>
+<p>目录<code>blog/themes/next/layout/_third-party/comments</code>找到文件<code>gitment.swig</code>，</p>
 <p><img src="/gb/构建自己的博客/gitment.png" alt="gitment.swig"></p>
 <p>在这里我用文章创建时间戳来当作<code>id</code>，这样长度就不会超过50个字符，成功解决！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>构建自己的博客并不难，也不需要什么专业代码基础，需要的是耐心而已（┭┮﹏┭┮都是配置），最后附上我的GitHub博客。</p>
 
       
     </div>
@@ -577,7 +661,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git-nodejs/" rel="tag"># git nodejs</a>
+            <a href="/tags/git-nodejs-hexo/" rel="tag"># git nodejs hexo</a>
           
         </div>
       
@@ -793,6 +877,8 @@
                     
                       
                     
+                      
+                    
                     <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
@@ -843,7 +929,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备"><span class="nav-number">1.1.</span> <span class="nav-text">二、准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">1.2.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gitment配置"><span class="nav-number">1.2.1.</span> <span class="nav-text">gitment配置</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、准备"><span class="nav-number">2.</span> <span class="nav-text">二、准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Node-js"><span class="nav-number">2.1.</span> <span class="nav-text">安装Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git软件"><span class="nav-number">2.2.</span> <span class="nav-text">安装Git软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.3.</span> <span class="nav-text">安装Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、修改站点配置"><span class="nav-number">3.</span> <span class="nav-text">三、修改站点配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Github创建一个hexo的代码库"><span class="nav-number">4.</span> <span class="nav-text">四、Github创建一个hexo的代码库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、写文章"><span class="nav-number">5.</span> <span class="nav-text">五、写文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、配置主题"><span class="nav-number">6.</span> <span class="nav-text">六、配置主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改Next主题配置文件"><span class="nav-number">6.1.</span> <span class="nav-text">修改Next主题配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换头像"><span class="nav-number">6.2.</span> <span class="nav-text">更换头像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码高亮"><span class="nav-number">6.3.</span> <span class="nav-text">代码高亮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加分类页"><span class="nav-number">6.4.</span> <span class="nav-text">添加分类页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加标签页"><span class="nav-number">6.5.</span> <span class="nav-text">添加标签页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404页"><span class="nav-number">6.6.</span> <span class="nav-text">404页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#站点分析统计"><span class="nav-number">6.7.</span> <span class="nav-text">站点分析统计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#百度统计"><span class="nav-number">6.7.1.</span> <span class="nav-text">百度统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不蒜子统计"><span class="nav-number">6.7.2.</span> <span class="nav-text">不蒜子统计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内容分享服务"><span class="nav-number">6.8.</span> <span class="nav-text">内容分享服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评论功能"><span class="nav-number">6.9.</span> <span class="nav-text">评论功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gitment配置"><span class="nav-number">6.9.1.</span> <span class="nav-text">gitment配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -863,7 +949,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1466,7 +1552,7 @@
       
           pbOptions.position = "bottomCenter";
       
-          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone";
       
       new needShareButton('#needsharebutton-postbottom', pbOptions);
     
@@ -1479,7 +1565,7 @@
       
           flOptions.position = "middleRight";
       
-          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone";
       
       new needShareButton('#needsharebutton-float', flOptions);
     
