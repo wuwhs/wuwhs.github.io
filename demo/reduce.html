@@ -69,14 +69,31 @@
     }, {});
     console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
 
-    const person = {
+    /* const person = {
       name: 'jazz',
       gender: 'male',
       age: 24
     };
 
     const personUnknowAge = (({name, gender}) => ({name, gender}))(person);
-    console.log(personUnknowAge); // {name: "jazz", gender: "male"}
+    console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
+
+    /* const person = {
+      name: 'jazz',
+      gender: 'male',
+      age: 24
+    };
+    let { age, ...personUnknowAge } = person;
+    console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
+
+    var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
+    var letterArr = letters.reduce(function (acc, cur) {
+      if (acc.indexOf(cur) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
+    console.log(letterArr); //  ["A", "B", "C"]
 
   </script>
 </body>
