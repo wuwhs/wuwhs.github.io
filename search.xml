@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vConsole]]></title>
+    <url>%2F2018%2F09%2F26%2FvConsole%2F</url>
+    <content type="text"><![CDATA[前言你是否遇到这样的情况？你的移动端项目上线，突然用户发现某个页面或功能不能用了，按照所见即所得原理，产品第一时间肯定揪出你这个前端er起来改bug，而此时你正在下班的地铁上或远方找个清静的地方佛（hai）系（pi），反正就是没有电脑或网络环境提供条件区调试你的前端页面。 在开发移动端页面难处除了兼容纷杂机型屏幕，还有在实际终端上调试，原生app、微信小程序开发可以抓日志打印，而页面h5开发打印是不会显示的。 怎样能从前端开始快速定位问题呢？作为前端er的工作就是要把浏览器反馈的信息都能放到页面让用户看到，错误信息也不例外，只不过要在不影响用户使用的前提下，选择一个合适的时机。 而vConsole就是为移动端调试利器之一，能够在移动端设备上查看log、浏览器信息、网络信息、页面元素和本地存储（Cookie和LocalStorage），由腾讯团队开源，下载最新版本或npm install vconsole安装，页面引入即可。 扫描这个二维码立马在线查看效果 详细参考vConsole使用教程，在这里不累述。以下记录几点在使用过程中注意点。 初始化在引入vConsole后，需要手动初始化 1var vConsole = new VConsole(option); option是一个选填的Object对象，具体配置定义可以参考公共属性及方法 一般将vConsole的初始化实例单独拿出来，除了让插件独立，还有可以让插件能按需引入，这个后面说。 12345// vconsole.js文件import VConsole from 'vconsole'let vConsole = new VConsole()vConsole.setOption('maxLogNumber', 5000) 未加载 vConsole 模块时，console.log() 会直接打印到原生控制台中；加载 vConsole 后，日志会打印到页面前端+原生控制台。 加载后，在我们的移动端页面就会漂浮一个vConsole绿色按钮，点击展开一个弹窗面板。 异步加载对于移动端页面，听说一个优秀的前端er往往看重页面性能，能少加载尽量少，特别是对于首屏加载，吓得我赶快去看看vConsole的文件vconsole.min.js大小，有77KB，作为一个辅助插件还算是挺大的，因此 不建议混杂打包在其它业务代码里，即用ES6的import函数动态加载单独的js文件； 最好也不影响页面加载，插入到html代码&lt;script&gt;标签加async属性让js异步加载完成执行。 综上在项目中处理如下： 12// 把独立出的vconsole.js按需引入import('~/plugins/vconsole') 开关控制加载我们可以通过配置来决定是否启用加载vConsole，这样，在开发环境就可以在移动端查看打印日志和其它信息。当然，不能把这项功能直接开放到生成环境，影响用户使用（用户才不关心你的打印帮你排查问题）。 那么，问题来了，生产环境怎样做能和谐两者关系呢？这样要从链接到当前页面的url参数入手了，可以自己定义一个只有你自己知道的参数键值（在这里我直接用vconsole举例了），获取到这个参数就按需动态加载vConsole插件js文件，否则不加载，也不影响整个业务代码打包大小，两全齐美。 1234567891011121314151617181920212223242526272829303132// util.jsconst queryParams = (url = window.location.href) =&gt; &#123; let surl = [] let patt = /\?([^#/?]+)/g url = decodeURIComponent(url) let result = [] while ((result = patt.exec(url))) &#123; surl.push(result[1]) &#125; if (!surl.length) &#123; return null &#125; let o = &#123;&#125; surl.forEach((item, index) =&gt; &#123; let s = surl[index] let kvs = s.split('&amp;') kvs.forEach((item) =&gt; &#123; let arr = item.split('=') o[arr[0]] = arr[1] &#125;) &#125;) return o&#125;// ...// 启用vconsole移动端打印工具if (Util.queryParams().hasOwnProperty('vconsole')) &#123; import('~/plugins/vconsole')&#125; 下面看一下这样处理后的效果： 用户看不到vConsole绿色按钮，而在你把页面url插入你神秘的参数就能看到调试界面啦！]]></content>
+      <categories>
+        <category>mobile</category>
+      </categories>
+      <tags>
+        <tag>其它</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[简约强大数组操作组合]]></title>
     <url>%2F2018%2F09%2F07%2F%E7%AE%80%E7%BA%A6%E5%BC%BA%E5%A4%A7%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C%E7%BB%84%E5%90%88%2F</url>
     <content type="text"><![CDATA[前言在实际js开发中对数组操作频率非常高，在这里小记（不全）一下，备忘。 5个迭代方法：every、filter、forEach、map和some every()：对数组中的每一项运行给定函数，如果该函数每一项都返回true，则返回true； filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组； forEach()：对数组中的每一项运行给定函数，这个方法没有返回值； map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组； some()：对数组中的每一项运行给定函数，如果该函数任意一项返回true，则返回true； 123456789101112131415161718192021222324// everyvar numbers = [1, 2, 3, 4, 5, 6, 7];var everyResult = numbers.every(function (item, index, array) &#123; return (item &gt; 2);&#125;);console.log(everyResult); // false// somesomeResult = numbers.some(function (item, index, array) &#123; return (item &gt; 2);&#125;);console.log(someResult); // true// filtervar filterResult = numbers.filter(function (item, index, array) &#123; return (item &gt; 2);&#125;);console.log(filterResult); // [3, 4, 5, 6, 7]// mapvar mapResult = numbers.map(function (item, index, array) &#123; return item * 2;&#125;);console.log(mapResult); // [2, 4, 6, 8, 10, 12, 14] 一个归并方法：reducearray.reduce(callback[, initialValue])第一个参数是每一项上调用的函数，该函数有四个参数： accumulator：累加回调返回值；他是上一次调用时返回的累积值，或initValue； currentValue：数组中正在处理的元素； currentIndex：数组中正在处理的当前元素的索引。如果提供了initialValue，这索引号为0，否则索引为1； array：调用reduce()的数组。 当第二个参数省略时，遍历从数组第二项开始，数组第一项被当作前一个值accumulator。 数组求和 12345const numbers = [10, 20, 30, 40];numbers.reduce((acc, cur, index, arr) =&gt; &#123; console.log('acc: ' + acc + '; ' + 'cur: ' + cur + ';'); return acc + cur;&#125;) 结果为： 123acc: 10; cur: 20;acc: 30; cur: 30;acc: 60; cur: 40; 这第二个参数就是设置accumulator的初始类型和初始值，比如为0，就表示accumulator的初始值为Number类型，值为0，因此，reduce的最终结果也会是Number类型。 12345const numbers = [10, 20, 30, 40];numbers.reduce((acc, cur, index, arr) =&gt; &#123; console.log('acc: ' + acc + '; ' + 'cur: ' + cur + ';'); return acc + cur;&#125;, 0) 结果为： 1234acc: 0; cur: 10;acc: 10; cur: 20;acc: 30; cur: 30;acc: 60; cur: 40; 强大的reducereduce作为归并方法，在有些情形可以替代其它数组操作方法，强大之处，还得要落实在具体的案例上。 假设现在有一个数列[10, 20, 30, 40, 50]，每一项乘以2，然后筛选出大于60的项。 在这里更新数组每一项（map的功能）然后筛选出一部分（filter的功能），如果是先使用map然后filter的话，你需要遍历这个数组两次。在这里用reduce更高效。 123456789var numbers = [10, 20, 30, 40, 50];var result = numbers.reduce(function (acc, cur) &#123; cur = cur * 2; if (cur &gt; 60) &#123; acc.push(cur); &#125; return acc;&#125;, []);console.log(result); // [80, 100] 从这个例子可以看出reduce完成了map和filter的使命。 统计数组中重复出现项的个数，用对象表示。 123456var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];var letterObj = letters.reduce(function (acc, cur) &#123; acc[cur] = acc[cur] ? ++acc[cur] : 1; return acc;&#125;, &#123;&#125;);console.log(letterObj); // &#123;A: 1, B: 2, C: 4&#125; 数组去重 12345678var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];var letterArr = letters.reduce(function (acc, cur) &#123; if (acc.indexOf(cur) === -1) &#123; acc.push(cur); &#125; return acc;&#125;, []);console.log(letterArr); // ["A", "B", "C"] ps：了解更多数组去重方法，点这里。 与ES6的结合与ES6结合使用也会擦出不少火花。 删除目标对象某个属性。 1234567891011121314151617const person = &#123; name: 'jazz', gender: 'male', age: 24&#125;;const personUnknowAge = Object.keys(person).filter((key) =&gt; &#123; return key !== 'age';&#125;).map((key) =&gt; &#123; return &#123; [key]: person[key] &#125;&#125;).reduce((acc, cur) =&gt; &#123; return &#123;...acc, ...cur&#125;;&#125;, &#123;&#125;);console.log(personUnknowAge); // &#123;name: "jazz", gender: "male"&#125; 更简洁的方案，利用ES6中函数参数解构： 12const personUnknowAge = ((&#123;name, gender&#125;) =&gt; (&#123;name, gender&#125;))(person);console.log(personUnknowAge); // &#123;name: "jazz", gender: "male"&#125; 当然还有更简单的方案，利用ES6中对象解构： 1234567const person = &#123; name: 'jazz', gender: 'male', age: 24&#125;;let &#123; age, ...personUnknowAge &#125; = person;console.log(personUnknowAge); // &#123;name: "jazz", gender: "male"&#125;]]></content>
@@ -99,8 +110,8 @@
         <category>html</category>
       </categories>
       <tags>
-        <tag>缓存</tag>
         <tag>html5</tag>
+        <tag>缓存</tag>
       </tags>
   </entry>
   <entry>
@@ -189,8 +200,8 @@
         <category>其它</category>
       </categories>
       <tags>
-        <tag>http</tag>
         <tag>缓存</tag>
+        <tag>http</tag>
       </tags>
   </entry>
   <entry>
