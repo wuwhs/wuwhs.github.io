@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>scrollIntoView</title>
+  <style>
+    .back-to-top {
+      width: 18px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 2px #333;
+      position: fixed;
+      right: 20px;
+      bottom: 40px;
+    }
+
+    .back-to-top:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+      <p>很多内容。。。</p>
+  </div>
+  <section class="back-to-top">
+    回到顶部
+  </section>
+
+  <script>
+    var scrollTopSmooth = function (position) {
+      // 不存在原生`requestAnimationFrame`，用`setTimeout`模拟替代
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = function (cb) {
+          return setTimeout(cb, 17);
+        };
+      }
+      // 当前滚动高度
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      // step
+      var step = function () {
+        var distance = position - scrollTop;
+        scrollTop = scrollTop + distance / 5;
+        if (Math.abs(distance) < 1) {
+          window.scrollTo(0, position);
+        } else {
+          window.scrollTo(0, scrollTop);
+          requestAnimationFrame(step);
+        }
+      };
+      step();
+    }
+
+    $backToTop = document.querySelector('.back-to-top')
+    $backToTop.addEventListener('click', function () {
+      scrollTopSmooth(0);
+    }, false);
+  </script>
+</body>
+</html>
