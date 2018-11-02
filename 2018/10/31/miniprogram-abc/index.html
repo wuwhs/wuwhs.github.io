@@ -123,32 +123,25 @@
 
 
 
-  <meta name="description" content="关于html5的离线存储，大致可分为：  localStorage, sessionStorage indexedDB web sql application cache  可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。 访问流程 当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest">
-<meta name="keywords" content="html5,缓存">
+  <meta name="description" content="小程序目录结构 123456789--|-- pages 页面  |-- resources 资源  |-- utils 小程序公用方法  |-- app.js 小程序逻辑  |-- app.json 小程序公共配置  |-- app.wxss 小程序公共样式表  |-- project.config.json 小程序项目配置&amp;gt; 每一个页面由四个文件组成，分别是`js`、`wxml`、`js">
+<meta name="keywords" content="小程序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML5离线存储之Application Cache">
-<meta property="og:url" content="https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/index.html">
+<meta property="og:title" content="小程序入门">
+<meta property="og:url" content="https://wuwhs.github.io/2018/10/31/miniprogram-abc/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
-<meta property="og:description" content="关于html5的离线存储，大致可分为：  localStorage, sessionStorage indexedDB web sql application cache  可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。 访问流程 当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest">
+<meta property="og:description" content="小程序目录结构 123456789--|-- pages 页面  |-- resources 资源  |-- utils 小程序公用方法  |-- app.js 小程序逻辑  |-- app.json 小程序公共配置  |-- app.wxss 小程序公共样式表  |-- project.config.json 小程序项目配置&amp;gt; 每一个页面由四个文件组成，分别是`js`、`wxml`、`js">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/7AB47833D09B4737834BBDB43A3DEF36/11091">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/5DF2CA55432348339CA767C4B0DAAA70/11130">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/FD192A001F3642B380838F8D5430CD98/11135">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/4E1E0959E5C044DD9F4AC2DFBDDF2AEB/11139">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/186721D50C1C4F95A11A7BC16B4B56DA/11144">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/53DA4D618AC24349AF6E7C1C1D3A44A3/11151">
-<meta property="og:updated_time" content="2018-08-31T09:09:14.024Z">
+<meta property="og:updated_time" content="2018-11-02T10:17:17.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTML5离线存储之Application Cache">
-<meta name="twitter:description" content="关于html5的离线存储，大致可分为：  localStorage, sessionStorage indexedDB web sql application cache  可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。 访问流程 当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest">
-<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/7AB47833D09B4737834BBDB43A3DEF36/11091">
+<meta name="twitter:title" content="小程序入门">
+<meta name="twitter:description" content="小程序目录结构 123456789--|-- pages 页面  |-- resources 资源  |-- utils 小程序公用方法  |-- app.js 小程序逻辑  |-- app.json 小程序公共配置  |-- app.wxss 小程序公共样式表  |-- project.config.json 小程序项目配置&amp;gt; 每一个页面由四个文件组成，分别是`js`、`wxml`、`js">
 
 
 
 
 
 
-  <link rel="canonical" href="https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/"/>
+  <link rel="canonical" href="https://wuwhs.github.io/2018/10/31/miniprogram-abc/"/>
 
 
 
@@ -158,7 +151,7 @@
   };
 </script>
 
-  <title>HTML5离线存储之Application Cache | wuwh's blog</title>
+  <title>小程序入门 | wuwh's blog</title>
   
 
 
@@ -366,7 +359,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/10/31/miniprogram-abc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="wuwhs">
@@ -383,7 +376,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">HTML5离线存储之Application Cache
+          <h2 class="post-title" itemprop="name headline">小程序入门
               
             
           </h2>
@@ -408,7 +401,7 @@
                 
               
 
-              <time title="创建时间：2018-05-23 19:40:30" itemprop="dateCreated datePublished" datetime="2018-05-23T19:40:30+08:00">2018-05-23</time>
+              <time title="创建时间：2018-10-31 14:36:53" itemprop="dateCreated datePublished" datetime="2018-10-31T14:36:53+08:00">2018-10-31</time>
             
 
             
@@ -425,7 +418,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-31 17:09:14" itemprop="dateModified" datetime="2018-08-31T17:09:14+08:00">2018-08-31</time>
+                <time title="修改时间：2018-11-02 18:17:17" itemprop="dateModified" datetime="2018-11-02T18:17:17+08:00">2018-11-02</time>
               
             
           </span>
@@ -442,7 +435,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/html/" itemprop="url" rel="index"><span itemprop="name">html</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/小程序/" itemprop="url" rel="index"><span itemprop="name">小程序</span></a></span>
 
                 
                 
@@ -457,8 +450,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/23/HTML5离线存储之Application Cache/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/05/23/HTML5离线存储之Application Cache/" itemprop="commentsCount"></span>
+                <a href="/2018/10/31/miniprogram-abc/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count gitment-comments-count" data-xid="/2018/10/31/miniprogram-abc/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -494,99 +487,75 @@
       
 
       
-        <p>关于html5的离线存储，大致可分为：</p>
+        <p>小程序目录结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">--|-- pages 页面</span><br><span class="line">  |-- resources 资源</span><br><span class="line">  |-- utils 小程序公用方法</span><br><span class="line">  |-- app.js 小程序逻辑</span><br><span class="line">  |-- app.json 小程序公共配置</span><br><span class="line">  |-- app.wxss 小程序公共样式表</span><br><span class="line">  |-- project.config.json 小程序项目配置</span><br><span class="line"></span><br><span class="line">&gt; 每一个页面由四个文件组成，分别是<span class="string">`js`</span>、<span class="string">`wxml`</span>、<span class="string">`json`</span>、<span class="string">`wxss`</span>，为了方便开发者减少配置，描述页面的四个文件必须具有相同的路径与文件名</span><br></pre></td></tr></table></figure>
+<p><code>App(Object)</code>初始化注册一个小程序，<code>Object</code>参数指定小程序的生命周期回调。</p>
+<blockquote>
+<p><code>App()</code>必须在<code>app.js</code>中调用，有且只能调用一次</p>
+</blockquote>
+<p>–生命周期–</p>
 <ul>
-<li>localStorage, sessionStorage</li>
-<li>indexedDB</li>
-<li>web sql</li>
-<li>application cache</li>
+<li><code>onLaunch</code> 小程序初始化完成</li>
+<li><code>onShow</code> 小程序启动，或从后台进入前台显示</li>
+<li><code>onHide</code> 小程序从前台进入后台时</li>
+<li><code>onError</code> 小程序发生脚本错误，或者api调用失败时触发，会带上错误信息</li>
+<li><code>onPageNotFound</code> 小程序要打开的页面不存在时触发，会带上页面信息回调该函数</li>
 </ul>
-<p>可以在chrome的debug工具/Resources下产看，下面来着重说明一下Application Cache。</p>
-<h4 id="访问流程"><a href="#访问流程" class="headerlink" title="访问流程"></a>访问流程</h4><p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/7AB47833D09B4737834BBDB43A3DEF36/11091" alt="image"></p>
-<p>当我们第一次正确配置app cache后，当我们再次访问该应用时，浏览器会首先检查manifest文件是否有变动，如果有变动就会把相应的变得跟新下来，同时改变浏览器里面的app cache，如果没有变动，就会直接把app cache的资源返回，基本流程是这样的。</p>
-<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
-<li>离线浏览: 用户可以在离线状态下浏览网站内容</li>
-<li>更快的速度: 因为数据被存储在本地，所以速度会更快</li>
-<li>减轻服务器的负载: 浏览器只会下载在服务器上发生改变的资源</li>
-</ul>
-<h4 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h4><p>首先，我们建立一个html文件，类似这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang=&quot;en&quot; mainfest=&quot;index.manifest&quot;&gt;</span><br><span class="line"> &lt;head&gt;&lt;/head&gt;</span><br><span class="line"> &lt;body&gt;&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>可能有些代码看不懂，我们先看最简单的，第一行配置了一个manifest=”manifest.appcache”（注意是mani不是main），这是使用app cache首先要配置的，然后我们在这个html文件里引入了两个img做为测试用，然后监听了load时间来查看看application的status，关于applicationCache的api，可以查看。</p>
-<p>然后在相同目录下新建一个manifest.appcache文件，注意关于路径要和html页面配置时一致即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line">#version 1.3</span><br><span class="line"></span><br><span class="line">CACHE:</span><br><span class="line">img/1.jpg</span><br><span class="line">img/2.jpg</span><br><span class="line">test.css</span><br><span class="line">NETWORK:</span><br><span class="line">*</span><br></pre></td></tr></table></figure>
-<p>关于manifest.appcache文件，基本格式为三段： CACHE，NETWORK，与 FALLBACK，其中NETWORK和FALLBACK为可选项，而第一行CACHE MANIFEST为固定格式，必须写在前面。</p>
-<p><strong>CACHE:（必须）</strong></p>
-<p>标识出哪些文件需要缓存，可以是相对路径也可以是绝对路径。<br>例如：aa.css，<a href="http://www.baidu.com/aa.js" target="_blank" rel="noopener">http://www.baidu.com/aa.js</a>.</p>
-<p>NETWORK:（可选）</p>
-<p>这一部分是要绕过缓存直接读取的文件，可以使用通配符＊，,也就是说除了上面的cache文件，剩下的文件每次都要重新拉取。例如＊，login.php。</p>
-<p>FALLBACK:（可选）</p>
-<p>指定了一个后备页面，当资源无法访问时，浏览器会使用该页面。该段落的每条记录都列出两个 URI—第一个表示资源，第二个表示后备页面。两个 URI 都必须使用相对路径并且与清单文件同源。可以使用通配符。例如*.html /offline.html。</p>
-<p>有了上面两个文件之后还要配置服务器的mime.types类型，找大盘apache的mime.types文件，添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text/cache-manifest .appcache</span><br></pre></td></tr></table></figure>
-<p>OK，上面文件配置完成之后，application cache就可以运行了。<br>查看console：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/5DF2CA55432348339CA767C4B0DAAA70/11130" alt="image"></p>
-<p>可以看到，一下子这么多log，但是除了4是我们console的log之外，其他的都是appcache自己打的，因为我们配置了manifest，系统会默认打出appcache的log。关于status的值：</p>
-<p>然后，通过log，我们看到一些文件已经被缓存，我们可以查看chrome Resources来查看：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/FD192A001F3642B380838F8D5430CD98/11135" alt="image"></p>
-<p>证明直接从缓存拿去文件：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/4E1E0959E5C044DD9F4AC2DFBDDF2AEB/11139" alt="image"></p>
-<p><strong>更新缓存的方式</strong></p>
-<p>更新manifest文件</p>
-<p>浏览器发现manifest文件本身发生变化，便会根据新的manifest文件去获取新的资源进行缓存。</p>
-<p>当manifest文件列表并没有变化的时候，我们通常通过修改manifest注释的方式来改变文件，从而实现更新。</p>
-<p>通过javascript操作</p>
-<p>浏览器提供了applicationCache供js访问，通过对于applicationCache对象的操作也能达到更新缓存的目的。</p>
-<p>清除浏览器缓存</p>
-<p>对于第一种，我们修改一下manifest文件，把version改为1.4，然后刷新页面。</p>
-<p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/186721D50C1C4F95A11A7BC16B4B56DA/11144" alt="image"></p>
-<p>我们可以发现，appcache更新了缓存重新从网络上拉去的cache的文件，但是，我们如果想要看到改变，必须再次刷新页面。</p>
-<p>对于第二种方法，我们首先修改一下我们的js，添加一个监听事件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.applicationCache.addEventListener(&apos;updateready&apos;, function()&#123;</span><br><span class="line">    console.log(&apos;updateready!&apos;);</span><br><span class="line">    window.applicationCache.swapCache();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>清除浏览器缓存再试一次，这次我们在console里调用window.applicationCache.update();，看看发生了什么：</p>
-<p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/53DA4D618AC24349AF6E7C1C1D3A44A3/11151" alt="image"></p>
-<p>updateready事件触发了，同样，appcache也更新了缓存，其中swapCache方法的意思是重新应用跟新后的缓存来替换原来的缓存！，到这里后基本的appcache也差不多了。</p>
-<p><strong>注意事项：</strong></p>
+<p><code>getApp()</code>全局获取小程序<code>App</code>实例</p>
+<p><code>Page(Object)</code> 函数用来注册一个页面。</p>
+<p><code>Object</code>指定页面的初始数据、生命周期、事件处理函数等</p>
 <ul>
-<li><p>站点离线存储的容量限制是5M</p>
-</li>
-<li><p>如果manifest文件，或者内部列举的某一个文件不能正常下载，整个更新过程将视为失败，浏览器继续全部使用老的缓存</p>
-</li>
-<li><p>引用manifest的html必须与manifest文件同源，在同一个域下</p>
-</li>
-<li><p>FALLBACK中的资源必须和manifest文件同源</p>
-</li>
-<li><p>当一个资源被缓存后，该浏览器直接请求这个绝对路径也会访问缓存中的资源。</p>
-</li>
-<li><p>站点中的其他页面即使没有设置manifest属性，请求的资源如果在缓存中也从缓存中访问</p>
-</li>
-<li><p>当manifest文件发生改变时，资源请求本身也会触发更新</p>
-</li>
+<li><code>data</code> 页面初始数据</li>
+<li><code>onLoad</code> 生命周期回调-监听页面加载</li>
+<li><code>onShow</code> 生命周期回调-监听页面显示</li>
+<li><code>onReady</code> 生命周期回调-监听页面初次渲染完成</li>
+<li><code>onHide</code> 生命周期回调-监听页面隐藏</li>
+<li><code>onUnload</code> 生命周期回调-监听页面卸载</li>
+<li><code>onPullDownRefresh</code>监听用户下拉动作</li>
+<li><code>onReachBotton</code> 页面上拉触底事件的处理函数</li>
+<li><code>onShareAppMessage</code> 用户点击右上角转发</li>
+<li><code>onPageScroll</code> 页面滚动触发事件的处理函数</li>
+<li><code>onTabItemTap</code> 当前是 <code>tab</code> 页时，点击 <code>tab</code> 触发</li>
+<li>其它 可以添加任意函数和数据</li>
 </ul>
+<p>注意点：</p>
+<ol>
+<li><code>onShareAppMessage</code> 用户点击右上角转发或者点击页面转发按钮（ <code>&lt;button&gt;</code> 组件 <code>open-type=&quot;share&quot;</code> ），只有定义了此事件处理函数，右上角菜单才会显示“转发”按钮</li>
+<li><code>Page</code>对象原型上的 <code>setData</code> 函数用于将数据从逻辑层发送到视图层（异步），同时改变对应的 <code>this.data</code> 的值（同步）。</li>
+<li><code>Page.prototype.setData(Object data, Function callback)</code>，<code>data</code>以<code>key: value</code>的形式给出。妻子 <code>key</code> 可以以数据路径的形式给出，支持改变数组中的某一项或对象的某个属性，如 <code>arr[2].msg</code>，并且不需要在 <code>this.data</code> 中预先定义。</li>
+<li>直接修改 <code>this.data</code> 而不调用 <code>this.setData</code> 是无法改变页面的状态的，还会造成数据不一致。</li>
+</ol>
+<p>页面路由</p>
+<ul>
+<li>打开新页面， <code>wx.navigateTo</code> 或 <code>&lt;navigator open-type=&quot;navigateTo&quot;/&gt;</code></li>
+<li>页面重定向， <code>wx.redirectTo</code> 或 <code>&lt;navigator open-type=&quot;redirectTo&quot;/&gt;</code></li>
+<li>页面返回，<code>wx.navigateBack</code> 或 <code>&lt;navigator open-type=&quot;navigateBack&quot;/&gt;</code></li>
+<li>Tab 切换，<code>wx.switchTap</code> 或 <code>&lt;navigator open-type=&quot;switchTab&quot;/&gt;</code></li>
+<li>重启动， <code>wx.reLaunch</code> 或 <code>&lt;navigator open-type=&quot;reLaunch&quot;/&gt;</code></li>
+</ul>
+<p>文件作用域</p>
+<p>JavaScript 文件中声明的变量和函数只在该文件中有效；不同文件中可以声明相同的名字的变量和函数，互不影响。</p>
+<p>模块化</p>
+<p>可以将一些公共代码抽离成一个单独的 js 文件，作为一个模块。模块只有通过 <code>module.exports</code> 或者 <code>exports</code> 才能对外暴露接口。</p>
+<blockquote>
+<p><code>exports</code> 是 <code>module.exports</code> 的一个引用</p>
+</blockquote>
+<p>自定义组件</p>
+<p>类似于也页面，由<code>wxml</code>、<code>wxss</code>、<code>js</code>和<code>json</code>4个文件组成，只不过要在<code>json</code>文件中声明（<code>component: true</code>）</p>
+<blockquote>
+<p>组件的生命周期：<code>created</code>、<code>attached</code>、<code>ready</code>、<code>moved</code>、<code>detached</code>，可以放在组件属性<code>lifetimes</code>下，也可以放在<code>methods</code>下，也可以组件根下。</p>
+</blockquote>
+<p>组件间通讯</p>
+<p>Behavior</p>
+<p>类似其它语言中的<code>mixin</code>、<code>traits</code></p>
+<p>组件间关系</p>
+<p>视图层</p>
 
       
     </div>
 
     
       
-
-  <div class="popular-posts-header">相关文章</div>
-  <ul class="popular-posts">
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2018/05/24/html5 新型api/" rel="bookmark">html5 新型api</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2018/04/18/HTTP缓存机制/" rel="bookmark">HTTP缓存机制</a></div>
-      
-    </li>
-  
-  </ul>
 
 
     
@@ -635,7 +604,7 @@
     <strong>本文作者： </strong>wuwhs</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/" title="HTML5离线存储之Application Cache">https://wuwhs.github.io/2018/05/23/HTML5离线存储之Application Cache/</a>
+    <a href="https://wuwhs.github.io/2018/10/31/miniprogram-abc/" title="小程序入门">https://wuwhs.github.io/2018/10/31/miniprogram-abc/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -648,9 +617,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/html5/" rel="tag"># html5</a>
-          
-            <a href="/tags/缓存/" rel="tag"># 缓存</a>
+            <a href="/tags/小程序/" rel="tag"># 小程序</a>
           
         </div>
       
@@ -683,8 +650,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/21/深入理解BFC/" rel="next" title="深入理解BFC">
-                <i class="fa fa-chevron-left"></i> 深入理解BFC
+              <a href="/2018/10/25/scrollIntoView/" rel="next" title="scrollIntoView">
+                <i class="fa fa-chevron-left"></i> scrollIntoView
               </a>
             
           </div>
@@ -692,10 +659,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/24/html5 新型api/" rel="prev" title="html5 新型api">
-                html5 新型api <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -747,17 +710,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -916,22 +870,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问流程"><span class="nav-number">1.</span> <span class="nav-text">访问流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用"><span class="nav-number">3.</span> <span class="nav-text">如何使用</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1157,7 +1095,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: '1527075630000',
+            id: '1540967813000',
             owner: 'wuwhs',
             repo: 'wuwhs.github.io',
             

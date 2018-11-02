@@ -118,7 +118,7 @@
 
       var step = function () {
         position = position + (destination - position) / rate;
-        if (position < 1) {
+        if (Math.abs(destination - position) < 1) {
           callback(destination, true);
           return;
         }
@@ -131,7 +131,7 @@
     var scrollTopSmooth = function (position) {
       // 当前滚动高度
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      easeout(scrollTop, 0, 5, function (val) {
+      easeout(scrollTop, position, 5, function (val) {
         window.scrollTo(0, val);
       });
     }

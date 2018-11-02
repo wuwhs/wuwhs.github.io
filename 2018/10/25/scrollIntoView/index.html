@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://wuwhs.github.io/gb/scrollIntoView/scroll-behavior-compatibility.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/scrollIntoView/scrollIntoView.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/scrollIntoView/scroll-to-top.gif">
-<meta property="og:updated_time" content="2018-10-29T08:16:19.677Z">
+<meta property="og:updated_time" content="2018-10-29T09:56:46.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scrollIntoView">
 <meta name="twitter:description" content="前言在实际应用中，经常用到滚动到页面顶部或某个位置，一般简单用锚点处理或用js将document.body.scrollTop设置为0，结果是页面一闪而过滚到指定位置，不是特别友好。我们想要的效果是要有点缓冲效果。 现代浏览器陆续意识到了这种需求，scrollIntoView意思是滚动到可视，css中提供了scroll-behavior属性，js有Element.scrollIntoView()方">
@@ -264,7 +264,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">25</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">26</span></a>
   </li>
         
         
@@ -272,7 +272,7 @@
           
           <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">10</span></a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">11</span></a>
   </li>
         
         
@@ -280,7 +280,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">38</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">39</span></a>
   </li>
 
       
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-10-29 16:16:19" itemprop="dateModified" datetime="2018-10-29T16:16:19+08:00">2018-10-29</time>
+                <time title="修改时间：2018-10-29 17:56:46" itemprop="dateModified" datetime="2018-10-29T17:56:46+08:00">2018-10-29</time>
               
             
           </span>
@@ -544,7 +544,7 @@
 <p>或者戳<a href="/demo/scrollIntoView/index.html">这里</a></p>
 <h2 id="简单封装"><a href="#简单封装" class="headerlink" title="简单封装"></a>简单封装</h2><p>上面的小demo中，缓冲算法和当前滚动业务代码耦合在一起了，下面单独拆解出单独一个函数。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 缓冲函数</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125; position 当前滚动位置</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125; destination 目标位置</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125; rate 缓动率</span></span><br><span class="line"><span class="comment">* @param &#123;Function&#125; callback 缓动结束回调函数 两个参数分别是当前位置和是否结束</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> easeout = <span class="function"><span class="keyword">function</span> (<span class="params">position, destination, rate, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (position === destination || <span class="keyword">typeof</span> destination !== <span class="string">'number'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  destination = destination || <span class="number">0</span>;</span><br><span class="line">  rate = rate || <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不存在原生`requestAnimationFrame`，用`setTimeout`模拟替代</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">window</span>.requestAnimationFrame) &#123;</span><br><span class="line">    <span class="built_in">window</span>.requestAnimationFrame = <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> setTimeout(fn, <span class="number">17</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> step = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    position = position + (destination - position) / rate;</span><br><span class="line">    <span class="keyword">if</span> (position &lt; <span class="number">1</span>) &#123;</span><br><span class="line">      callback(destination, <span class="literal">true</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    callback(position, <span class="literal">false</span>);</span><br><span class="line">    requestAnimationFrame(step);</span><br><span class="line">  &#125;;</span><br><span class="line">  step();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>拆分后，这个小缓冲算法就可以被重复调用啦，于是，当前小demo调用：</p>
+<p>拆分后，这个小缓冲算法就可以被重复调用啦，而且，适用于滚动到指定位置（不仅仅是到顶部）和缓冲率（控制滚动快慢），当前小demo调用：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scrollTopSmooth = <span class="function"><span class="keyword">function</span> (<span class="params">position</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 当前滚动高度</span></span><br><span class="line">  <span class="keyword">var</span> scrollTop = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line">  easeout(scrollTop, <span class="number">0</span>, <span class="number">5</span>, <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, val);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$backToTop = <span class="built_in">document</span>.querySelector(<span class="string">'.back-to-top'</span>)</span><br><span class="line">$backToTop.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  scrollTopSmooth(<span class="number">0</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>综合来看，简单实现一个完美滚动注意以下即可</p>
 <ol>
@@ -574,13 +574,6 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2017/06/26/js中的位运算/" rel="bookmark">js中的位运算</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
       <div class="popular-posts-title"><a href="/2018/05/24/html5 新型api/" rel="bookmark">html5 新型api</a></div>
       
     </li>
@@ -595,7 +588,14 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/07/27/尾调用/" rel="bookmark">尾调用</a></div>
+      <div class="popular-posts-title"><a href="/2017/06/26/js中的位运算/" rel="bookmark">js中的位运算</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/11/08/区分substring、substr和slice/" rel="bookmark">区分substring、substr和slice</a></div>
       
     </li>
   
@@ -704,6 +704,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/10/31/miniprogram-abc/" rel="prev" title="小程序入门">
+                小程序入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -783,7 +787,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -816,7 +820,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -879,7 +885,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
