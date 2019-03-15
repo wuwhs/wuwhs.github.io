@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="前言在实际js开发中对数组操作频率非常高，在这里小记（不全）一下，备忘。 5个迭代方法：every、filter、forEach、map和some every()：对数组中的每一项运行给定函数，如果该函数每一项都返回true，则返回true；  filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组；  forEach()：对数组中的每一项运行给定函数，这个方法没有">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-20T09:35:57.238Z">
+<meta property="og:updated_time" content="2019-02-28T07:41:53.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简约强大数组操作组合">
 <meta name="twitter:description" content="前言在实际js开发中对数组操作频率非常高，在这里小记（不全）一下，备忘。 5个迭代方法：every、filter、forEach、map和some every()：对数组中的每一项运行给定函数，如果该函数每一项都返回true，则返回true；  filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组；  forEach()：对数组中的每一项运行给定函数，这个方法没有">
@@ -275,7 +275,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">39</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">41</span></a>
   </li>
 
       
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-20 17:35:57" itemprop="dateModified" datetime="2018-09-20T17:35:57+08:00">2018-09-20</time>
+                <time title="修改时间：2019-02-28 15:41:53" itemprop="dateModified" datetime="2019-02-28T15:41:53+08:00">2019-02-28</time>
               
             
           </span>
@@ -501,6 +501,21 @@
 </li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// every</span></span><br><span class="line"><span class="keyword">var</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>];</span><br><span class="line"><span class="keyword">var</span> everyResult = numbers.every(<span class="function"><span class="keyword">function</span> (<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (item &gt; <span class="number">2</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(everyResult); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// some</span></span><br><span class="line">someResult = numbers.some(<span class="function"><span class="keyword">function</span> (<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (item &gt; <span class="number">2</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(someResult); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// filter</span></span><br><span class="line"><span class="keyword">var</span> filterResult = numbers.filter(<span class="function"><span class="keyword">function</span> (<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (item &gt; <span class="number">2</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(filterResult); <span class="comment">// [3, 4, 5, 6, 7]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map</span></span><br><span class="line"><span class="keyword">var</span> mapResult = numbers.map(<span class="function"><span class="keyword">function</span> (<span class="params">item, index, array</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(mapResult); <span class="comment">// [2, 4, 6, 8, 10, 12, 14]</span></span><br></pre></td></tr></table></figure>
+<h2 id="被忽视的-map-的第二个、第三个参数"><a href="#被忽视的-map-的第二个、第三个参数" class="headerlink" title="被忽视的 map 的第二个、第三个参数"></a>被忽视的 map 的第二个、第三个参数</h2><p>通常情况下， <code>map</code> 方法中的 <code>callback</code> 函数只接受一个参数，就是正在被遍历数组元素本身。但不意味着 <code>map</code> 只给 <code>callback</code> 传一个参数，这种惯性思维很可能会让我们犯错。下面举一个例子：</p>
+<blockquote>
+<p>下面语句返回什么呢：<code>[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;].map(parseInt)</code></p>
+</blockquote>
+<p>可能你会觉得是 <code>[1, 2, 3]</code>，但实际结果是 <code>[1, NaN, NaN]</code>。</p>
+<p><code>map</code> 回调方法 <code>callback(currentValue, index, array)</code> 有三个参数，第一个是数组中正在处理的当前元素，第二个是当前元素索引，第三个是数组本身。</p>
+<p><code>Number.parseInt(string[, radix])</code>有两个参数，第一个是待转化字符，第二个是进制数。<code>parseInt</code>传入第三个参数会被忽略。</p>
+<p>因此，上述执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'1'</span>, <span class="number">0</span>, [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'2'</span>, <span class="number">1</span>, [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'3'</span>, <span class="number">2</span>, [<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>]) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<h3 id="拓展-map-在实际项目中的应用"><a href="#拓展-map-在实际项目中的应用" class="headerlink" title="拓展 map 在实际项目中的应用"></a>拓展 map 在实际项目中的应用</h3><p>匹配查找某个目录下的文件并引入。</p>
+<p><code>context.require</code> 返回一个 <code>require</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">webpackContext</span>(<span class="params">req</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> __webpack_require__(webpackContextResolve(req));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该函数有一个 <code>keys</code> 属性，是一个函数，返回一个数组，该数组是由所有可能被上下文模块的请求对象组成。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> requireAll = <span class="function"><span class="params">requireContext</span> =&gt;</span> requireContext.keys().map(requireContext)</span><br><span class="line"><span class="keyword">let</span> req = <span class="built_in">require</span>.context(<span class="string">'./svg'</span>, <span class="literal">false</span>, /\.svg$/)</span><br><span class="line">requireAll(req)</span><br></pre></td></tr></table></figure>
+<p>这样通过 <code>map</code> 遍历，结合引入上下文对象作为回调函数，即可获取引入某个目录下的 <code>svg</code> 资源。</p>
 <h2 id="一个归并方法：reduce"><a href="#一个归并方法：reduce" class="headerlink" title="一个归并方法：reduce"></a>一个归并方法：reduce</h2><p><code>array.reduce(callback[, initialValue])</code>第一个参数是每一项上调用的函数，该函数有四个参数：</p>
 <ol>
 <li><code>accumulator</code>：累加回调返回值；他是上一次调用时返回的累积值，或<code>initValue</code>；</li>
@@ -775,7 +790,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -925,7 +940,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5个迭代方法：every、filter、forEach、map和some"><span class="nav-number">2.</span> <span class="nav-text">5个迭代方法：every、filter、forEach、map和some</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个归并方法：reduce"><span class="nav-number">3.</span> <span class="nav-text">一个归并方法：reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强大的reduce"><span class="nav-number">4.</span> <span class="nav-text">强大的reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与ES6的结合"><span class="nav-number">5.</span> <span class="nav-text">与ES6的结合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5个迭代方法：every、filter、forEach、map和some"><span class="nav-number">2.</span> <span class="nav-text">5个迭代方法：every、filter、forEach、map和some</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#被忽视的-map-的第二个、第三个参数"><span class="nav-number">3.</span> <span class="nav-text">被忽视的 map 的第二个、第三个参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拓展-map-在实际项目中的应用"><span class="nav-number">3.1.</span> <span class="nav-text">拓展 map 在实际项目中的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个归并方法：reduce"><span class="nav-number">4.</span> <span class="nav-text">一个归并方法：reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强大的reduce"><span class="nav-number">5.</span> <span class="nav-text">强大的reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与ES6的结合"><span class="nav-number">6.</span> <span class="nav-text">与ES6的结合</span></a></li></ol></div>
             
 
           </div>
@@ -945,7 +960,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
