@@ -272,7 +272,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">42</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">43</span></a>
   </li>
 
       
@@ -374,7 +374,7 @@
           <h2 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/03/19/h5-keyboard-compatible/" itemprop="url">
-                  H5键盘兼容处理
+                  可能这些是你想要的H5键盘兼容方案
                 </a>
               
             
@@ -417,7 +417,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-22 19:16:13" itemprop="dateModified" datetime="2019-03-22T19:16:13+08:00">2019-03-22</time>
+                <time title="修改时间：2019-04-23 14:32:58" itemprop="dateModified" datetime="2019-04-23T14:32:58+08:00">2019-04-23</time>
               
             
           </span>
@@ -470,8 +470,12 @@
       
         
           
-          前言在 H5 项目中，我们经常会遇到页面中存在单个甚至多个 input/textarea 输入框与底部固定元素布局情况。在 input/textarea 输入框获取焦点时，会自动触发键盘弹起，而键盘弹起在 IOS 与 Android 的 webview 中表现并不一致，同时当我们主动触发键盘收起时同样存在差异化。而无论如何，我们希望功能流畅的同时，尽量保持用户体验一致性。
-键盘弹起的不同表现IOS 键盘弹起表现IOS 的键盘处在窗口的最上层，当键盘弹起时， webview 的高度 height 并没有改变，只是 scrollTop 发生变化，页面可以滚动。且页面可以滚动的最大限度为弹出键盘的高
+          前言最近一段时间在做 H5 聊天项目，踩过其中一大坑：输入框获取焦点，软键盘弹起，要求输入框吸附（或顶）在输入法框上。需求很明确，看似很简单，其实不然。从实验过一些机型上看，发现主要存在以下问题：
+
+在 Android 和 IOS 上，获知软键盘弹起和收起状态存在差异，且页面 webview 表现不同。
+在IOS12 上，微信版本 v6.7.4 及以上，输入框获取焦点，键盘弹起，页面（webview）整体往上滚动，当键盘收起后，不回到原位，导致键盘原来所在位置是空白的。
+在 IOS 上，使用第三方输入法，高度计算存在偏差，导致在有些输入法弹起，将输入框挡住一部分。
+在有些浏览器上使用一些操作技
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -848,6 +852,193 @@ WXML 中数据绑定 Mustache
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/18/miniprogram-bug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/12/25/array-combination/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/25/array-combination/" itemprop="url">
+                  简约强大数组操作组合
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-25 23:23:20" itemprop="dateCreated datePublished" datetime="2018-12-25T23:23:20+08:00">2018-12-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-28 14:05:13" itemprop="dateModified" datetime="2019-03-28T14:05:13+08:00">2019-03-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前言在实际js开发中对数组操作频率非常高，看过一些小伙伴的一些用法，挺有意思，在这里小记（不全）一下，备忘。
+
+5个迭代方法：every、filter、forEach、map和some
+every()：对数组中的每一项运行给定函数，如果该函数每一项都返回true，则返回true；
+
+filter()：对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组；
+
+forEach()：对数组中的每一项运行给定函数，这个方法没有返回值；
+
+map()：对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组；
+
+some()：对数组中的每一项运行给定函数，如果该函数任意一项返回tr
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/25/array-combination/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1970,189 +2161,6 @@ https://www.liaoxuefeng.com/wiki/0013739
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2018/07/22/搞定css三列布局/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/22/搞定css三列布局/" itemprop="url">
-                  搞定css三列布局
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-07-22 19:32:30" itemprop="dateCreated datePublished" datetime="2018-07-22T19:32:30+08:00">2018-07-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-09-20 17:35:27" itemprop="dateModified" datetime="2018-09-20T17:35:27+08:00">2018-09-20</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/css/" itemprop="url" rel="index"><span itemprop="name">css</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-谈到布局，首先就要想到定位，当别人问我，css的position定位有哪些取值，分别表示什么意思？呃…..
-
-定位position有六个属性值：static、relative、absolute、fixed、sticky和inherit。
-
-static（默认）：元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分；行内元素则会创建一个或多个行框，置于父级元素中。
-relative：元素框相对于之前正常文档流中的位置发生偏移，并且原先的位置仍然被占据。发生偏移的时候，可能会覆盖其他元素。
-absolute：元素框不再占有文档位置，并且相对于包含块进行偏移（所谓包含块就是最近一级外层元素p
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/22/搞定css三列布局/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2204,7 +2212,7 @@ absolute：元素框不再占有文档位置，并且相对于包含块进行偏
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

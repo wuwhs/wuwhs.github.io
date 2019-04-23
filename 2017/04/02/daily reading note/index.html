@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="wuwh&#39;s blog">
 <meta property="og:description" content="记录日常看书、看博客小记DOM2 DOM3有关属性检测节点是否相等 isSomeNode isEqualNode 123456div1 = document.createElement(&amp;quot;div&amp;quot;);div2 = document.createElement(&amp;quot;div&amp;quot;);div1.isSameNode(div1); // truediv1.isSameNo">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-31T09:12:21.084Z">
+<meta property="og:updated_time" content="2019-04-10T10:21:56.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="daily reading note">
 <meta name="twitter:description" content="记录日常看书、看博客小记DOM2 DOM3有关属性检测节点是否相等 isSomeNode isEqualNode 123456div1 = document.createElement(&amp;quot;div&amp;quot;);div2 = document.createElement(&amp;quot;div&amp;quot;);div1.isSameNode(div1); // truediv1.isSameNo">
@@ -275,7 +275,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">42</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">43</span></a>
   </li>
 
       
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-08-31 17:12:21" itemprop="dateModified" datetime="2018-08-31T17:12:21+08:00">2018-08-31</time>
+                <time title="修改时间：2019-04-10 18:21:56" itemprop="dateModified" datetime="2019-04-10T18:21:56+08:00">2019-04-10</time>
               
             
           </span>
@@ -551,6 +551,11 @@
 </ol>
 <p>所以，我们一般采用获取最大值，保证跨浏览器准确：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var docHeight = Math.max(document.documentElement.scrollHeight, doucument.documentElment.clientHeight);</span><br></pre></td></tr></table></figure>
+<p>html4.0 的 <code>DTD</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span></span><br></pre></td></tr></table></figure>
+<p>html5 的 <code>DTD</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在文档使用了 <code>DTD</code> 时，<code>document.body.scrollHeight</code> 值为0，没有用 <code>DTD</code> 时不为0</p>
 <p><strong>确定元素大小</strong></p>
 <p>getBoundingClientRect()方法，返回一个对象，包括四个属性：left、top、right和bottom。这些属性给出了元素相对视口的位置。</p>
 <p>——2017/11/26</p>
@@ -1043,15 +1048,26 @@
 <hr>
 <p><strong>关于从页面外部加载js文件</strong></p>
 <ol>
-<li>带有src属性<code>&lt;script&gt;</code> 标签之间还包含JavaScript代码，则只会下载并执行外部脚本文件，嵌入的代码会被忽略；</li>
-<li>不存在defer和async属性，浏览器就会按照<code>&lt;script&gt;</code>在页面中出现的先后顺序对它们依次进行解析；</li>
-<li><code>&lt;script&gt;</code>有defer属性，浏览器会立刻下载，但延时执行（延时到<code>&lt;/html&gt;</code>后执行），HTML5规定按照文件出现的先后顺序执行，先于DOMContentLoaded事件执行；</li>
-<li><code>&lt;script&gt;</code>有async属性，浏览器立刻下载，不保证按照先后顺序执行，一定在load事件前执行，但不一定在DOMContentLoaded之前执行；</li>
+<li>带有src属性<figure class="highlight plain"><figcaption><span>标签之间还包含JavaScript代码，则只会下载并执行外部脚本文件，嵌入的代码会被忽略；</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">2. 不存在defer和async属性，浏览器就会按照```&lt;script&gt;```在页面中出现的先后顺序对它们依次进行解析；</span><br><span class="line">3. ```&lt;script&gt;```有defer属性，浏览器会立刻下载，但延时执行（延时到```&lt;/html&gt;```后执行），HTML5规定按照文件出现的先后顺序执行，先于DOMContentLoaded事件执行；</span><br><span class="line">4. ```&lt;script&gt;```有async属性，浏览器立刻下载，不保证按照先后顺序执行，一定在load事件前执行，但不一定在DOMContentLoaded之前执行；</span><br><span class="line"></span><br><span class="line">**重绘repaint与重排reflow**</span><br><span class="line">重绘：当改变那些不会影响元素在网页中的位置样式时，如background-color，border，visibility，浏览器只会用新的样式将元素重绘一次。</span><br><span class="line">重排：当改变影响到文本内容或结构，或者元素位置时，重排就会发生。</span><br><span class="line"></span><br><span class="line">—— 2018/1/19</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">**输入框弹起数字键盘**</span><br><span class="line"></span><br><span class="line">```html</span><br><span class="line">&lt;input type=&quot;tel&quot; novalidate=&quot;novalidate&quot; pattern=&quot;[0-9]*&quot; id=&quot;q2&quot; value=&quot;&quot; name=&quot;q2&quot; verify=&quot;学号&quot;&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><strong>重绘repaint与重排reflow</strong><br>重绘：当改变那些不会影响元素在网页中的位置样式时，如background-color，border，visibility，浏览器只会用新的样式将元素重绘一次。<br>重排：当改变影响到文本内容或结构，或者元素位置时，重排就会发生。</p>
-<p>—— 2018/1/19</p>
-<hr>
-
+<p><code>type=&quot;tel&quot;</code></p>
+<ul>
+<li>优点是iOS和Android的键盘表现都差不多</li>
+<li>缺点是那些字母好多余，虽然我没有强迫症但还是感觉怪怪的啊。</li>
+</ul>
+<p><code>type=&quot;number&quot;</code></p>
+<ul>
+<li>优点是Android下实现的一个真正的数字键盘</li>
+<li>缺点一：iOS下不是九宫格键盘，输入不方便</li>
+<li>缺点二：旧版Android（包括微信所用的X5内核）在输入框后面会有超级鸡肋的小尾巴，好在Android 4.4.4以后给去掉了。</li>
+</ul>
+<p>不过对于缺点二，我们可以用webkit私有的伪元素给fix掉：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=number]</span><span class="selector-pseudo">::-webkit-inner-spin-button</span>,</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=number]</span><span class="selector-pseudo">::-webkit-outer-spin-button</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-appearance</span>: none;</span><br><span class="line">    <span class="attribute">appearance</span>: none;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>pattern</code></p>
+<p>pattern用于验证表单输入的内容，通常HTML5的type属性，比如email、tel、number、data类、url等，已经自带了简单的数据格式验证功能了，加上pattern后，前端部分的验证更加简单高效了。</p>
+<p><code></code></p>
+<p><code>novalidate</code></p>
+<h2 id="novalidate-属性规定当提交表单时不对其进行验证。"><a href="#novalidate-属性规定当提交表单时不对其进行验证。" class="headerlink" title="novalidate 属性规定当提交表单时不对其进行验证。"></a>novalidate 属性规定当提交表单时不对其进行验证。</h2>
       
     </div>
 
@@ -1064,7 +1080,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/09/07/简约强大数组操作组合/" rel="bookmark">简约强大数组操作组合</a></div>
+      <div class="popular-posts-title"><a href="/2018/07/27/尾调用/" rel="bookmark">尾调用</a></div>
       
     </li>
   
@@ -1092,7 +1108,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2017/11/08/区分substring、substr和slice/" rel="bookmark">区分substring、substr和slice</a></div>
+      <div class="popular-posts-title"><a href="/2017/06/18/js数据类型转化/" rel="bookmark">js数据类型转化</a></div>
       
     </li>
   
@@ -1280,7 +1296,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1434,7 +1450,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录日常看书、看博客小记"><span class="nav-number">1.</span> <span class="nav-text">记录日常看书、看博客小记</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM2-DOM3有关属性"><span class="nav-number">1.0.1.</span> <span class="nav-text">DOM2 DOM3有关属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#样式相关"><span class="nav-number">1.0.2.</span> <span class="nav-text">样式相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#范围"><span class="nav-number">1.0.3.</span> <span class="nav-text">范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事件"><span class="nav-number">1.0.4.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义事件"><span class="nav-number">1.0.5.</span> <span class="nav-text">自定义事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表单"><span class="nav-number">1.0.6.</span> <span class="nav-text">表单</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof-undefined"><span class="nav-number">1.1.</span> <span class="nav-text">typeof undefined</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML5原生API"><span class="nav-number">1.2.</span> <span class="nav-text">HTML5原生API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级函数"><span class="nav-number">1.3.</span> <span class="nav-text">高级函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Symbol"><span class="nav-number">1.4.</span> <span class="nav-text">ES6之Symbol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Proxy"><span class="nav-number">1.5.</span> <span class="nav-text">ES6之Proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Reflect"><span class="nav-number">1.6.</span> <span class="nav-text">ES6之Reflect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Set和Map"><span class="nav-number">1.7.</span> <span class="nav-text">ES6之Set和Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Promise"><span class="nav-number">1.8.</span> <span class="nav-text">ES6之Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Promise-1"><span class="nav-number">1.9.</span> <span class="nav-text">ES6之Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Iterator和for…of循环"><span class="nav-number">1.10.</span> <span class="nav-text">ES6之Iterator和for…of循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Generator"><span class="nav-number">1.11.</span> <span class="nav-text">ES6之Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Generator函数的异步应用"><span class="nav-number">1.12.</span> <span class="nav-text">ES6之Generator函数的异步应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Class的继承"><span class="nav-number">1.13.</span> <span class="nav-text">ES6之Class的继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Module"><span class="nav-number">1.14.</span> <span class="nav-text">ES6之Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Module加载"><span class="nav-number">1.15.</span> <span class="nav-text">ES6之Module加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之编程风格"><span class="nav-number">1.16.</span> <span class="nav-text">ES6之编程风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之数组"><span class="nav-number">1.17.</span> <span class="nav-text">ES6之数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之String"><span class="nav-number">1.18.</span> <span class="nav-text">ES6之String</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Object"><span class="nav-number">1.19.</span> <span class="nav-text">ES6之Object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之function"><span class="nav-number">1.20.</span> <span class="nav-text">ES6之function</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#记录日常看书、看博客小记"><span class="nav-number">1.</span> <span class="nav-text">记录日常看书、看博客小记</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM2-DOM3有关属性"><span class="nav-number">1.0.1.</span> <span class="nav-text">DOM2 DOM3有关属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#样式相关"><span class="nav-number">1.0.2.</span> <span class="nav-text">样式相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#范围"><span class="nav-number">1.0.3.</span> <span class="nav-text">范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#事件"><span class="nav-number">1.0.4.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义事件"><span class="nav-number">1.0.5.</span> <span class="nav-text">自定义事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表单"><span class="nav-number">1.0.6.</span> <span class="nav-text">表单</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof-undefined"><span class="nav-number">1.1.</span> <span class="nav-text">typeof undefined</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML5原生API"><span class="nav-number">1.2.</span> <span class="nav-text">HTML5原生API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高级函数"><span class="nav-number">1.3.</span> <span class="nav-text">高级函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Symbol"><span class="nav-number">1.4.</span> <span class="nav-text">ES6之Symbol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Proxy"><span class="nav-number">1.5.</span> <span class="nav-text">ES6之Proxy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Reflect"><span class="nav-number">1.6.</span> <span class="nav-text">ES6之Reflect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Set和Map"><span class="nav-number">1.7.</span> <span class="nav-text">ES6之Set和Map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Promise"><span class="nav-number">1.8.</span> <span class="nav-text">ES6之Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Promise-1"><span class="nav-number">1.9.</span> <span class="nav-text">ES6之Promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Iterator和for…of循环"><span class="nav-number">1.10.</span> <span class="nav-text">ES6之Iterator和for…of循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Generator"><span class="nav-number">1.11.</span> <span class="nav-text">ES6之Generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Generator函数的异步应用"><span class="nav-number">1.12.</span> <span class="nav-text">ES6之Generator函数的异步应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Class的继承"><span class="nav-number">1.13.</span> <span class="nav-text">ES6之Class的继承</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Module"><span class="nav-number">1.14.</span> <span class="nav-text">ES6之Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Module加载"><span class="nav-number">1.15.</span> <span class="nav-text">ES6之Module加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之编程风格"><span class="nav-number">1.16.</span> <span class="nav-text">ES6之编程风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之数组"><span class="nav-number">1.17.</span> <span class="nav-text">ES6之数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之String"><span class="nav-number">1.18.</span> <span class="nav-text">ES6之String</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之Object"><span class="nav-number">1.19.</span> <span class="nav-text">ES6之Object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6之function"><span class="nav-number">1.20.</span> <span class="nav-text">ES6之function</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#novalidate-属性规定当提交表单时不对其进行验证。"><span class="nav-number"></span> <span class="nav-text">novalidate 属性规定当提交表单时不对其进行验证。</span></a></div>
             
 
           </div>
