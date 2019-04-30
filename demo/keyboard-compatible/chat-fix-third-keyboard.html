@@ -153,22 +153,25 @@
       var isIOS = /iphone|ipad|ipod/.test(ua);
       var isAndroid = /android/.test(ua);
       var isMiuiBrowser = /miuibrowser/.test(ua);
+      var isSafari = /Safari/i.test(ua) && !/Chrome/i.test(ua);
 
       return {
         isIOS: isIOS,
         isAndroid: isAndroid,
-        isMiuiBrowser: isMiuiBrowser
+        isMiuiBrowser: isMiuiBrowser,
+        isSafari: isSafari
       }
     }()
 
     // 获取到焦点元素滚动到可视区
-    function activeElementScrollIntoView(activeElement, delay) {
-      var editable = activeElement.getAttribute('contenteditable')
+    function activeElementScrollIntoView(activeElement, delay, scrollOption) {
+      var editable = activeElement.getAttribute('contenteditable');
 
       // 输入框、textarea或富文本获取焦点后没有将该元素滚动到可视区
       if (activeElement.tagName == 'INPUT' || activeElement.tagName == 'TEXTAREA' || editable === '' || editable) {
         setTimeout(function () {
-          activeElement.scrollIntoView();
+          console.log('scrollOption: ', scrollOption)
+          activeElement.scrollIntoView(scrollOption);
         }, delay)
       }
     }
@@ -179,7 +182,8 @@
         // IOS 键盘弹起：IOS 和 Android 输入框获取焦点键盘弹起
         $input.addEventListener('focus', function () {
           console.log('IOS 键盘弹起啦！');
-          activeElementScrollIntoView(this, 1000);
+          // Safari 浏览器，`scrollIntoView` 参数设为 `false`，才使得聊天输入框刚好吸附在输入法上，为 `true` 会往上走一点
+          activeElementScrollIntoView(this, 1000, !judgeDeviceType.isSafari);
         }, false)
 
         // IOS 键盘收起：IOS 点击输入框以外区域或点击收起按钮，输入框都会失去焦点，键盘会收起，
@@ -219,7 +223,7 @@
             if (judgeDeviceType.isMiuiBrowser) {
               document.body.style.marginBottom = '40px';
             }
-            activeElementScrollIntoView($input, 1000);
+            activeElementScrollIntoView($input, 1000, true);
           }
 
           originHeight = resizeHeight;
