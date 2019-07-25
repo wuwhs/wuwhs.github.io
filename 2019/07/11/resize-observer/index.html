@@ -132,7 +132,7 @@
 <meta property="og:image" content="https://wuwhs.github.io/gb/mutation-observer/animation.gif">
 <meta property="og:image" content="https://wuwhs.github.io/gb/mutation-observer/listen-animation.gif">
 <meta property="og:image" content="https://wuwhs.github.io/gb/mutation-observer/resize-observer.png">
-<meta property="og:updated_time" content="2019-07-25T13:20:46.544Z">
+<meta property="og:updated_time" content="2019-07-25T13:41:16.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅监听容器高度变化">
 <meta name="twitter:description" content="前言老鸟：怎样去监听 DOM 元素的高度变化呢？菜鸟：哈哈哈哈哈，这都不知道哦，用 onresize 事件鸭！老鸟扶了扶眼睛，空气安静几秒钟，菜鸟才晃过神来。对鸭，普通 DOM 元素没有 onresize 事件，只有在 window 对象下有此事件，该死，又双叒叕糗大了。 哈哈哈哈，以上纯属虚构，不过在最近项目中还真遇到过对容器监听高（宽）变化：在使用 iscroll 或 better-scrol">
@@ -261,7 +261,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">28</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">27</span></a>
   </li>
         
         
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-25 21:20:46" itemprop="dateModified" datetime="2019-07-25T21:20:46+08:00">2019-07-25</time>
+                <time title="修改时间：2019-07-25 21:41:16" itemprop="dateModified" datetime="2019-07-25T21:41:16+08:00">2019-07-25</time>
               
             
           </span>
@@ -523,7 +523,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">record: [&#123;</span><br><span class="line">  addedNodes: NodeList []</span><br><span class="line">  attributeName: <span class="string">"class"</span></span><br><span class="line">  attributeNamespace: <span class="literal">null</span></span><br><span class="line">  nextSibling: <span class="literal">null</span></span><br><span class="line">  oldValue: <span class="string">"aaa"</span></span><br><span class="line">  previousSibling: <span class="literal">null</span></span><br><span class="line">  removedNodes: NodeList []</span><br><span class="line">  target: div#tar.tar</span><br><span class="line">  type: <span class="string">"attributes"</span></span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
 <h3 id="MutationObserver-的应用"><a href="#MutationObserver-的应用" class="headerlink" title="MutationObserver 的应用"></a>MutationObserver 的应用</h3><p>一个容器本身以及内部元素的属性变化，节点变化和文本变化是影响该容器高宽的重要因素（当然还有其他因素），以上了解了 <code>MutationObserver</code> API 的一些细节，可以实现监听容器宽高的变化。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $tar = <span class="built_in">document</span>.getElementById(<span class="string">'tar'</span>);</span><br><span class="line"><span class="keyword">var</span> MutationObserver = <span class="built_in">window</span>.MutationObserver || <span class="built_in">window</span>.webkitMutationObserver || <span class="built_in">window</span>.MozMutationObserver;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> recordHeight = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> mutationObserver = <span class="keyword">new</span> MutationObserver(<span class="function"><span class="keyword">function</span> (<span class="params">mutations</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(mutations);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> height = <span class="built_in">window</span>.getComputedStyle($tar).getPropertyValue(<span class="string">'height'</span>);</span><br><span class="line">  <span class="keyword">if</span> (height === recordHeight) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  recordHeight = height;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'高度变化了'</span>);</span><br><span class="line">  <span class="comment">// 之后更新外部容器等操作</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">mutationObserver.observe($tar, &#123;</span><br><span class="line">  childList: <span class="literal">true</span>, <span class="comment">// 子节点的变动（新增、删除或者更改）</span></span><br><span class="line">  attributes: <span class="literal">true</span>, <span class="comment">// 属性的变动</span></span><br><span class="line">  characterData: <span class="literal">true</span>, <span class="comment">// 节点内容或节点文本的变动</span></span><br><span class="line">  subtree: <span class="literal">true</span> <span class="comment">// 是否将观察器应用于该节点的所有后代节点</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="漏网之鱼：动画（animation、transform）改变容器高（宽）"><a href="#漏网之鱼：动画（animation、transform）改变容器高（宽）" class="headerlink" title="漏网之鱼：动画（animation、transform）改变容器高（宽）"></a>漏网之鱼：动画（animation、transform）改变容器高（宽）</h3><p>除了容器内部元素节点、属性变化，还有 css3 动画会影响容器高宽，由于动画并不会造成元素属性的变化，所以 <code>MutationObserver</code> API 是监听不到的。</p>
+<h2 id="漏网之鱼：动画（animation、transform）改变容器高（宽）"><a href="#漏网之鱼：动画（animation、transform）改变容器高（宽）" class="headerlink" title="漏网之鱼：动画（animation、transform）改变容器高（宽）"></a>漏网之鱼：动画（animation、transform）改变容器高（宽）</h2><p>除了容器内部元素节点、属性变化，还有 css3 动画会影响容器高宽，由于动画并不会造成元素属性的变化，所以 <code>MutationObserver</code> API 是监听不到的。</p>
 <p>将 <code>#tar</code> 容器加入以下 <code>css</code> 动画</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> changeHeight &#123;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#tar</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">animation</span>: changeHeight <span class="number">2s</span> ease-in <span class="number">1s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/gb/mutation-observer/animation.gif" alt="MutationObserver监听不到动画改变高宽"></p>
@@ -566,6 +566,13 @@
     <li class="popular-posts-item">
       
       
+      <div class="popular-posts-title"><a href="/2018/04/20/理解同步、异步和事件循环/" rel="bookmark">理解同步、异步和事件循环</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
       <div class="popular-posts-title"><a href="/2018/05/24/html5 新型api/" rel="bookmark">html5 新型api</a></div>
       
     </li>
@@ -573,21 +580,14 @@
     <li class="popular-posts-item">
       
       
+      <div class="popular-posts-title"><a href="/2017/06/26/js中的位运算/" rel="bookmark">js中的位运算</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
       <div class="popular-posts-title"><a href="/2017/06/18/js数据类型转化/" rel="bookmark">js数据类型转化</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2018/12/25/array-combination/" rel="bookmark">简约强大数组操作组合</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2017/11/08/区分substring、substr和slice/" rel="bookmark">区分substring、substr和slice</a></div>
       
     </li>
   
@@ -832,8 +832,6 @@
                     
                       
                     
-                      
-                    
                     <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
@@ -884,7 +882,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MutationObserver"><span class="nav-number">2.</span> <span class="nav-text">MutationObserver</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-特点"><span class="nav-number">2.1.</span> <span class="nav-text">MutationObserver 特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-构造函数"><span class="nav-number">2.2.</span> <span class="nav-text">MutationObserver 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-实例的-observe-方法"><span class="nav-number">2.3.</span> <span class="nav-text">MutationObserver 实例的 observe() 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#childList-和-subtree-属性"><span class="nav-number">2.3.1.</span> <span class="nav-text">childList 和 subtree 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attributes-和-attributeFilter-属性"><span class="nav-number">2.3.2.</span> <span class="nav-text">attributes 和 attributeFilter 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#characterData-和-subtree-属性"><span class="nav-number">2.3.3.</span> <span class="nav-text">characterData 和 subtree 属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#takeRecords-、disconnect-方法"><span class="nav-number">2.4.</span> <span class="nav-text">takeRecords()、disconnect() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-的应用"><span class="nav-number">2.5.</span> <span class="nav-text">MutationObserver 的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏网之鱼：动画（animation、transform）改变容器高（宽）"><span class="nav-number">2.6.</span> <span class="nav-text">漏网之鱼：动画（animation、transform）改变容器高（宽）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResizeObserver"><span class="nav-number">3.</span> <span class="nav-text">ResizeObserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResizeObserver-Polyfill"><span class="nav-number">4.</span> <span class="nav-text">ResizeObserver Polyfill</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-iframe-模拟-window-的-resize"><span class="nav-number">5.</span> <span class="nav-text">用 iframe 模拟 window 的 resize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MutationObserver"><span class="nav-number">2.</span> <span class="nav-text">MutationObserver</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-特点"><span class="nav-number">2.1.</span> <span class="nav-text">MutationObserver 特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-构造函数"><span class="nav-number">2.2.</span> <span class="nav-text">MutationObserver 构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-实例的-observe-方法"><span class="nav-number">2.3.</span> <span class="nav-text">MutationObserver 实例的 observe() 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#childList-和-subtree-属性"><span class="nav-number">2.3.1.</span> <span class="nav-text">childList 和 subtree 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attributes-和-attributeFilter-属性"><span class="nav-number">2.3.2.</span> <span class="nav-text">attributes 和 attributeFilter 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#characterData-和-subtree-属性"><span class="nav-number">2.3.3.</span> <span class="nav-text">characterData 和 subtree 属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#takeRecords-、disconnect-方法"><span class="nav-number">2.4.</span> <span class="nav-text">takeRecords()、disconnect() 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MutationObserver-的应用"><span class="nav-number">2.5.</span> <span class="nav-text">MutationObserver 的应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏网之鱼：动画（animation、transform）改变容器高（宽）"><span class="nav-number">3.</span> <span class="nav-text">漏网之鱼：动画（animation、transform）改变容器高（宽）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResizeObserver"><span class="nav-number">4.</span> <span class="nav-text">ResizeObserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResizeObserver-Polyfill"><span class="nav-number">5.</span> <span class="nav-text">ResizeObserver Polyfill</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-iframe-模拟-window-的-resize"><span class="nav-number">6.</span> <span class="nav-text">用 iframe 模拟 window 的 resize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
