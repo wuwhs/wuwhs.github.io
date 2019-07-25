@@ -170,7 +170,6 @@
       // 输入框、textarea或富文本获取焦点后没有将该元素滚动到可视区
       if (activeElement.tagName == 'INPUT' || activeElement.tagName == 'TEXTAREA' || editable === '' || editable) {
         setTimeout(function () {
-          console.log('scrollOption: ', scrollOption)
           activeElement.scrollIntoView(scrollOption);
         }, delay)
       }
@@ -198,7 +197,9 @@
           var version = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
 
           if (+wechatVersion.replace(/\./g, '') >= 674 && +version[1] >= 12) {
-            window.scrollTo(0, Math.max(document.body.clientHeight, document.documentElement.clientHeight));
+            setTimeout(function () {
+              window.scrollTo(0, Math.max(document.body.clientHeight, document.documentElement.clientHeight));
+            })
           }
         })
       }
@@ -236,7 +237,6 @@
     for (var i = 0; i < $inputs.length; i++) {
       listenKeybord($inputs[i]);
     }
-
   </script>
 </body>
 

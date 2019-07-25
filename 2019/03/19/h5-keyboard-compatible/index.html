@@ -131,7 +131,7 @@
 <meta property="og:image" content="https://wuwhs.github.io/gb/keyboard-compatible/keyboard-number.jpg">
 <meta property="og:image" content="https://wuwhs.github.io/gb/keyboard-compatible/ios+wx6.7.4.jpg">
 <meta property="og:image" content="https://wuwhs.github.io/gb/keyboard-compatible/keyboard-chat-input.png">
-<meta property="og:updated_time" content="2019-04-30T10:42:33.201Z">
+<meta property="og:updated_time" content="2019-05-11T09:57:47.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可能这些是你想要的H5键盘兼容方案">
 <meta name="twitter:description" content="前言最近一段时间在做 H5 聊天项目，踩过其中一大坑：输入框获取焦点，软键盘弹起，要求输入框吸附（或顶）在输入法框上。需求很明确，看似很简单，其实不然。从实验过一些机型上看，发现主要存在以下问题：  在 Android 和 IOS 上，获知软键盘弹起和收起状态存在差异，且页面 webview 表现不同。 在IOS12 上，微信版本 v6.7.4 及以上，输入框获取焦点，键盘弹起，页面（webvie">
@@ -260,7 +260,7 @@
           
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">27</span></a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">28</span></a>
   </li>
         
         
@@ -276,7 +276,7 @@
           
           <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">43</span></a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">44</span></a>
   </li>
 
       
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-30 18:42:33" itemprop="dateModified" datetime="2019-04-30T18:42:33+08:00">2019-04-30</time>
+                <time title="修改时间：2019-05-11 17:57:47" itemprop="dateModified" datetime="2019-05-11T17:57:47+08:00">2019-05-11</time>
               
             
           </span>
@@ -521,7 +521,7 @@
 <h1 id="兼容-IOS12-V6-7-4"><a href="#兼容-IOS12-V6-7-4" class="headerlink" title="兼容 IOS12 + V6.7.4+"></a>兼容 <code>IOS12</code> + <code>V6.7.4+</code></h1><p>如果你在用 <code>IOS12</code> 和 <code>V6.7.4+</code>版本的微信浏览器打开上面表单输入的 <code>demo</code> ，就会惊奇的发现键盘收起后，原本被滚动顶起的页面并没有回到底部位置，导致原来键盘弹起的位置“空”了。</p>
 <p><img src="/gb/keyboard-compatible/ios+wx6.7.4.jpg" alt="兼容 `IOS12` + `V6.7.4+`"></p>
 <p>其实这是 <code>Apple</code> 在 <code>IOS</code> 的 <code>bug</code>，会出现在所有的 <code>Xcode10</code> 打包的 <code>IOS12</code> 的设备上。微信官方已给出<a href="https://developers.weixin.qq.com/community/develop/doc/00044ae90742f8c82fb78fcae56800" target="_blank" rel="noopener">解决方案</a>，只需在软键盘收起后，将页面（<code>webview</code>）滚回到窗口最底部位置（<code>clientHeight</code>位置）。修复后的上面表单输入 <code>demo</code> 可以戳<a href="/demo/keyboard-compatible/input-fix-ios12-wx6.7.4.html">这里</a></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'IOS 键盘收起啦！'</span>);</span><br><span class="line"><span class="comment">// IOS 键盘收起后操作</span></span><br><span class="line"><span class="comment">// 微信浏览器版本6.7.4+IOS12会出现键盘收起后，视图被顶上去了没有下来</span></span><br><span class="line"><span class="keyword">var</span> wechatInfo = <span class="built_in">window</span>.navigator.userAgent.match(<span class="regexp">/MicroMessenger\/([\d\.]+)/i</span>);</span><br><span class="line"><span class="keyword">if</span> (!wechatInfo) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wechatVersion = wechatInfo[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> version = (navigator.appVersion).match(<span class="regexp">/OS (\d+)_(\d+)_?(\d+)?/</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (+wechatVersion.replace(<span class="regexp">/\./g</span>, <span class="string">''</span>) &gt;= <span class="number">674</span> &amp;&amp; +version[<span class="number">1</span>] &gt;= <span class="number">12</span>) &#123;</span><br><span class="line">  <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.clientHeight, <span class="built_in">document</span>.documentElement.clientHeight));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'IOS 键盘收起啦！'</span>);</span><br><span class="line"><span class="comment">// IOS 键盘收起后操作</span></span><br><span class="line"><span class="comment">// 微信浏览器版本6.7.4+IOS12会出现键盘收起后，视图被顶上去了没有下来</span></span><br><span class="line"><span class="keyword">var</span> wechatInfo = <span class="built_in">window</span>.navigator.userAgent.match(<span class="regexp">/MicroMessenger\/([\d\.]+)/i</span>);</span><br><span class="line"><span class="keyword">if</span> (!wechatInfo) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wechatVersion = wechatInfo[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">var</span> version = (navigator.appVersion).match(<span class="regexp">/OS (\d+)_(\d+)_?(\d+)?/</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (+wechatVersion.replace(<span class="regexp">/\./g</span>, <span class="string">''</span>) &gt;= <span class="number">674</span> &amp;&amp; +version[<span class="number">1</span>] &gt;= <span class="number">12</span>) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.clientHeight, <span class="built_in">document</span>.documentElement.clientHeight));</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="兼容第三方输入法"><a href="#兼容第三方输入法" class="headerlink" title="兼容第三方输入法"></a>兼容第三方输入法</h1><p>上面说了那么多，其实已经把 <code>H5</code> 聊天输入框的坑填了一大半了，接下来就先看下聊天输入框的基本HTML结构</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"chat__content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>一些聊天内容1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 省略几千行聊天内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input__content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input"</span> <span class="attr">contenteditable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>发送<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>样式</p>
@@ -546,14 +546,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2018/04/20/理解同步、异步和事件循环/" rel="bookmark">理解同步、异步和事件循环</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2018/12/25/array-combination/" rel="bookmark">简约强大数组操作组合</a></div>
+      <div class="popular-posts-title"><a href="/2019/07/11/resize-observer/" rel="bookmark">如何优雅监听容器高度变化</a></div>
       
     </li>
   
@@ -567,14 +560,21 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2017/06/26/js中的位运算/" rel="bookmark">js中的位运算</a></div>
+      <div class="popular-posts-title"><a href="/2017/06/18/js数据类型转化/" rel="bookmark">js数据类型转化</a></div>
       
     </li>
   
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2017/06/18/js数据类型转化/" rel="bookmark">js数据类型转化</a></div>
+      <div class="popular-posts-title"><a href="/2018/12/25/array-combination/" rel="bookmark">简约强大数组操作组合</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/11/08/区分substring、substr和slice/" rel="bookmark">区分substring、substr和slice</a></div>
       
     </li>
   
@@ -635,6 +635,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/11/resize-observer/" rel="prev" title="如何优雅监听容器高度变化">
+                如何优雅监听容器高度变化 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -715,7 +719,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -764,6 +768,8 @@
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
+                    
+                      
                     
                       
                     
