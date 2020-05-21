@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" v-model="info.name">
+        <input type="text" v-model="message">
         <div>{{message}}</div>
         <ul>
             <li>NO.1</li>
@@ -19,7 +19,7 @@
     <script src="./Watcher.js"></script>
     <script src="./Observer.js"></script>
     <script src="./Compile.js"></script>
-    <script src="./MVVM.js"></script>    
+    <script src="./MVVM.js"></script>
     <script>
         let vm = new MVVM({
             el: '#app',
