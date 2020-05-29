@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[我的阅读清单]]></title>
     <url>%2F2020%2F05%2F29%2Freading-plan%2F</url>
-    <content type="text"><![CDATA[2020-5-29傻傻分不清之 Cookie、Session、Token、JWTPS：明扼要的对比了四者之间的异同点，加深前后端身份校验的认识]]></content>
+    <content type="text"><![CDATA[2020-5-29傻傻分不清之 Cookie、Session、Token、JWTPS：明扼要的对比了四者之间的异同点，加深前后端身份校验的认识，相关阅读阮一峰的JSON Web Token 入门教程]]></content>
       <tags>
         <tag>前端</tag>
       </tags>
