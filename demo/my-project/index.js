@@ -40,3 +40,16 @@ console.log('ob: ', ob)
 ob.trigger('key1')
 ob.remove('key1')
 console.log('ob: ', ob)
+
+new Promise((resolve) => {
+  console.log(1)
+  resolve()
+}).then(() => {
+  console.log(2)
+})
+
+async function test () {
+  console.log(3)
+  let test = await console.log(4)
+}
+test()
