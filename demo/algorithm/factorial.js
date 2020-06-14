@@ -71,7 +71,7 @@
 const MAX_NUMBER = Number.MAX_VALUE
 
 const coins = [1, 2, 5]
-function coinChange (amount) {
+function coinChange(amount) {
   let last = amount
 
   // 剩余目标金额为0，所需钱币0枚

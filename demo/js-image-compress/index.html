@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="file">
+  <script>
+    var fileEle = document.getElementById('file');
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+
+    fileEle.addEventListener('change', function () {
+      var file = this.files[0];
+      var imageType = /^image\//;
+      if (!imageType.test(file.type)) {
+        return;
+      }
+
+      var reader = new FileReader();
+      console.log('file: ', file)
+      reader.onload = function (ev) {
+        console.log('FileReader url: ', reader.result);
+      };
+      reader.readAsDataURL(file);
+
+      // var image = document.createElement('img');
+      // var url = URL.createObjectURL(file);
+
+      // image.onload = function () {
+      //   console.log('image: ', image)
+      //   console.log('canvas: ', canvas)
+      //   console.log('image.naturalWidth: ', image.naturalWidth)
+
+      //   canvas.width = image.naturalWidth;
+      //   canvas.height = image.naturalHeight;
+      //   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      //   var dataUrl = canvas.toDataURL('image/png', 0.8);
+      //   console.log('dataUrl: ', dataUrl)
+      // }
+
+      // image.src = url;
+      // image.alt = file.name;
+
+    }, false)
+
+  </script>
+</body>
+
+</html>
