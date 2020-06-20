@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言公司的移动端业务需要在用户上传图片是由前端压缩图片大小，再上传到服务器，这样可以减少移动端上行流量，减少用户上传等待时长，优化用户体验。 JavaScript 操作压缩图片原理不难，已有成熟 API，然而在实际输出压缩后结果却总有意外，有些图片竟会越压缩越大，加之终端（手机）类型众多，有些手机压缩图片甚至变黑。  所以本文将试图解决如下问题：  弄清 Image 对象、data URL、Can">
+<meta name="keywords" content="javacript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="了解JS压缩图片，这一篇就够了">
+<meta property="og:url" content="https://wuwhs.github.io/2020/06/07/js-image-compressor/index.html">
+<meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="前言公司的移动端业务需要在用户上传图片是由前端压缩图片大小，再上传到服务器，这样可以减少移动端上行流量，减少用户上传等待时长，优化用户体验。 JavaScript 操作压缩图片原理不难，已有成熟 API，然而在实际输出压缩后结果却总有意外，有些图片竟会越压缩越大，加之终端（手机）类型众多，有些手机压缩图片甚至变黑。  所以本文将试图解决如下问题：  弄清 Image 对象、data URL、Can">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wuwhs.github.io/gb/js-image-compressor/compress-xiaolongnv.png">
+<meta property="og:image" content="https://wuwhs.github.io/gb/js-image-compressor/js-image-compressor.jpg">
+<meta property="og:image" content="https://wuwhs.github.io/gb/js-image-compressor/canvas-draw-image.jpg">
+<meta property="og:image" content="https://wuwhs.github.io/gb/js-image-compressor/compress-larger.png">
+<meta property="og:updated_time" content="2020-06-20T15:12:06.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="了解JS压缩图片，这一篇就够了">
+<meta name="twitter:description" content="前言公司的移动端业务需要在用户上传图片是由前端压缩图片大小，再上传到服务器，这样可以减少移动端上行流量，减少用户上传等待时长，优化用户体验。 JavaScript 操作压缩图片原理不难，已有成熟 API，然而在实际输出压缩后结果却总有意外，有些图片竟会越压缩越大，加之终端（手机）类型众多，有些手机压缩图片甚至变黑。  所以本文将试图解决如下问题：  弄清 Image 对象、data URL、Can">
+<meta name="twitter:image" content="https://wuwhs.github.io/gb/js-image-compressor/compress-xiaolongnv.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://wuwhs.github.io/2020/06/07/js-image-compressor/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>了解JS压缩图片，这一篇就够了 | wuwh's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fa314f7747528620032d3194b7fccc9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuwh's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Make progress every day</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">31</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">51</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2020/06/07/js-image-compressor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">了解JS压缩图片，这一篇就够了
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-07 23:24:10" itemprop="dateCreated datePublished" datetime="2020-06-07T23:24:10+08:00">2020-06-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-06-20 23:12:06" itemprop="dateModified" datetime="2020-06-20T23:12:06+08:00">2020-06-20</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>公司的移动端业务需要在用户上传图片是由前端压缩图片大小，再上传到服务器，这样可以减少移动端上行流量，减少用户上传等待时长，优化用户体验。</p>
+<p><code>JavaScript</code> 操作压缩图片原理不难，已有成熟 <code>API</code>，然而在实际输出压缩后结果却总有意外，有些图片竟会越压缩越大，加之终端（手机）类型众多，有些手机压缩图片甚至变黑。</p>
+<p><img src="/gb/js-image-compressor/compress-xiaolongnv.png" alt="压缩小龙女，哈哈哈😂"></p>
+<p>所以本文将试图解决如下问题：</p>
+<ul>
+<li>弄清 <code>Image</code> 对象、<code>data URL</code>、<code>Canvas</code> 和 <code>File（Blob）</code>之间的转化关系；</li>
+<li>图片压缩关键技巧；</li>
+<li>超大图片压缩黑屏问题。</li>
+</ul>
+<h2 id="转化关系"><a href="#转化关系" class="headerlink" title="转化关系"></a>转化关系</h2><p>在实际应用中有可能使用的情境：大多时候我们直接读取用户上传的 <code>File</code> 对象，读写到画布（<code>canvas</code>）上，利用 <code>Canvas</code> 的 <code>API</code> 进行压缩，完成压缩之后再转成 <code>File（Blob）</code> 对象，上传到远程图片服务器；不妨有时候我们也需要将一个 <code>base64</code> 字符串压缩之后再变为 <code>base64</code> 字符串传入到远程数据库或者再转成  <code>File（Blob）</code> 对象。一般的，它们有如下转化关系：</p>
+<p><img src="/gb/js-image-compressor/js-image-compressor.jpg" alt="js-image-compressor-flow-chat"></p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>下面将按照转化关系图中的转化方法一一实现。</p>
+<h3 id="file2DataUrl-file-callback"><a href="#file2DataUrl-file-callback" class="headerlink" title="file2DataUrl(file, callback)"></a>file2DataUrl(file, callback)</h3><p>用户通过页面标签 <code>&lt;input type=&quot;file&quot; /&gt;</code> 上传的本地图片直接转化 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/data_URIs" target="_blank" rel="noopener"><code>data URL</code></a> 字符串形式。可以使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FileReader" target="_blank" rel="noopener"><code>FileReader</code></a> 文件读取构造函数。<code>FileReader</code> 对象允许 <code>Web</code> 应用程序异步读取存储在计算机上的文件（或原始数据缓冲区）的内容，使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File" target="_blank" rel="noopener"><code>File</code></a> 或 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob" target="_blank" rel="noopener"><code>Blob</code></a> 对象指定要读取的文件或数据。该实例方法 <code>readAsDataURL</code> 读取文件内容并转化成 <code>base64</code> 字符串。在读取完后，在实例属性 <code>result</code> 上可获取文件内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">file2DataUrl</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback(reader.result);</span><br><span class="line">  &#125;;</span><br><span class="line">  reader.readAsDataURL(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Data URL</code> 由四个部分组成：前缀（<code>data:</code>）、指示数据类型的 <code>MIME</code> 类型、如果非文本则为可选的 <code>base64</code> 标记、数据本身：</p>
+<blockquote>
+<p>data:[<mediatype>][;base64],<data></data></mediatype></p>
+</blockquote>
+<p>比如一张 <code>png</code> 格式图片，转化为 <code>base64</code> 字符串形式：<code>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAgAElEQVR4XuxdB5g</code>。</p>
+<h3 id="file2Image-file-callback"><a href="#file2Image-file-callback" class="headerlink" title="file2Image(file, callback)"></a>file2Image(file, callback)</h3><p>若想将用户通过本地上传的图片放入缓存并 <code>img</code> 标签显示出来，除了可以利用以上方法转化成的 <code>base64</code> 字符串作为图片 <code>src</code>，还可以直接用 <code>URL</code> 对象，引用保存在 <code>File</code> 和 <code>Blob</code> 中数据的 <code>URL</code>。使用对象 <code>URL</code> 的好处是可以不必把文件内容读取到 <code>JavaScript</code> 中 而直接使用文件内容。为此，只要在需要文件内容的地方提供对象 <code>URL</code> 即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">file2Image</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">  <span class="keyword">var</span> URL = <span class="built_in">window</span>.webkitURL || <span class="built_in">window</span>.URL;</span><br><span class="line">  <span class="keyword">if</span> (URL) &#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(file);</span><br><span class="line">    image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      callback(image);</span><br><span class="line">      <span class="built_in">window</span>.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    image.src = url;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    inputFile2DataUrl(file, <span class="function"><span class="keyword">function</span>(<span class="params">dataUrl</span>) </span>&#123;</span><br><span class="line">      image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        callback(image);</span><br><span class="line">      &#125;</span><br><span class="line">      image.src = dataUrl;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：要创建对象 <code>URL</code>，可以使用 <code>window.URL.createObjectURL()</code> 方法，并传入 <code>File</code> 或 <code>Blob</code> 对象。如果不再需要相应数据，最好释放它占用的内容。但只要有代码在引用对象 <code>URL</code>，内存就不会释放。要手工释放内存，可以把对象 <code>URL</code> 传给 <code>window.revokeObjectURL()</code>。</p>
+<h3 id="url2Image-url-callback"><a href="#url2Image-url-callback" class="headerlink" title="url2Image(url, callback)"></a>url2Image(url, callback)</h3><p>通过图片链接（<code>url</code>）获取图片 <code>Image</code> 对象，由于图片加载是异步的，因此放到回调函数 <code>callback</code> 回传获取到的 <code>Image</code> 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">url2Image</span>(<span class="params">url, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">  image.src = url;</span><br><span class="line">  image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback(image);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="image2Canvas-image"><a href="#image2Canvas-image" class="headerlink" title="image2Canvas(image)"></a>image2Canvas(image)</h3><p>利用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/drawImage" target="_blank" rel="noopener"><code>drawImage()</code></a> 方法将 <code>Image</code> 对象绘画在 <code>Canvas</code> 对象上。</p>
+<p><code>drawImage</code> 有三种语法形式：</p>
+<blockquote>
+<p>void ctx.drawImage(image, dx, dy);<br>  void ctx.drawImage(image, dx, dy, dWidth, dHeight);<br>  void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);</p>
+</blockquote>
+<p>参数：</p>
+<ul>
+<li><code>image</code> 绘制到上下文的元素；</li>
+<li><code>sx</code> 绘制选择框左上角以 <code>Image</code> 为基准 <code>X</code> 轴坐标；</li>
+<li><code>sy</code> 绘制选择框左上角以 <code>Image</code> 为基准 <code>Y</code> 轴坐标；</li>
+<li><code>sWidth</code> 绘制选择框宽度；</li>
+<li><code>sHeight</code> 绘制选择框宽度；</li>
+<li><code>dx</code> <code>Image</code> 的左上角在目标 <code>canvas</code> 上 <code>X</code> 轴坐标；</li>
+<li><code>dy</code> <code>Image</code> 的左上角在目标 <code>canvas</code> 上 <code>Y</code> 轴坐标；</li>
+<li><code>dWidth</code> <code>Image</code> 在目标 <code>canvas</code> 上绘制的宽度；</li>
+<li><code>dHeight</code> <code>Image</code> 在目标 <code>canvas</code> 上绘制的高度；</li>
+</ul>
+<p><img src="/gb/js-image-compressor/canvas-draw-image.jpg" alt="canvas-draw-image"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">image2Canvas</span>(<span class="params">image</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  canvas.width = image.naturalWidth;</span><br><span class="line">  canvas.height = image.naturalHeight;</span><br><span class="line">  ctx.drawImage(image, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">  <span class="keyword">return</span> canvas;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="canvas2DataUrl-canvas-quality-type"><a href="#canvas2DataUrl-canvas-quality-type" class="headerlink" title="canvas2DataUrl(canvas, quality, type)"></a>canvas2DataUrl(canvas, quality, type)</h3><p><code>HTMLCanvasElement</code> 对象有 <code>toDataURL(type, encoderOptions)</code> 方法，返回一个包含图片展示的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/data_URIs" target="_blank" rel="noopener"><code>data URL</code></a> 。同时可以指定输出格式和质量。</p>
+<p>参数分别为：</p>
+<ul>
+<li><code>type</code> 图片格式，默认为 <code>image/png</code>。</li>
+<li><code>encoderOptions</code> <strong>在指定图片格式为 <code>image/jpeg</code> 或 <code>image/webp</code> 的情况下</strong>，可以从 <code>0</code> 到 <code>1</code> 的区间内选择图片的质量。如果超出取值范围，将会使用默认值 <code>0.92</code>，其他参数会被忽略。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">canvas2DataUrl</span>(<span class="params">canvas, quality, type</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> canvas.toDataURL(type || <span class="string">'image/jpeg'</span>, quality || <span class="number">0.8</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dataUrl2Image-dataUrl-callback"><a href="#dataUrl2Image-dataUrl-callback" class="headerlink" title="dataUrl2Image(dataUrl, callback)"></a>dataUrl2Image(dataUrl, callback)</h3><p>图片链接也可以是 <code>base64</code> 字符串，直接赋值给 <code>Image</code> 对象 <code>src</code> 即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataUrl2Image</span>(<span class="params">dataUrl, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">  image.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    callback(image);</span><br><span class="line">  &#125;;</span><br><span class="line">  image.src = dataUrl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dataUrl2Blob-dataUrl"><a href="#dataUrl2Blob-dataUrl" class="headerlink" title="dataUrl2Blob(dataUrl)"></a>dataUrl2Blob(dataUrl)</h3><p>将 <code>data URL</code> 字符串转化为 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob" target="_blank" rel="noopener"><code>Blob</code></a> 对象。主要思路是：先将 <code>data URL</code> 数据（<code>data</code>） 部分提取出来，用 <code>atob</code> 对经过 <code>base64</code> 编码的字符串进行解码，再转化成 <code>Unicode</code> 编码，存储在<code>Uint8Array</code>（8位无符号整型数组，每个元素是一个字节） 类型数组，最终转化成 <code>Blob</code> 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataUrl2Blob</span>(<span class="params">dataUrl, type</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> data = dataUrl.split(<span class="string">','</span>)[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">var</span> mimePattern = <span class="regexp">/^data:(.*?)(;base64)?,/</span>;</span><br><span class="line">  <span class="keyword">var</span> mime = dataUrl.match(mimePattern)[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">var</span> binStr = atob(data);</span><br><span class="line">  <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(len);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    arr[i] = binStr.charCodeAt(i);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Blob([arr], &#123;<span class="attr">type</span>: type || mime&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="canvas2Blob-canvas-callback-quality-type"><a href="#canvas2Blob-canvas-callback-quality-type" class="headerlink" title="canvas2Blob(canvas, callback, quality, type)"></a>canvas2Blob(canvas, callback, quality, type)</h3><p><code>HTMLCanvasElement</code> 有 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLCanvasElement/toBlob" target="_blank" rel="noopener"><code>toBlob(callback, [type], [encoderOptions])</code></a> 方法创造 <code>Blob</code> 对象，用以展示 <code>canvas</code> 上的图片；这个图片文件可以被缓存或保存到本地，由用户代理端自行决定。第二个参数指定图片格式，如不特别指明，图片的类型默认为 <code>image/png</code>，分辨率为 <code>96dpi</code>。第三个参数用于针对<code>image/jpeg</code> 格式的图片进行输出图片的质量设置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">canvas2Blob</span>(<span class="params">canvas, callback, quality, type</span>)</span>&#123;</span><br><span class="line">  canvas.toBlob(<span class="function"><span class="keyword">function</span>(<span class="params">blob</span>) </span>&#123;</span><br><span class="line">    callback(blob);</span><br><span class="line">  &#125;, type || <span class="string">'image/jpeg'</span>, quality || <span class="number">0.8</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为兼容低版本浏览器，作为 <code>toBlob</code> 的 <code>polyfill</code> 方案，可以用上面 <code>data URL</code> 生成 <code>Blob</code> 方法 <code>dataUrl2Blob</code> 作为<code>HTMLCanvasElement</code> 原型方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!HTMLCanvasElement.prototype.toBlob) &#123;</span><br><span class="line"> <span class="built_in">Object</span>.defineProperty(HTMLCanvasElement.prototype, <span class="string">'toBlob'</span>, &#123;</span><br><span class="line">  value: <span class="function"><span class="keyword">function</span> (<span class="params">callback, type, quality</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dataUrl = <span class="keyword">this</span>.toDataURL(type, quality);</span><br><span class="line">    callback(dataUrl2Blob(dataUrl));</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="blob2DataUrl-blob-callback"><a href="#blob2DataUrl-blob-callback" class="headerlink" title="blob2DataUrl(blob, callback)"></a>blob2DataUrl(blob, callback)</h3><p>将 <code>Blob</code> 对象转化成 <code>data URL</code> 数据，由于 <code>FileReader</code> 的实例 <code>readAsDataURL</code> 方法不仅支持读取文件，还支持读取 <code>Blob</code> 对象数据，这里复用上面 <code>file2DataUrl</code> 方法即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blob2DataUrl</span>(<span class="params">blob, callback</span>) </span>&#123;</span><br><span class="line">  file2DataUrl(blob, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="blob2Image-blob-callback"><a href="#blob2Image-blob-callback" class="headerlink" title="blob2Image(blob, callback)"></a>blob2Image(blob, callback)</h3><p>将 <code>Blob</code> 对象转化成 <code>Image</code> 对象，可通过 <code>URL</code> 对象引用文件，也支持引用 <code>Blob</code> 这样的类文件对象，同样，这里复用上面 <code>file2Image</code> 方法即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blob2Image</span>(<span class="params">blob, callback</span>) </span>&#123;</span><br><span class="line">  file2Image(blob, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="upload-url-file-callback"><a href="#upload-url-file-callback" class="headerlink" title="upload(url, file, callback)"></a>upload(url, file, callback)</h3><p>上传图片（已压缩），可以使用 <code>FormData</code> 传入文件对象，通过 <code>XHR</code> 直接把文件上传到服务器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">url, file, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  <span class="keyword">var</span> fd = <span class="keyword">new</span> FormData();</span><br><span class="line">  fd.append(<span class="string">'file'</span>, file);</span><br><span class="line">  xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (xhr.readyState === <span class="number">4</span> &amp;&amp; xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="comment">// 上传成功</span></span><br><span class="line">      callback &amp;&amp; callback(xhr.responseText);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(xhr);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  xhr.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);</span><br><span class="line">  xhr.send(fd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以使用 <code>FileReader</code> 读取文件内容，转化成二进制上传</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upload</span>(<span class="params">url, file</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">  xhr.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);</span><br><span class="line">  xhr.overrideMimeType(<span class="string">'text/plain; charset=x-user-defined-binary'</span>);</span><br><span class="line"></span><br><span class="line">  reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    xhr.send(reader.result);</span><br><span class="line">  &#125;;</span><br><span class="line">  reader.readAsBinaryString(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实现简易图片压缩"><a href="#实现简易图片压缩" class="headerlink" title="实现简易图片压缩"></a>实现简易图片压缩</h2><p>在熟悉以上各种图片转化方法的具体实现，将它们封装在一个公用对象 <code>util</code> 里，再结合压缩转化流程图，这里我们可以简单实现图片压缩了：<br>首先将上传图片转化成 <code>Image</code> 对象，再将写入到 <code>Canvas</code> 画布，最后由 <code>Canvas</code> 对象 <code>API</code> 对图片的大小和尺寸输出调整，实现压缩目的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简易图片压缩方法</span></span><br><span class="line"><span class="comment"> * @param &#123;Object&#125; options 相关参数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">win</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> REGEXP_IMAGE_TYPE = <span class="regexp">/^image\//</span>;</span><br><span class="line">  <span class="keyword">var</span> util = &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> defaultOptions = &#123;</span><br><span class="line">    file: <span class="literal">null</span>,</span><br><span class="line">    quality: <span class="number">0.8</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">var</span> isFunc = <span class="function"><span class="keyword">function</span> (<span class="params">fn</span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">typeof</span> fn === <span class="string">'function'</span>; &#125;;</span><br><span class="line">  <span class="keyword">var</span> isImageType = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123; <span class="keyword">return</span> REGEXP_IMAGE_TYPE.test(value); &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 简易图片压缩构造函数</span></span><br><span class="line"><span class="comment">   * @param &#123;Object&#125; options 相关参数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">SimpleImageCompressor</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    options = <span class="built_in">Object</span>.assign(&#123;&#125;, defaultOptions, options);</span><br><span class="line">    <span class="keyword">this</span>.options = options;</span><br><span class="line">    <span class="keyword">this</span>.file = options.file;</span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> _proto = SimpleImageCompressor.prototype;</span><br><span class="line">  win.SimpleImageCompressor = SimpleImageCompressor;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 初始化</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  _proto.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> file = <span class="keyword">this</span>.file;</span><br><span class="line">    <span class="keyword">var</span> options = <span class="keyword">this</span>.options;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!file || !isImageType(file.type)) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">'请上传图片文件!'</span>);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!isImageType(options.mimeType)) &#123;</span><br><span class="line">      options.mimeType = file.type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    util.file2Image(file, <span class="function"><span class="keyword">function</span> (<span class="params">img</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> canvas = util.image2Canvas(img);</span><br><span class="line">      file.width = img.naturalWidth;</span><br><span class="line">      file.height = img.naturalHeight;</span><br><span class="line">      _this.beforeCompress(file, canvas);</span><br><span class="line"></span><br><span class="line">      util.canvas2Blob(canvas, <span class="function"><span class="keyword">function</span> (<span class="params">blob</span>) </span>&#123;</span><br><span class="line">        blob.width = canvas.width;</span><br><span class="line">        blob.height = canvas.height;</span><br><span class="line">        options.success &amp;&amp; options.success(blob);</span><br><span class="line">      &#125;, options.quality, options.mimeType)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 压缩之前，读取图片之后钩子函数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  _proto.beforeCompress = <span class="function"><span class="keyword">function</span> <span class="title">beforeCompress</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isFunc(<span class="keyword">this</span>.options.beforeCompress)) &#123;</span><br><span class="line">      <span class="keyword">this</span>.options.beforeCompress(<span class="keyword">this</span>.file);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 省略 `util` 公用方法定义</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将 `util` 公用方法添加到实例的静态属性上</span></span><br><span class="line">  <span class="keyword">for</span> (key <span class="keyword">in</span> util) &#123;</span><br><span class="line">    <span class="keyword">if</span> (util.hasOwnProperty(key)) &#123;</span><br><span class="line">      SimpleImageCompressor[key] = util[key];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="built_in">window</span>)</span><br></pre></td></tr></table></figure>
+<p>这个简易图片压缩方法调用和入参：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileEle = <span class="built_in">document</span>.getElementById(<span class="string">'file'</span>);</span><br><span class="line"></span><br><span class="line">fileEle.addEventListener(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  file = <span class="keyword">this</span>.files[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> options = &#123;</span><br><span class="line">    file: file,</span><br><span class="line">    quality: <span class="number">0.6</span>,</span><br><span class="line">    mimeType: <span class="string">'image/jpeg'</span>,</span><br><span class="line">    <span class="comment">// 压缩前回调</span></span><br><span class="line">    beforeCompress: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'压缩之前图片尺寸大小: '</span>, result.size);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'mime 类型: '</span>, result.type);</span><br><span class="line">      <span class="comment">// 将上传图片在页面预览</span></span><br><span class="line">      <span class="comment">// SimpleImageCompressor.file2DataUrl(result, function (url) &#123;</span></span><br><span class="line">      <span class="comment">//   document.getElementById('origin').src = url;</span></span><br><span class="line">      <span class="comment">// &#125;)</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 压缩成功回调</span></span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'压缩之后图片尺寸大小: '</span>, result.size);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'mime 类型: '</span>, result.type);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'压缩率： '</span>, (result.size / file.size * <span class="number">100</span>).toFixed(<span class="number">2</span>) + <span class="string">'%'</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 生成压缩后图片在页面展示</span></span><br><span class="line">      <span class="comment">// SimpleImageCompressor.file2DataUrl(result, function (url) &#123;</span></span><br><span class="line">      <span class="comment">//   document.getElementById('output').src = url;</span></span><br><span class="line">      <span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 上传到远程服务器</span></span><br><span class="line">      <span class="comment">// SimpleImageCompressor.upload('/upload.png', result);</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">new</span> SimpleImageCompressor(options);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>如果看到这里的客官不嫌弃这个 <code>demo</code> 太简单可以戳<a href="/demo/js-image-compressor/simple">这里</a>试试水，如果你有足够的耐心多传几张图片就会发现有时将 <code>png</code> 格式图片压缩成 <code>jpeg</code> 格式，图片大小不减反增。有时在手机上压缩 <code>png</code> 格式大尺寸图片还会出现黑屏情况。</p>
+<p><img src="/gb/js-image-compressor/compress-larger.png" alt="越压缩越膨胀😂"></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wuwhs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wuwhs.github.io/2020/06/07/js-image-compressor/" title="了解JS压缩图片，这一篇就够了">https://wuwhs.github.io/2020/06/07/js-image-compressor/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javacript/" rel="tag"># javacript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/29/reading-plan/" rel="next" title="我的阅读清单">
+                <i class="fa fa-chevron-left"></i> 我的阅读清单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="wuwhs" />
+            
+              <p class="site-author-name" itemprop="name">wuwhs</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wuwhs" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://segmentfault.com/u/wuwhs" target="_blank" title="Segmentfault" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化关系"><span class="nav-number">2.</span> <span class="nav-text">转化关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体实现"><span class="nav-number">3.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#file2DataUrl-file-callback"><span class="nav-number">3.1.</span> <span class="nav-text">file2DataUrl(file, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#file2Image-file-callback"><span class="nav-number">3.2.</span> <span class="nav-text">file2Image(file, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#url2Image-url-callback"><span class="nav-number">3.3.</span> <span class="nav-text">url2Image(url, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image2Canvas-image"><span class="nav-number">3.4.</span> <span class="nav-text">image2Canvas(image)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#canvas2DataUrl-canvas-quality-type"><span class="nav-number">3.5.</span> <span class="nav-text">canvas2DataUrl(canvas, quality, type)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataUrl2Image-dataUrl-callback"><span class="nav-number">3.6.</span> <span class="nav-text">dataUrl2Image(dataUrl, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dataUrl2Blob-dataUrl"><span class="nav-number">3.7.</span> <span class="nav-text">dataUrl2Blob(dataUrl)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#canvas2Blob-canvas-callback-quality-type"><span class="nav-number">3.8.</span> <span class="nav-text">canvas2Blob(canvas, callback, quality, type)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blob2DataUrl-blob-callback"><span class="nav-number">3.9.</span> <span class="nav-text">blob2DataUrl(blob, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#blob2Image-blob-callback"><span class="nav-number">3.10.</span> <span class="nav-text">blob2Image(blob, callback)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#upload-url-file-callback"><span class="nav-number">3.11.</span> <span class="nav-text">upload(url, file, callback)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现简易图片压缩"><span class="nav-number">4.</span> <span class="nav-text">实现简易图片压缩</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">copyright by wuwh's blog</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
