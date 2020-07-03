@@ -26,12 +26,16 @@
               <option value="auto">auto</option>
               <option value="image/png">image/png</option>
               <option value="image/jpeg">image/jpeg</option>
+              <option value="image/webp">image/webp</option>
               <option value="image/gif">image/gif</option>
             </select>
           </p>
           <p>
             <span>压缩率：</span>
             <input type="number" max="1" min="0.05" step="0.05" v-model="quality">
+          </p>
+          <p>
+            <button @click="submit">确定</button>
           </p>
         </div>
       </div>
@@ -72,6 +76,9 @@
         </div>
         <div>
           <span>实际压缩率：{{compressRatio}}</span>
+        </div>
+        <div>
+          <a :href="outputImgUrl" :download="imgName">下载</a>
         </div>
       </div>
     </div>

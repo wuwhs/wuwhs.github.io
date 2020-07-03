@@ -2,6 +2,8 @@ new Vue({
   el: '#app',
   data: function () {
     return {
+      file: null,
+      imgName: '',
       mimeType: 'auto',
       originImgUrl: '',
       originMimeType: 'auto',
@@ -47,6 +49,7 @@ new Vue({
 
       var dt = ev.dataTransfer;
       var file = dt.files[0];
+      this.file = file;
       this.compressImage(file);
     },
 
@@ -56,7 +59,15 @@ new Vue({
      */
     inputChange: function (ev) {
       var file = ev.target.files[0];
+      this.file = file;
       this.compressImage(file);
+    },
+
+    /**
+     * 确定提交
+     */
+    submit: function () {
+      this.compressImage(this.file);
     },
 
     /**
@@ -64,14 +75,14 @@ new Vue({
      * @param {File} file `File` 对象
      */
     compressImage: function (file) {
-      console.log('this.mimeType: ', this.mimeType)
       var vm = this;
       var options = {
         file: file,
-        quality: 0.6,
+        quality: this.quality,
         mimeType: this.mimeType,
         // 压缩前回调
         beforeCompress: function (result) {
+          vm.imgName = result.name;
           vm.originImgWidth = result.width;
           vm.originImgHeight = result.height;
           vm.originSize = result.size;
