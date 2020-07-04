@@ -2,19 +2,22 @@ new Vue({
   el: '#app',
   data: function () {
     return {
+      file: null,
+      btnText: '确定',
+      imgName: '',
       mimeType: 'auto',
       originImgUrl: '',
-      originMimeType: '',
+      originMimeType: 'auto',
       originSize: 0,
       originImgWidth: 'auto',
       originImgHeight: 'auto',
       outputImgUrl: '',
-      outputMimeType: '',
+      outputMimeType: 'auto',
       outputImgWidth: 'auto',
       outputImgHeight: 'auto',
       outputSize: 0,
       compressRatio: 0,
-      quality: 0.8
+      quality: 0.6
     }
   },
 
@@ -47,6 +50,7 @@ new Vue({
 
       var dt = ev.dataTransfer;
       var file = dt.files[0];
+      this.file = file;
       this.compressImage(file);
     },
 
@@ -56,7 +60,15 @@ new Vue({
      */
     inputChange: function (ev) {
       var file = ev.target.files[0];
+      this.file = file;
       this.compressImage(file);
+    },
+
+    /**
+     * 确定提交
+     */
+    submit: function () {
+      this.compressImage(this.file);
     },
 
     /**
@@ -67,10 +79,12 @@ new Vue({
       var vm = this;
       var options = {
         file: file,
-        quality: 0.6,
-        mimeType: 'image/jpeg',
+        quality: this.quality,
+        mimeType: this.mimeType,
         // 压缩前回调
         beforeCompress: function (result) {
+          vm.btnText = '处理中...';
+          vm.imgName = result.name;
           vm.originImgWidth = result.width;
           vm.originImgHeight = result.height;
           vm.originSize = result.size;
@@ -84,9 +98,10 @@ new Vue({
         },
         // 压缩成功回调
         success: function (result) {
+          vm.btnText = '确定';
           console.log('压缩之后图片尺寸大小: ', result.size);
           console.log('mime 类型: ', result.type);
-          console.log('压缩率： ', (result.size / file.size * 100).toFixed(2) + '%');
+          console.log('实际压缩率： ', (result.size / file.size * 100).toFixed(2) + '%');
 
           vm.outputImgWidth = result.width;
           vm.outputImgHeight = result.height;
