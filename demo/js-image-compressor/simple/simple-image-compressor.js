@@ -225,7 +225,7 @@
     xhr.send(fd);
   }
 
-  for (key in util) {
+  for (var key in util) {
     if (util.hasOwnProperty(key)) {
       SimpleImageCompressor[key] = util[key];
     }
