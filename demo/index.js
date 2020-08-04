@@ -87,39 +87,3 @@ const data = [
     value: 'xxx'
   }
 ]
-
-const deepSearch = (sdata, parent_id, id, value) => {
-  console.log('sdata: ', JSON.stringify(sdata))
-  console.log('parent_id: ', parent_id)
-  if (!parent_id) {
-    sdata[id] = {
-      value,
-      children: {}
-    }
-    return
-  }
-
-  if (typeof sdata === 'object' && sdata.hasOwnProperty(parent_id)) {
-    sdata[parent_id].children[id] = {
-      value,
-      children: {}
-    }
-    return
-  }
-
-  Object.keys(sdata).forEach(key => {
-    if (sdata[key].children) {
-      deepSearch(sdata[key].children, parent_id, id, value)
-    }
-  })
-}
-
-const parseTree = (data) => {
-  return data.reduce((prev, current) => {
-    const { parent_id, id, value } = current
-    deepSearch(prev, parent_id, id, value)
-    return prev
-  }, {})
-}
-
-console.log(JSON.stringify(parseTree(data)))

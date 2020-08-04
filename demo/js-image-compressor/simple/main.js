@@ -101,13 +101,13 @@ new Vue({
           vm.btnText = '确定';
           console.log('压缩之后图片尺寸大小: ', result.size);
           console.log('mime 类型: ', result.type);
-          console.log('实际压缩率： ', (result.size / file.size * 100).toFixed(2) + '%');
+          console.log('实际压缩率： ', ((file.size - result.size) / file.size * 100).toFixed(2) + '%');
 
           vm.outputImgWidth = result.width;
           vm.outputImgHeight = result.height;
           vm.outputSize = result.size;
           vm.outputMimeType = result.type;
-          vm.compressRatio = (result.size / file.size * 100).toFixed(2) + '%';
+          vm.compressRatio = ((file.size - result.size) / file.size * 100).toFixed(2) + '%';
 
           // 生成压缩后图片在页面展示
           SimpleImageCompressor.file2DataUrl(result, function (url) {
