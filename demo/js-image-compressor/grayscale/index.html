@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>js-image-compressor</title>
+  <title>grayscale demo</title>
   <link rel="stylesheet" href="../index.css">
 </head>
 
@@ -20,16 +20,6 @@
       <div class="column">
         <div>
           <h3>设置参数</h3>
-          <p>
-            <span>mime 类型：</span>
-            <select v-model="mimeType">
-              <option value="auto">auto</option>
-              <option value="image/png">image/png</option>
-              <option value="image/jpeg">image/jpeg</option>
-              <option value="image/webp">image/webp</option>
-              <option value="image/gif">image/gif</option>
-            </select>
-          </p>
           <p>
             <span>压缩率：</span>
             <input type="number" max="1" min="0.05" step="0.05" v-model="quality">
@@ -84,7 +74,7 @@
     </div>
   </div>
   <script src="../vue.min.js"></script>
-  <script src="./simple-image-compressor.js"></script>
+  <script src="../image-compressor.js"></script>
   <script src="./main.js"></script>
 </body>
 
