@@ -68,29 +68,29 @@
 // coins 钱币面值 [1, 2, 5]
 // 凑齐目标金额 11
 // last 剩余目标金额
-const MAX_NUMBER = Number.MAX_VALUE
+// const MAX_NUMBER = Number.MAX_VALUE
 
-const coins = [1, 2, 5]
-function coinChange(amount) {
-  let last = amount
+// const coins = [1, 2, 5]
+// function coinChange(amount) {
+//   let last = amount
 
-  // 剩余目标金额为0，所需钱币0枚
-  if (last === 0) return 0
-  // 剩余目标金额小于0 无解
-  if (last < 0) return -1
+//   // 剩余目标金额为0，所需钱币0枚
+//   if (last === 0) return 0
+//   // 剩余目标金额小于0 无解
+//   if (last < 0) return -1
 
-  let min = MAX_NUMBER
+//   let min = MAX_NUMBER
 
-  for (let i = 0; i < coins.length; i++) {
-    let coin = coins[i]
-    last = amount - coin
-    let res = coinChange(last)
-    // 无解，跳过
-    if (res === -1) continue
-    console.log('面值分别为： ', coin)
-    min = Math.min(min, (res + 1))
-  }
-  if (min === MAX_NUMBER) return -1
-  return min
-}
-console.log('coinChange: ', coinChange(11))
+//   for (let i = 0; i < coins.length; i++) {
+//     let coin = coins[i]
+//     last = amount - coin
+//     let res = coinChange(last)
+//     // 无解，跳过
+//     if (res === -1) continue
+//     console.log('面值分别为： ', coin)
+//     min = Math.min(min, (res + 1))
+//   }
+//   if (min === MAX_NUMBER) return -1
+//   return min
+// }
+// console.log('coinChange: ', coinChange(11))
