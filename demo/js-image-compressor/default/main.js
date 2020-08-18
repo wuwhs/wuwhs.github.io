@@ -118,23 +118,6 @@ new Vue({
           })
         },
 
-        // 图片绘画前
-        // beforeDraw: function (ctx) {
-        //   vm.btnText = '准备绘图...';
-        //   console.log('准备绘图...');
-        //   ctx.filter = 'grayscale(100%)';
-        // },
-
-        // 图片绘画后
-        // afterDraw: function (ctx, canvas) {
-        //   ctx.restore();
-        //   vm.btnText = '绘图完成...';
-        //   console.log('绘图完成...');
-        //   ctx.fillStyle = '#fff';
-        //   ctx.font = (canvas.width * 0.1) + 'px microsoft yahei';
-        //   ctx.fillText('wuwhs', 20, canvas.height - 20);
-        // },
-
         // 压缩成功回调
         success: function (result) {
           vm.btnText = BTN_OK;
