@@ -350,6 +350,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2020/10/12/element-replace-theme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/12/element-replace-theme/" itemprop="url">
+                  彻底学会element-ui按需引入和纯净主题定制
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-12 19:40:30 / 修改时间：23:33:47" itemprop="dateCreated datePublished" datetime="2020-10-12T19:40:30+08:00">2020-10-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 vue-cli 生成初始项目，在这仅对 element-ui 主题和组件方面来优化。
+1vue init webpack vuecli
+完整引入完整地将 ui 和样式引入。
+12import ElementUI from 'element-ui'import 'element-ui/lib/theme-chalk/index.css'
+在页面简单使用三个组件，看看效果。
+12345678910111213&lt;el-tabs v-model="activeName" @tab-cl
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/10/12/element-replace-theme/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2020/08/20/algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -396,12 +565,24 @@
                 
               
 
-              <time title="创建时间：2020-08-20 19:43:27 / 修改时间：20:21:00" itemprop="dateCreated datePublished" datetime="2020-08-20T19:43:27+08:00">2020-08-20</time>
+              <time title="创建时间：2020-08-20 19:43:27" itemprop="dateCreated datePublished" datetime="2020-08-20T19:43:27+08:00">2020-08-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-10 15:06:38" itemprop="dateModified" datetime="2020-10-10T15:06:38+08:00">2020-10-10</time>
               
             
           </span>
@@ -436,13 +617,13 @@
       
         
           
-          冒泡排序（Bubble Sort）基本思想给定一个数组，我们把数组里的元素通通倒入到水池中，这些元素将通过相互之间的比较，按照大小顺序一个一个地像气泡一样浮出水面。
-实现每一轮，从杂乱无章的数组头部开始，每两个元素比较大小并进行交换，直到这一轮当中最大或最小的元素被放置在数组的尾部，然后不断地重复这个过程，直到所有元素都排好位置。其中，核心操作就是元素相互比较。
-例题分析给定数组 [2, 1, 7, 9, 5, 8]，要求按照从左到右、从小到大的顺序进行排序。
-解题思路从左到右依次冒泡，把较大的数往右边挪动即可。
+          冒泡排序（Bubble Sort）冒泡排序基本思想给定一个数组，我们把数组里的元素通通倒入到水池中，这些元素将通过相互之间的比较，按照大小顺序一个一个地像气泡一样浮出水面。
+冒泡排序实现每一轮，从杂乱无章的数组头部开始，每两个元素比较大小并进行交换，直到这一轮当中最大或最小的元素被放置在数组的尾部，然后不断地重复这个过程，直到所有元素都排好位置。其中，核心操作就是元素相互比较。
+冒泡排序例题分析给定数组 [2, 1, 7, 9, 5, 8]，要求按照从左到右、从小到大的顺序进行排序。
+冒泡排序解题思路从左到右依次冒泡，把较大的数往右边挪动即可。
 
 
-首先指针指向第一个数，比较第一个数和第二个数的大小，由于 2 比 1 大，所
+首先指针指向第一个数，比较第一个数和第二个数
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1756,168 +1937,6 @@ Vue3.0 的到来已只是时间问题，未雨绸缪，何不先来尝鲜一波
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/08/26/npm-common-cmd/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wuwhs.github.io/2019/07/11/resize-observer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wuwhs">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wuwh's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/11/resize-observer/" itemprop="url">
-                  如何优雅监听容器高度变化
-                </a>
-              
-            
-          </h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-11 18:22:34" itemprop="dateCreated datePublished" datetime="2019-07-11T18:22:34+08:00">2019-07-11</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-08-26 09:24:49" itemprop="dateModified" datetime="2020-08-26T09:24:49+08:00">2020-08-26</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前言老鸟：怎样去监听 DOM 元素的高度变化呢？菜鸟：哈哈哈哈哈，这都不知道哦，用 onresize 事件鸭！老鸟扶了扶眼睛，空气安静几秒钟，菜鸟才晃过神来。对鸭，普通 DOM 元素没有 onresize 事件，只有在 window 对象下有此事件，该死，又双叒叕糗大了。
-哈哈哈哈，以上纯属虚构，不过在最近项目中还真遇到过对容器监听高（宽）变化：在使用 iscroll 或 better-scroll 滚动插件，如果容器内部元素有高度变化要去及时更新外部包裹容器，即调用 refresh() 方法。不然就会造成滚动误差（滚动不到底部或滚动脱离底部）。
-可能我们一般处理思路：
-
-在每次 DOM 节点
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/11/resize-observer/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
