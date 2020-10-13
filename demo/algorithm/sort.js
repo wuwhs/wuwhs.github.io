@@ -1,4 +1,3 @@
-
 // 冒泡排序算法
 // const bubbleSort = function (arr) {
 //   const len = arr.length
@@ -46,44 +45,54 @@
 // console.log('arr: ', arr)
 
 // 归并排序
-const mergeSort = function (arr, lo = 0, hi = arr.length - 1) {
-  // 判断是否剩下最后一个元素
+// const mergeSort = function (arr, lo = 0, hi = arr.length - 1) {
+//   // 判断是否剩下最后一个元素
+//   if (lo >= hi) return
+
+//   // 从中间将数组分成两部分
+//   let mid = lo + Math.floor((hi - lo) / 2)
+
+//   // 分别递归将左右两边排好序
+//   mergeSort(arr, lo, mid)
+//   mergeSort(arr, mid + 1, hi)
+
+//   // 将排好序的左右两半合并
+//   merge(arr, lo, mid, hi)
+// }
+
+// const merge = function (arr, lo, mid, hi) {
+//   // 复制一份原来的数组
+//   const copy = [...arr]
+
+//   // 定义一个 k 指针表示从什么位置开始修改原来的数组，
+//   // i 指针表示左边半的起始位置
+//   // j 指针便是右半边的其实位置
+//   let k = lo
+//   let i = lo
+//   let j = mid + 1
+
+//   while (k <= hi) {
+//     if (i > mid) {
+//       arr[k++] = copy[j++]
+//     } else if (j > hi) {
+//       arr[k++] = copy[i++]
+//     } else if (copy[j] < copy[i]) {
+//       arr[k++] = copy[j++]
+//     } else {
+//       arr[k++] = copy[i++]
+//     }
+//   }
+// }
+// const arr = [2, 1, 7, 9, 5, 8]
+// mergeSort(arr)
+// console.log('arr: ', arr)
+
+// 快速排序
+const quickSort = function (arr, lo, hi) {
+  // 判断是否只剩下一个元素，是，则直接返回
   if (lo >= hi) return
-
-  // 从中间将数组分成两部分
-  let mid = lo + Math.floor((hi - lo) / 2)
-
-  // 分别递归将左右两边排好序
-  mergeSort(arr, lo, mid)
-  mergeSort(arr, mid + 1, hi)
-
-  // 将排好序的左右两半合并
-  merge(arr, lo, mid, hi)
+  // 利用 partition 函数找到一个随机的基准点
+  const p = partition(arr, lo, hi)
+  quickSort(arr, lo, p)
+  quickSort(arr, p, hi)
 }
-
-const merge = function (arr, lo, mid, hi) {
-  // 复制一份原来的数组
-  const copy = [...arr]
-
-  // 定义一个 k 指针表示从什么位置开始修改原来的数组，
-  // i 指针表示左边半的起始位置
-  // j 指针便是右半边的其实位置
-  let k = lo
-  let i = lo
-  let j = mid + 1
-
-  while (k <= hi) {
-    if (i > mid) {
-      arr[k++] = copy[j++]
-    } else if (j > hi) {
-      arr[k++] = copy[i++]
-    } else if (copy[j] < copy[i]) {
-      arr[k++] = copy[j++]
-    } else {
-      arr[k++] = copy[i++]
-    }
-  }
-}
-const arr = [2, 1, 7, 9, 5, 8]
-mergeSort(arr)
-console.log('arr: ', arr)

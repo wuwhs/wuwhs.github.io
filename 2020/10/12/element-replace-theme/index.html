@@ -135,7 +135,7 @@
 <meta property="og:image" content="https://wuwhs.github.io/gb/element-replace-theme/5.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/element-replace-theme/6.png">
 <meta property="og:image" content="https://wuwhs.github.io/gb/element-replace-theme/7.png">
-<meta property="og:updated_time" content="2020-10-12T15:33:47.615Z">
+<meta property="og:updated_time" content="2020-10-13T01:50:40.507Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="彻底学会element-ui按需引入和纯净主题定制">
 <meta name="twitter:description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 vue-cli 生成初始项目，在这仅对 element-ui 主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将 ui 和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/li">
@@ -406,12 +406,24 @@
                 
               
 
-              <time title="创建时间：2020-10-12 19:40:30 / 修改时间：23:33:47" itemprop="dateCreated datePublished" datetime="2020-10-12T19:40:30+08:00">2020-10-12</time>
+              <time title="创建时间：2020-10-12 19:40:30" itemprop="dateCreated datePublished" datetime="2020-10-12T19:40:30+08:00">2020-10-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-13 09:50:40" itemprop="dateModified" datetime="2020-10-13T09:50:40+08:00">2020-10-13</time>
               
             
           </span>
@@ -466,7 +478,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vuecli</span><br></pre></td></tr></table></figure>
 <h2 id="完整引入"><a href="#完整引入" class="headerlink" title="完整引入"></a>完整引入</h2><p>完整地将 <code>ui</code> 和样式引入。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br></pre></td></tr></table></figure>
-<p>在页面简单使用三个组件，看看效果。</p>
+<p>在页面简单使用 2 个组件，看看效果。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-tabs</span> <span class="attr">v-model</span>=<span class="string">"activeName"</span> @<span class="attr">tab-click</span>=<span class="string">"handleClick"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"用户管理"</span> <span class="attr">name</span>=<span class="string">"first"</span>&gt;</span>用户管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"配置管理"</span> <span class="attr">name</span>=<span class="string">"second"</span>&gt;</span>配置管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"角色管理"</span> <span class="attr">name</span>=<span class="string">"third"</span>&gt;</span>角色管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"定时任务补偿"</span> <span class="attr">name</span>=<span class="string">"fourth"</span>&gt;</span>定时任务补偿<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-tabs</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">el-steps</span> <span class="attr">:active</span>=<span class="string">"2"</span> <span class="attr">align-center</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤1"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤2"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤3"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤4"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">el-steps</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/gb/element-replace-theme/0.png" alt="组件效果"></p>
 <p>再看一下打包后的资源大小情况<code>npm run build --report</code>。</p>
@@ -478,7 +490,7 @@
 <h2 id="按需引入组件样式"><a href="#按需引入组件样式" class="headerlink" title="按需引入组件样式"></a>按需引入组件样式</h2><p>新建一个 <code>element-variables.scss</code> 文件（为什么是 <code>SCSS</code> 文件，后面自定义主题会用到）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*icon字体路径变量*/</span></span><br><span class="line">$--font-path: <span class="string">"~element-ui/lib/theme-chalk/fonts"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*按需引入用到的组件的scss文件和基础scss文件*/</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/base.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/rate.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/button.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/row.scss"</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="按需引入组件"><a href="#按需引入组件" class="headerlink" title="按需引入组件"></a>按需引入组件</h2><p>新建一个 <code>element-config.js</code> 文件，将项目用到的 <code>element</code> 组件引入。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Rate, Row, Button &#125; <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install(V) &#123;</span><br><span class="line">    V.use(Rate)</span><br><span class="line">    V.use(Button)</span><br><span class="line">    V.use(Row)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Tabs, TabPane, Steps, Step &#125; <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install(V) &#123;</span><br><span class="line">    V.use(Tabs)</span><br><span class="line">    V.use(TabPane)</span><br><span class="line">    V.use(Steps)</span><br><span class="line">    V.use(Step)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="第一次优化后打包分析"><a href="#第一次优化后打包分析" class="headerlink" title="第一次优化后打包分析"></a>第一次优化后打包分析</h2><p>将以上 <code>element-variables.scss</code> 和 <code>element-config.js</code> 引入到 <code>main.js</code> 中。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'@/assets/js/element-config'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'@/assets/css/element-variables.scss'</span></span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>
 <p>貌似上面一切都很顺理成章，打包后大小会减小。</p>
@@ -500,7 +512,7 @@
 <p>现在我们的主题就变成了预期效果</p>
 <p><img src="/gb/element-replace-theme/4.png" alt="主题改变了"></p>
 <p>可能你已经注意到了，这里推荐的是分别引入用到的组件样式，而不是引入全部默认样式，因为这样会导致引入没有使用到的组件样式。比如当前案例中我们没有使用到 <code>ColorPicker</code> 组件，在打包输出的 <code>css</code> 文件中确有该组件样式。</p>
-<p><img src="/gb/element-replace-theme/5.png" alt="打包样式表出现没有使用的样式"></p>
+<p><img src="/gb/element-replace-theme/5.png" alt="打包样式文件出现没有使用的样式"></p>
 <h2 id="更换主题-纯净样式"><a href="#更换主题-纯净样式" class="headerlink" title="更换主题-纯净样式"></a>更换主题-纯净样式</h2><p>通过以上优化可以按需的将所用到组件打包，排除没用到的组件，减少包的大小。但是，还是存在一个小瑕疵：一个用到的组件样式会被两次打包，一次是默认的样式，一次是覆盖的样式。</p>
 <p><img src="/gb/element-replace-theme/6.png" alt="还存在默认样式"></p>
 <p>出现这个问题是由于我们在两个地方对样式进行引入了，一个是在 <code>.babelrc</code> 文件中通过 <code>babel-plugin-component</code> 插件按需引入 <code>element-ui</code> 组件及其默认样式，一个是在 <code>element-variables.scss</code> 文件中覆盖默认样式生成的自定义样式。</p>
