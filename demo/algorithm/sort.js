@@ -45,12 +45,20 @@
 // console.log('arr: ', arr)
 
 // 归并排序
-// const mergeSort = function (arr, lo = 0, hi = arr.length - 1) {
+// const mergeSort = function (arr, lo, hi) {
+//   if (lo === undefined) {
+//     lo = 0
+//   }
+//   if (hi === undefined) {
+//     hi = arr.length - 1
+//   }
+
 //   // 判断是否剩下最后一个元素
 //   if (lo >= hi) return
 
 //   // 从中间将数组分成两部分
 //   let mid = lo + Math.floor((hi - lo) / 2)
+//   console.log('mid', mid)
 
 //   // 分别递归将左右两边排好序
 //   mergeSort(arr, lo, mid)
@@ -89,10 +97,59 @@
 
 // 快速排序
 const quickSort = function (arr, lo, hi) {
+  if (lo === undefined) {
+    lo = 0
+  }
+  if (hi === undefined) {
+    hi = arr.length - 1
+  }
+
   // 判断是否只剩下一个元素，是，则直接返回
   if (lo >= hi) return
+
   // 利用 partition 函数找到一个随机的基准点
   const p = partition(arr, lo, hi)
-  quickSort(arr, lo, p)
-  quickSort(arr, p, hi)
+
+  // 递归对基准点左半边和右半边的数进行排序
+  quickSort(arr, lo, p - 1)
+  quickSort(arr, p + 1, hi)
 }
+
+// 交换数组位置
+const swap = function (arr, i, j) {
+  let temp = arr[i]
+  arr[i] = arr[j]
+  arr[j] = temp
+}
+
+// 随机获取位置索引
+const randomPos = function (lo, hi) {
+  return lo + Math.floor(Math.random() * (hi - lo))
+}
+
+const partition = function (arr, lo, hi) {
+  const pos = randomPos(lo, hi)
+  console.log('pos: ', pos)
+  swap(arr, pos, hi)
+
+  let i = lo
+  let j = lo
+
+  // 从左到右用每个数和基准值比较，若比基准值小，则放在指针 i 指向的位置
+  // 循环完毕后，i 指针之前的数都比基准值小
+  while (j < hi) {
+    if (arr[j] <= arr[hi]) {
+      swap(arr, i++, j)
+    }
+    j++
+  }
+  // 末尾的基准值放置到指针 i 的位置， i 指针之后的数都比基准值大
+  swap(arr, i, j)
+
+  // 返回指针 i，作为基准点的位置
+  return i
+}
+
+const arr = [2, 1, 7, 9, 5, 8]
+quickSort(arr)
+console.log(arr)
