@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>reduce</title>
-</head>
-<body>
-
-  <script>
-    /* // every
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>reduce</title>
+  </head>
+  <body>
+    <script>
+      /* // every
     var numbers = [1, 2, 3, 4, 5, 6, 7];
     var everyResult = numbers.every(function (item, index, array) {
       return (item > 2);
@@ -34,7 +33,7 @@
     });
     console.log(mapResult); // [2, 4, 6, 8, 10, 12, 14] */
 
-    /* var numbers = [10, 20, 30, 40, 50];
+      /* var numbers = [10, 20, 30, 40, 50];
     var result = numbers.reduce(function (prev, cur, index) {
       cur = cur * 2;
       if (cur > 60) {
@@ -44,14 +43,14 @@
     }, []);
     console.log(result); // [80, 100] */
 
-    /* var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
+      /* var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
     var letterObj = letters.reduce(function (prev, cur) {
       prev[cur] = prev[cur] ? ++prev[cur] : 1;
       return prev;
     }, {});
     console.log(letterObj); // {A: 1, B: 2, C: 4} */
 
-    /* const person = {
+      /* const person = {
       name: 'jazz',
       gender: 'male',
       age: 24
@@ -69,7 +68,7 @@
     }, {});
     console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
 
-    /* const person = {
+      /* const person = {
       name: 'jazz',
       gender: 'male',
       age: 24
@@ -78,7 +77,7 @@
     const personUnknowAge = (({name, gender}) => ({name, gender}))(person);
     console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
 
-    /* const person = {
+      /* const person = {
       name: 'jazz',
       gender: 'male',
       age: 24
@@ -86,15 +85,23 @@
     let { age, ...personUnknowAge } = person;
     console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
 
-    var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
-    var letterArr = letters.reduce(function (acc, cur) {
-      if (acc.indexOf(cur) === -1) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []);
-    console.log(letterArr); //  ["A", "B", "C"]
+      // var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
+      // var letterArr = letters.reduce(function (acc, cur) {
+      //   if (acc.indexOf(cur) === -1) {
+      //     acc.push(cur);
+      //   }
+      //   return acc;
+      // }, []);
+      // console.log(letterArr); //  ["A", "B", "C"]
 
-  </script>
-</body>
+      var a = 0
+      if (true) {
+        a = 1
+        function a() {}
+        a = 21
+      }
+      debugger
+      console.log(a)
+    </script>
+  </body>
 </html>
