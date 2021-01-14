@@ -119,15 +119,23 @@
 
 
 
-  <meta name="keywords" content="javascript,algorithm">
+  <meta name="description" content="判断动态规划判断一个算法问题是否属于动态规划问题，主要依据有两点：  最优子结构：一个问题的最优解是由它的各个子问题的最优解决定的。 重叠子问题：解决一个问题需要拆解许多子问题，而这个子问题有重复。  最长子序列问题LeetCode 第 300 题：给定一个无序的整数数组，找到其中最长子序列长度。 说明：可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n">
+<meta name="keywords" content="algorithm,javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「超详笔记」算法——动态规划（JS版）">
 <meta property="og:url" content="https://wuwhs.gitee.io/2020/11/23/algorithm-dp/index.html">
 <meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="判断动态规划判断一个算法问题是否属于动态规划问题，主要依据有两点：  最优子结构：一个问题的最优解是由它的各个子问题的最优解决定的。 重叠子问题：解决一个问题需要拆解许多子问题，而这个子问题有重复。  最长子序列问题LeetCode 第 300 题：给定一个无序的整数数组，找到其中最长子序列长度。 说明：可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-12-12T07:24:35.409Z">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-dp/dp-1.gif">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-dp/dp-2.gif">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-dp/dp-3.gif">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-dp/dp-4.gif">
+<meta property="og:updated_time" content="2021-01-14T15:47:03.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「超详笔记」算法——动态规划（JS版）">
+<meta name="twitter:description" content="判断动态规划判断一个算法问题是否属于动态规划问题，主要依据有两点：  最优子结构：一个问题的最优解是由它的各个子问题的最优解决定的。 重叠子问题：解决一个问题需要拆解许多子问题，而这个子问题有重复。  最长子序列问题LeetCode 第 300 题：给定一个无序的整数数组，找到其中最长子序列长度。 说明：可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 O(n">
+<meta name="twitter:image" content="https://wuwhs.gitee.io/gb/algorithm-dp/dp-1.gif">
 
 
 
@@ -411,7 +419,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-12-12 15:24:35" itemprop="dateModified" datetime="2020-12-12T15:24:35+08:00">2020-12-12</time>
+                <time title="修改时间：2021-01-14 23:47:03" itemprop="dateModified" datetime="2021-01-14T23:47:03+08:00">2021-01-14</time>
               
             
           </span>
@@ -444,7 +452,32 @@
       
 
       
-        
+        <h3 id="判断动态规划"><a href="#判断动态规划" class="headerlink" title="判断动态规划"></a>判断动态规划</h3><p>判断一个算法问题是否属于动态规划问题，主要依据有两点：</p>
+<ul>
+<li>最优子结构：一个问题的最优解是由它的各个子问题的最优解决定的。</li>
+<li>重叠子问题：解决一个问题需要拆解许多子问题，而这个子问题有重复。</li>
+</ul>
+<h3 id="最长子序列问题"><a href="#最长子序列问题" class="headerlink" title="最长子序列问题"></a>最长子序列问题</h3><p><code>LeetCode</code> 第 <code>300</code> 题：给定一个无序的整数数组，找到其中最长子序列长度。</p>
+<p>说明：可能会有多种最长上升子序列的组合，你只需要输出对应的长度即可。你算法的时间复杂度应该为 <code>O(n2)</code>。<br>注意：子序列和子数组不同，它并不要求元素是连续的。</p>
+<p>示例</p>
+<p>输入：<code>[ 10, 9, 2, 5, 3, 7, 101, 18 ]</code><br>输出：<code>4</code><br>即，最长的上升子序列是 <code>[2, 3, 7, 101]</code>，它的长度是 <code>4</code>。</p>
+<h4 id="最长子序列问题解题思路"><a href="#最长子序列问题解题思路" class="headerlink" title="最长子序列问题解题思路"></a>最长子序列问题解题思路</h4><p>在给定的数组里，有很多的上升子序列，例如：[10, 101]，[9, 101]，[2, 5, 7, 101]，以及 [2, 3, 7, 101]，只需要找出其中一个最长的。</p>
+<p><strong>思路 1</strong>：暴力法</p>
+<p>找出所有的子序列，然后从中返回一个最长的。</p>
+<p>从一个数组中罗列出所有的非空子数组有： <code>n×(n + 1)/2</code> 种，即 <code>O(n2)</code>，那么罗列出所有的非空子序列有 <code>2n−1</code>  种。复杂度将是 <code>O(2n)</code>。</p>
+<p><strong>思路 2</strong>：缩小问题规模</p>
+<p>1、找最优子结构：输入规模对半分。</p>
+<p><img src="/gb/algorithm-dp/dp-1.gif" alt="dp-1.gif"></p>
+<p><code>[10, 9, 2, 5]</code> 最长的子序列应该是 <code>[2, 5]</code>，而 <code>[3, 7, 101, 4]</code> 最长的子序列是 <code>[3, 7, 101]</code>，由于 <code>3</code> 比 <code>5</code> 小，无法简单地组合在一起。即该方法下，总问题的解无法直观地通过子问题的最优解求得。</p>
+<p>2、找最优子结构：每次减一个。</p>
+<p>假设 <code>f(n)</code> 表示的是数组 <code>nums[0，…，n−1]</code> 中最长的子序列，那么 <code>f(n−1)</code> 就是数组 <code>nums[0，…，n−2]</code> 中最长的子序列，依此类推，<code>f(1)</code> 就是 <code>nums[0]</code> 的最长子序列。</p>
+<p>假设已经解决了 <code>f(1)，f(2)，… f(n−1)</code> 的问题，考虑最后一个数 <code>nums[n−1]</code>，也必然考虑到倒数第二个数 <code>nums[n−2]</code>，所以 <code>f(n)</code> 指：如果包含了最后的数，那么最长的子序列应该是什么。注意：最后这个数必须包含在子序列当中的。</p>
+<p><img src="/gb/algorithm-dp/dp-2.gif" alt="dp-2.gif"></p>
+<p>如何通过 <code>f(1)，f(2)，…f(n−1)</code> 推导出 <code>f(n)</code> 呢？由于最后一个数是 <code>4</code>，我们只需要在前面的 <code>f(1)，f(2)，…f(n−1)</code> 当中，找出一个以小于 <code>4</code> 的数作为结尾的最长的子序列，然后把 <code>4</code> 添加到最后，那么 <code>f(n)</code> 就一定是以 <code>4</code> 作为结尾的最长的子序列了。</p>
+<p><img src="/gb/algorithm-dp/dp-3.gif" alt="dp-3.gif"></p>
+<p>最长的子序列并不一定会包含 <code>4</code>，遍历 <code>f(1)，f(2)，…f(n−1)</code> ，找出最长的。例如，以 <code>101</code> 结尾的最长的上升子序列是什么。</p>
+<p><img src="/gb/algorithm-dp/dp-4.gif" alt="dp-4.gif"></p>
+
       
     </div>
 
@@ -458,13 +491,6 @@
       
       
       <div class="popular-posts-title"><a href="/2020/11/06/algorithm-recursion-backtracking/" rel="bookmark">「超详笔记」算法——递归与回溯（JS版）</a></div>
-      
-    </li>
-  
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="/2020/11/08/algorithm-dfs-bfs/" rel="bookmark">「超详笔记」算法——深度与广度优先（JS版）</a></div>
       
     </li>
   
@@ -485,7 +511,14 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="/2017/06/26/js中的位运算/" rel="bookmark">js中的位运算</a></div>
+      <div class="popular-posts-title"><a href="/2020/11/08/algorithm-dfs-bfs/" rel="bookmark">「超详笔记」算法——深度与广度优先（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/04/04/JavaScript思维导图/" rel="bookmark">JavaScript思维导图</a></div>
       
     </li>
   
@@ -522,9 +555,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
-          
             <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
           
         </div>
       
@@ -594,8 +627,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -772,6 +814,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断动态规划"><span class="nav-number">1.</span> <span class="nav-text">判断动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长子序列问题"><span class="nav-number">2.</span> <span class="nav-text">最长子序列问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最长子序列问题解题思路"><span class="nav-number">2.1.</span> <span class="nav-text">最长子序列问题解题思路</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

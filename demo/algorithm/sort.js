@@ -1,3 +1,5 @@
+/** 排序算法 */
+
 // 冒泡排序算法
 // const bubbleSort = function (arr) {
 //   const len = arr.length
