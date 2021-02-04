@@ -1,5 +1,5 @@
-// 寻找最长子序列
-// 递归，自顶而下的方式
+// // 寻找最长子序列
+// // 递归，自顶而下的方式
 // class LongestSubsequence {
 //   constructor(nums) {
 //     this.max = 1
@@ -16,7 +16,6 @@
 
 //     let result = 0
 //     let maxEndingHere = 1
-//     let
 
 //     // 从头遍历数组，递归求出以每个点为结尾的子数组中最长上升序列的长度
 //     for (let i = 1; i < n; i++) {
@@ -61,7 +60,7 @@
 //         }
 //       }
 //       // 当前计算好的长度与全局的最大值进行比较
-//       this.max = Math.max(this.max, dp[i].length)
+//       this.max = Math.max(this.max, dp[i])
 //     }
 //   }
 // }
@@ -70,7 +69,7 @@
 // const ls = new LongestSubsequence(arr)
 // console.log('ls: ', ls.max)
 
-// 求不相邻数最大和
+// // 求不相邻数最大和
 // const rob = function (nums) {
 //   let n = nums.length
 
@@ -107,7 +106,7 @@ const LPS = function (s) {
     dp[i] = [...new Array(n)]
     dp[i][i] = 1
   }
-
+  console.log('dp: ', dp)
   // 从长度为 2 开始，尝试将区间扩大，一直扩大到 n
   for (let len = 2; len <= n; len++) {
     // 扩大的过程中，每次都得出区间的真实位置 i 和结束位置j
@@ -126,4 +125,4 @@ const LPS = function (s) {
   }
 }
 
-LPS('abcbc')
+console.log(LPS('abcbc'))
