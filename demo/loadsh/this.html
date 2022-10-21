@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>this</title>
+</head>
+<body>
+  <script>
+    var obj = {
+      fun1: function () {
+        // this
+        console.log('this1', this);
+        return function () {
+          // this
+          console.log('this2', this);
+        }
+      },
+      fun2 () {
+        var f = function () {
+          // this
+          console.log('this3', this);
+        }
+        f();
+      },
+      fun3: () => {
+        // this
+        console.log('this4', this);
+      },
+      fun4: function fun5 () {
+        // this
+        console.log('this5', this);
+      }.bind(this),
+      fun6: {
+        fun7: () => {
+          // this
+          console.log('this6', this);
+        }
+      }
+    }
+    var f1 = obj.fun1();
+    f1();
+    obj.fun2();
+    obj.fun3();
+    obj.fun4();
+    obj.fun6.fun7();
+
+  </script>
+</body>
+</html>

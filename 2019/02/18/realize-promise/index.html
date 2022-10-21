@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="用过 Promise，但是总是有点似懂非懂的感觉，也看过很多文章，还是搞不懂 Promise的 实现原理，后面自己边看文章，边调试代码，终于慢慢的有感觉了，下面就按自己的理解来实现一个 Promise。 已将每一步的代码都放在了 github 上，方便大家阅读。如果觉得好的话，欢迎star。 想要完全理解代码，需要理解 this 和闭包的含义。 Promise是什么简单来说，Promise 主要就">
+<meta name="keywords" content="javascript,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise的实现">
+<meta property="og:url" content="https://wuwhs.gitee.io/2019/02/18/realize-promise/index.html">
+<meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="用过 Promise，但是总是有点似懂非懂的感觉，也看过很多文章，还是搞不懂 Promise的 实现原理，后面自己边看文章，边调试代码，终于慢慢的有感觉了，下面就按自己的理解来实现一个 Promise。 已将每一步的代码都放在了 github 上，方便大家阅读。如果觉得好的话，欢迎star。 想要完全理解代码，需要理解 this 和闭包的含义。 Promise是什么简单来说，Promise 主要就">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-09-27T03:58:43.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise的实现">
+<meta name="twitter:description" content="用过 Promise，但是总是有点似懂非懂的感觉，也看过很多文章，还是搞不懂 Promise的 实现原理，后面自己边看文章，边调试代码，终于慢慢的有感觉了，下面就按自己的理解来实现一个 Promise。 已将每一步的代码都放在了 github 上，方便大家阅读。如果觉得好的话，欢迎star。 想要完全理解代码，需要理解 this 和闭包的含义。 Promise是什么简单来说，Promise 主要就">
+
+
+
+
+
+
+  <link rel="canonical" href="https://wuwhs.gitee.io/2019/02/18/realize-promise/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Promise的实现 | wuwh's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fa314f7747528620032d3194b7fccc9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuwh's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Make progress every day</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">71</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.gitee.io/2019/02/18/realize-promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Promise的实现
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-18 17:51:11" itemprop="dateCreated datePublished" datetime="2019-02-18T17:51:11+08:00">2019-02-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-27 11:58:43" itemprop="dateModified" datetime="2022-09-27T11:58:43+08:00">2022-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用过 Promise，但是总是有点似懂非懂的感觉，也看过很多文章，还是搞不懂 Promise的 实现原理，后面自己边看文章，边调试代码，终于慢慢的有感觉了，下面就按自己的理解来实现一个 Promise。</p>
+<p>已将每一步的代码都放在了 github 上，方便大家阅读。如果觉得好的话，欢迎star。</p>
+<p>想要完全理解代码，需要理解 this 和闭包的含义。</p>
+<p>Promise是什么<br>简单来说，Promise 主要就是为了解决异步回调的问题。用 Promise 来处理异步回调使得代码层次清晰，便于理解，且更加容易维护。其主流规范目前主要是 Promises/A+ 。对于 Promise 用法不熟悉的，可以参看我的这篇文章——es6学习笔记5–promise，理解了再来看这篇文章，会对你有很大帮助的。</p>
+<p>在开始前，我们先写一个 promise 应用场景来体会下 promise 的作用。目前谷歌和火狐已经支持 es6 的 promise。我们采用 setTimeout 来模拟异步的运行，具体代码如下：</p>
+<p>复制代码<br>function fn1(resolve, reject) {<br>    setTimeout(function() {<br>        console.log(‘步骤一：执行’);<br>        resolve(‘1’);<br>    },500);<br>}</p>
+<p>function fn2(resolve, reject) {<br>    setTimeout(function() {<br>        console.log(‘步骤二：执行’);<br>        resolve(‘2’);<br>    },100);<br>}</p>
+<p>new Promise(fn1).then(function(val){<br>    console.log(val);<br>    return new Promise(fn2);<br>}).then(function(val){<br>    console.log(val);<br>    return 33;<br>}).then(function(val){<br>    console.log(val);<br>});<br>复制代码<br>最终我们写的promise同样可以实现这个功能。</p>
+<p>初步构建<br>下面我们来写一个简单的 promsie。Promise 的参数是函数 fn，把内部定义 resolve 方法作为参数传到 fn 中，调用 fn。当异步操作成功后会调用 resolve 方法，然后就会执行 then 中注册的回调函数。</p>
+<p>复制代码<br>function Promise(fn){<br>  //需要一个成功时的回调<br>  var callback;<br>  //一个实例的方法，用来注册异步事件<br>  this.then = function(done){<br>    callback = done;<br>  }<br>  function resolve(){<br>    callback();<br>  }<br>  fn(resolve);<br>}<br>复制代码<br>加入链式支持<br>下面加入链式，成功回调的方法就得变成数组才能存储。同时我们给 resolve 方法添加参数，这样就不会输出 undefined。</p>
+<p>复制代码<br>function Promise(fn) {<br>    var promise = this,<br>        value = null;<br>        promise._resolves = [];</p>
+<pre><code>this.then = function (onFulfilled) {
+    promise._resolves.push(onFulfilled);
+    return this;
+};
+
+function resolve(value) {
+    promise._resolves.forEach(function (callback) {
+        callback(value);
+    });
+}
+
+fn(resolve);
+</code></pre><p>}<br>复制代码<br>promise = this， 这样我们不用担心某个时刻 this 指向突然改变问题。</p>
+<p>调用 then 方法，将回调放入 promise._resolves 队列；</p>
+<p>创建 Promise 对象同时，调用其 fn, 并传入 resolve 方法，当 fn 的异步操作执行成功后，就会调用 resolve ，也就是执行promise._resolves 队列中的回调；</p>
+<p>resolve 方法 接收一个参数，即异步操作返回的结果，方便传值。</p>
+<p>then方法中的 return this 实现了链式调用。<br>但是，目前的 Promise 还存在一些问题，如果我传入的是一个不包含异步操作的函数，resolve就会先于 then 执行，也就是说 promise._resolves 是一个空数组。</p>
+<p>为了解决这个问题，我们可以在 resolve 中添加 setTimeout，来将 resolve 中执行回调的逻辑放置到 JS 任务队列末尾。</p>
+<p>复制代码<br>    function resolve(value) {<br>        setTimeout(function() {<br>            promise._resolves.forEach(function (callback) {<br>                callback(value);<br>            });<br>        },0);<br>    }<br>复制代码<br>引入状态<br>剖析 Promise 之基础篇 说 这里存在一点问题: 如果 Promise 异步操作已经成功，之后调用 then  注册的回调再也不会执行了，而这是不符合我们预期的。</p>
+<p>对于这句话不是很理解，有知道的可以留言说下，最好能给实例说明下。但我个人觉得是，then 中的注册的回调都会在 resolve 运行之前就添加到数组当中，不会存在不执行的情况啊。</p>
+<p>接着上面的步伐，引入状态：</p>
+<p>复制代码<br>function Promise(fn) {<br>    var promise = this,<br>        value = null;<br>        promise._resolves = [];<br>        promise._status = ‘PENDING’;</p>
+<pre><code>this.then = function (onFulfilled) {
+    if (promise._status === &apos;PENDING&apos;) {
+        promise._resolves.push(onFulfilled);
+        return this;
+    }
+    onFulfilled(value);
+    return this;
+};
+
+
+function resolve(value) {
+    setTimeout(function(){
+        promise._status = &quot;FULFILLED&quot;;
+        promise._resolves.forEach(function (callback) {
+            callback(value);
+        })
+    },0);
+}
+
+fn(resolve);
+</code></pre><p>}<br>复制代码<br>每个 Promise 存在三个互斥状态：pending、fulfilled、rejected。Promise 对象的状态改变，只有两种可能：从 pending 变为 fulfilled 和从 pending 变为 rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。就算改变已经发生了，你再对 Promise 对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。</p>
+<p>加上异步结果的传递<br>目前的写法都没有考虑异步返回的结果的传递，我们来加上结果的传递：</p>
+<p>复制代码<br>    function resolve(value) {<br>        setTimeout(function(){<br>            promise._status = “FULFILLED”;<br>            promise._resolves.forEach(function (callback) {<br>                value = callback(value);<br>            })<br>        },0);<br>    }<br>复制代码<br>串行 Promise<br>串行 Promise 是指在当前 promise 达到 fulfilled 状态后，即开始进行下一个 promise（后邻 promise）。例如我们先用ajax从后台获取用户的的数据，再根据该数据去获取其他数据。</p>
+<p>这里我们主要对 then 方法进行改造：</p>
+<p>复制代码<br>    this.then = function (onFulfilled) {<br>        return new Promise(function(resolve) {<br>            function handle(value) {<br>                var ret = isFunction(onFulfilled) &amp;&amp; onFulfilled(value) || value;<br>                resolve(ret);<br>            }<br>            if (promise._status === ‘PENDING’) {<br>                promise._resolves.push(handle);<br>            } else if(promise._status === FULFILLED){<br>                handle(value);<br>            }<br>        })</p>
+<pre><code>};
+</code></pre><p>复制代码<br>then 方法该改变比较多啊，这里我解释下：</p>
+<p>注意的是，new Promise() 中匿名函数中的 promise （promise._resolves 中的 promise）指向的都是上一个 promise 对象， 而不是当前这个刚刚创建的。</p>
+<p>首先我们返回的是新的一个promise对象，因为是同类型，所以链式仍然可以实现。</p>
+<p>其次，我们添加了一个 handle 函数，handle 函数对上一个 promise 的 then 中回调进行了处理，并且调用了当前的 promise 中的 resolve 方法。</p>
+<p>接着将 handle 函数添加到 上一个promise 的 promise._resolves 中，当异步操作成功后就会执行 handle 函数，这样就可以 执行 当前 promise 对象的回调方法。我们的目的就达到了。</p>
+<p>有些人在这里可能会有点犯晕，有必要对执行过程分析一下，具体参看以下代码：</p>
+<p>new Promise(fn1).then(fn2).then(fn3)})<br>fn1, fn2, fn3的函数具体可参看最前面的定义。</p>
+<p>首先我们创建了一个 Promise 实例，这里叫做 promise1；接着会运行 fn1(resolve);</p>
+<p>但是 fn1 中有一个 setTimeout 函数，于是就会先跳过这一部分，运行后面的第一个 then 方法;</p>
+<p>then 返回一个新的对象 promise2,  promise2 对象的 resolve 方法和 then 方法的中回调函数 fn2 都被封装在 handle 中， 然后 handle 被添加到 　　promise1._resolves 数组中。</p>
+<p>接着运行第二个 then 方法，同样返回一个新的对象 promise3, 包含 promise3 的 resolve 方法和 回调函数 fn3 的 handle 方法被添加到 promise2._resolves 数组中。</p>
+<p>到此两个 then 运行结束。 setTimeout 中的延迟时间一到，就会调用 promise1的 resolve方法。</p>
+<p>resolve 方法的执行，会调用 promise1._resolves 数组中的回调，之前我们添加的 handle 方法就会被执行； 也就是 fn2 和 promsie2 的 resolve 方法，都被调用了。</p>
+<p>以此类推，fn3 会和 promise3 的 resolve 方法 一起执行，因为后面没有 then 方法了，promise3._resolves 数组是空的 。</p>
+<p>至此所有回调执行结束</p>
+<p> 但这里还存在一个问题，就是我们的 then 里面函数不能对 Promise 对象进行处理。这里我们需要再次对 then 进行修改，使其能够处理 promise 对象。</p>
+<p>复制代码<br>this.then = function (onFulfilled) {<br>        return new Promise(function(resolve) {<br>            function handle(value) {<br>                var ret = typeof onFulfilled === ‘function’ &amp;&amp; onFulfilled(value) || value;<br>                if( ret &amp;&amp; typeof ret [‘then’] == ‘function’){<br>                    ret.then(function(value){<br>                       resolve(value);<br>                    });<br>                } else {<br>                    resolve(ret);<br>                }<br>            }<br>            if (promise._status === ‘PENDING’) {<br>                promise._resolves.push(handle);<br>            } else if(promise._status === FULFILLED){<br>                handle(value);<br>            }<br>        })</p>
+<pre><code>};
+</code></pre><p>复制代码<br>在 then 方法里面，我们对 ret 进行了判断，如果是一个 promise 对象，就会调用其 then 方法，形成一个嵌套，直到其不是promise对象为止。同时 在 then 方法中我们添加了调用 resolve 方法，这样链式得以维持。</p>
+<p>失败处理<br>异步操作不可能都成功，在异步操作失败时，标记其状态为 rejected，并执行注册的失败回调。</p>
+<p>有了之前处理 fulfilled 状态的经验，支持错误处理变得很容易。毫无疑问的是，在注册回调、处理状态变更上都要加入新的逻辑：</p>
+<p>复制代码<br>    this.then = function (onFulfilled, onRejected) {<br>        return new Promise(function(resolve, reject) {<br>            function handle(value) {<br>                …….<br>            }<br>            function errback(reason){<br>                reason = isFunction(onRejected) &amp;&amp; onRejected(reason) || reason;<br>                reject(reason);<br>            }<br>            if (promise._status === ‘PENDING’) {<br>                promise._resolves.push(handle);<br>                promise._rejects.push(errback);<br>            } else if(promise._status === ‘FULFILLED’){<br>                handle(value);<br>            } else if(promise._status === ‘REJECTED’) {<br>            　　errback(promise._reason);<br>        }<br>        })</p>
+<pre><code>};
+
+function reject(value) {
+    setTimeout(function(){
+        promise._status = &quot;REJECTED&quot;;
+        promise._rejects.forEach(function (callback) {
+            promise._reason = callback( value);
+        })
+    },0);
+}
+</code></pre><p>复制代码<br>添加Promise.all方法<br>Promise.all 可以接收一个元素为 Promise 对象的数组作为参数，当这个数组里面所有的 Promise 对象都变为 resolve 时，该方法才会返回。</p>
+<p>具体代码如下：</p>
+<p>复制代码<br>Promise.all = function(promises){<br>    if (!Array.isArray(promises)) {<br>        throw new TypeError(‘You must pass an array to all.’);<br>      }<br>　　　　// 返回一个promise 实例<br>      return new Promise(function(resolve,reject){<br>          var i = 0,<br>              result = [],<br>              len = promises.length,<br>            　 count = len；</p>
+<p>　　　　　　// 每一个 promise 执行成功后，就会调用一次 resolve 函数<br>          function resolver(index) {<br>          　　return function(value) {<br>            　　　resolveAll(index, value);<br>          　　};<br>        　}</p>
+<pre><code>function rejecter(reason){
+    reject(reason);
+}
+
+function resolveAll(index,value){
+</code></pre><p>　　　　　　　// 存储每一个promise的参数<br>            result[index] = value;<br>　　　　　　　// 等于0 表明所有的promise 都已经运行完成，执行resolve函数<br>            if( –count == 0){<br>                resolve(result)<br>            }<br>        }<br>　　　　　　// 依次循环执行每个promise<br>          for (; i &lt; len; i++) {<br>　　　　　　　　 // 若有一个失败，就执行rejecter函数<br>              promises[i].then(resolver(i),rejecter);<br>          }<br>      });<br>}<br>复制代码<br>Promise.all会返回一个 Promise 实例，该实例直到参数中的所有的 promise 都执行成功，才会执行成功回调，一个失败就会执行失败回调。</p>
+<p>日常开发中经常会遇到这样的需求，在不同的接口请求数据然后拼合成自己所需的数据，通常这些接口之间没有关联（例如不需要前一个接口的数据作为后一个接口的参数），这个时候  Promise.all 方法就可以派上用场了。</p>
+<p>添加Promise.race方法<br>该函数和 Promise.all 相类似，它同样接收一个数组，不同的是只要该数组中的任意一个 Promise 对象的状态发生变化（无论是 resolve 还是 reject）该方法都会返回。我们只需要对 Promise.all 方法稍加修改就可以了。</p>
+<p>复制代码<br>Promise.race = function(promises){<br>    if (!Array.isArray(promises)) {<br>        throw new TypeError(‘You must pass an array to race.’);<br>    }<br>    return Promise(function(resolve,reject){<br>        var i = 0,<br>            len = promises.length;</p>
+<pre><code>    function resolver(value) {
+        resolve(value);
+    }
+
+    function rejecter(reason){
+        reject(reason);
+    }
+
+    for (; i &lt; len; i++) {
+        promises[i].then(resolver,rejecter);
+    }
+});
+</code></pre><p>}<br>复制代码<br>代码中没有类似一个 resolveAll 的函数，因为我们不需要等待所有的 promise 对象状态都发生变化，只要一个就可以了。</p>
+<p>添加其他API以及封装函数<br>到这里，Promise 的主要API都已经完成了，另外我们在添加一些比较常见的方法。也对一些可能出现的错误进行了处理，最后对其进行封装。</p>
+<p>完整的代码如下：</p>
+<p>复制代码<br>(function(window,undefined){</p>
+<p>// resolve 和 reject 最终都会调用该函数<br>var final = function(status,value){<br>    var promise = this, fn, st;</p>
+<pre><code>if(promise._status !== &apos;PENDING&apos;) return;
+
+// 所以的执行都是异步调用，保证then是先执行的
+setTimeout(function(){
+    promise._status = status;
+    st = promise._status === &apos;FULFILLED&apos;
+    queue = promise[st ? &apos;_resolves&apos; : &apos;_rejects&apos;];
+
+    while(fn = queue.shift()) {
+        value = fn.call(promise, value) || value;
+    }
+
+    promise[st ? &apos;_value&apos; : &apos;_reason&apos;] = value;
+    promise[&apos;_resolves&apos;] = promise[&apos;_rejects&apos;] = undefined;
+});
+</code></pre><p>}</p>
+<p>//参数是一个函数，内部提供两个函数作为该函数的参数,分别是resolve 和 reject<br>var Promise = function(resolver){<br>    if (!(typeof resolver === ‘function’ ))<br>        throw new TypeError(‘You must pass a resolver function as the first argument to the promise constructor’);<br>    //如果不是promise实例，就new一个<br>    if(!(this instanceof Promise)) return new Promise(resolver);</p>
+<pre><code>var promise = this;
+promise._value;
+promise._reason;
+promise._status = &apos;PENDING&apos;;
+//存储状态
+promise._resolves = [];
+promise._rejects = [];
+
+//
+var resolve = function(value) {
+    //由於apply參數是數組
+    final.apply(promise,[&apos;FULFILLED&apos;].concat([value]));
+}
+
+var reject = function(reason){
+    final.apply(promise,[&apos;REJECTED&apos;].concat([reason]));
+}
+
+resolver(resolve,reject);
+</code></pre><p>}</p>
+<p>Promise.prototype.then = function(onFulfilled,onRejected){<br>    var promise = this;<br>    // 每次返回一个promise，保证是可thenable的<br>    return new Promise(function(resolve,reject){</p>
+<pre><code>    function handle(value) {
+        // 這一步很關鍵，只有這樣才可以將值傳遞給下一個resolve
+        var ret = typeof onFulfilled === &apos;function&apos; &amp;&amp; onFulfilled(value) || value;
+
+        //判断是不是promise 对象
+        if (ret &amp;&amp; typeof ret [&apos;then&apos;] == &apos;function&apos;) {
+            ret.then(function(value) {
+                resolve(value);
+            }, function(reason) {
+                reject(reason);
+            });
+        } else {
+            resolve(ret);
+        }
+    }
+
+    function errback(reason){
+        reason = typeof onRejected === &apos;function&apos; &amp;&amp; onRejected(reason) || reason;
+        reject(reason);
+    }
+
+    if(promise._status === &apos;PENDING&apos;){
+        promise._resolves.push(handle);
+        promise._rejects.push(errback);
+    }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
+        callback(promise._value);
+    }else if(promise._status === REJECTED){
+        errback(promise._reason);
+    }
+});
+</code></pre><p>}</p>
+<p>Promise.prototype.catch = function(onRejected){<br>    return this.then(undefined, onRejected)<br>}</p>
+<p>Promise.prototype.delay = function(ms,value){<br>    return this.then(function(ori){<br>        return Promise.delay(ms,value || ori);<br>    })<br>}</p>
+<p>Promise.delay = function(ms,value){<br>    return new Promise(function(resolve,reject){<br>        setTimeout(function(){<br>            resolve(value);<br>            console.log(‘1’);<br>        },ms);<br>    })<br>}</p>
+<p>Promise.resolve = function(arg){<br>    return new Promise(function(resolve,reject){<br>        resolve(arg)<br>    })<br>}</p>
+<p>Promise.reject = function(arg){<br>    return Promise(function(resolve,reject){<br>        reject(arg)<br>    })<br>}</p>
+<p>Promise.all = function(promises){<br>    if (!Array.isArray(promises)) {<br>        throw new TypeError(‘You must pass an array to all.’);<br>    }<br>    return Promise(function(resolve,reject){<br>        var i = 0,<br>            result = [],<br>            len = promises.length,<br>            count = len</p>
+<pre><code>    //这里与race中的函数相比，多了一层嵌套，要传入index
+    function resolver(index) {
+      return function(value) {
+        resolveAll(index, value);
+      };
+    }
+
+    function rejecter(reason){
+        reject(reason);
+    }
+
+    function resolveAll(index,value){
+        result[index] = value;
+        if( --count == 0){
+            resolve(result)
+        }
+    }
+
+    for (; i &lt; len; i++) {
+        promises[i].then(resolver(i),rejecter);
+    }
+});
+</code></pre><p>}</p>
+<p>Promise.race = function(promises){<br>    if (!Array.isArray(promises)) {<br>        throw new TypeError(‘You must pass an array to race.’);<br>    }<br>    return Promise(function(resolve,reject){<br>        var i = 0,<br>            len = promises.length;</p>
+<pre><code>    function resolver(value) {
+        resolve(value);
+    }
+
+    function rejecter(reason){
+        reject(reason);
+    }
+
+    for (; i &lt; len; i++) {
+        promises[i].then(resolver,rejecter);
+    }
+});
+</code></pre><p>}</p>
+<p>window.Promise = Promise;</p>
+<p>})(window);<br>复制代码</p>
+<p>下载完整版代码，点击 github ，如果觉得好的话，欢迎star。</p>
+<p>代码写完了，总要写几个实例看看效果啊，具体看下面的测试代码：</p>
+<p>复制代码<br>var getData100 = function(){<br>    return new Promise(function(resolve,reject){<br>        setTimeout(function(){<br>            resolve(‘100ms’);<br>        },1000);<br>    });<br>}</p>
+<p>var getData200 = function(){<br>    return new Promise(function(resolve,reject){<br>        setTimeout(function(){<br>            resolve(‘200ms’);<br>        },2000);<br>    });<br>}<br>var getData300 = function(){<br>    return new Promise(function(resolve,reject){<br>        setTimeout(function(){<br>            reject(‘reject’);<br>        },3000);<br>    });<br>}</p>
+<p>getData100().then(function(data){<br>    console.log(data);      // 100ms<br>    return getData200();<br>}).then(function(data){<br>    console.log(data);      // 200ms<br>    return getData300();<br>}).then(function(data){<br>    console.log(data);<br>}, function(data){<br>    console.log(data);      // ‘reject’<br>});</p>
+<p>Promise.all([getData100(), getData200()]).then(function(data){<br>    console.log(data);      // [ “100ms”, “200ms” ]<br>});</p>
+<p>Promise.race([getData100(), getData200(), getData300()]).then(function(data){<br>    console.log(data);      // 100ms<br>});<br>Promise.resolve(‘resolve’).then(function(data){<br>    console.log(data);      //‘resolve’<br>})<br>Promise.reject(‘reject函数’).then(function(data){<br>    console.log(data);<br>}, function(data){<br>    console.log(data);     //‘reject函数’<br>})<br>复制代码</p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/04/04/JavaScript思维导图/" rel="bookmark">JavaScript思维导图</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/08/algorithm-dfs-bfs/" rel="bookmark">「超详笔记」算法——深度与广度优先（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/12/12/algorithm-binary-search-greedy/" rel="bookmark">「超详笔记」算法——二分搜索与贪婪（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/06/algorithm-recursion-backtracking/" rel="bookmark">「超详笔记」算法——递归与回溯（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/23/algorithm-dp/" rel="bookmark">「超详笔记」算法——动态规划（JS版）</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wuwhs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wuwhs.gitee.io/2019/02/18/realize-promise/" title="Promise的实现">https://wuwhs.gitee.io/2019/02/18/realize-promise/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/18/miniprogram-bug/" rel="next" title="小程序bug集合">
+                <i class="fa fa-chevron-left"></i> 小程序bug集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/19/h5-keyboard-compatible/" rel="prev" title="可能这些是你想要的H5键盘兼容方案">
+                可能这些是你想要的H5键盘兼容方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="wuwhs" />
+            
+              <p class="site-author-name" itemprop="name">wuwhs</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wuwhs" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://segmentfault.com/u/wuwhs" target="_blank" title="Segmentfault" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">copyright by wuwh's blog</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

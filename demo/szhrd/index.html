@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数字华容道——思否猫版</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 布局 -->
+      <!-- <div class="main">
+        <section class="content">
+          <ul class="row" v-for="row in level" :key="row" :style="{width: `${appWidth}px`}">
+            <li class="col" v-for="col in level" :key="col" :style="{width: `${itemWidth}px`}">
+              <div
+                class="item"
+                :style="{
+                  height: `${itemWidth}px`, 
+                  backgroundPosition: getBgPos(row, col)
+                }"
+              >
+                {{row}}:{{col}}
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div> -->
+      <header class="header">
+        <h2>数字华容道-思否猫版</h2>
+      </header>
+
+      <main class="main">
+        <section class="content">
+          <ul class="row" v-for="row in level" :key="row" :style="{width: `${appWidth}px`}">
+            <li class="col" v-for="col in level" :key="col" :style="{width: `${itemWidth}px`}">
+              <div
+                class="item"
+                @click="handleMove(row, col)"
+                :style="{
+                  height: `${itemWidth}px`, 
+                  backgroundPosition: getMessBgPos(row, col),
+                  backgroundImage: `url(${bgImgUrl})`
+                }"
+              >
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <el-card class="aside">
+          <el-image :src="formData.imgUrl"> </el-image>
+
+          <el-form :model="formData" :disabled="!switchOn">
+            <el-form-item label="选择思否猫" prop="imgInfo">
+              <el-select v-model="formData.imgUrl" placeholder="请选择思否猫">
+                <el-option v-for="(item, index) in imgList" :key="index" :value="item.url" :label="item.desc">
+                  <div class="img-item">
+                    <img :src="item.url" />
+                    <span> &nbsp; {{item.desc}}</span>
+                  </div>
+                </el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item label="选择难度">
+              <el-select v-model="formData.level" placeholder="请选择难度">
+                <el-option v-for="(item, index) in levelList" :key="index" :value="item.value" :label="item.desc">
+                  <span>{{item.desc}}</span>
+                </el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item label="步数">
+              <span>{{step}}</span>
+            </el-form-item>
+
+            <el-form-item label="计时">
+              <span>{{time}}</span>
+            </el-form-item>
+          </el-form>
+
+          <div style="text-align: center;">
+            <el-button @click="switchGame">{{btnText}}</el-button>
+          </el-form-item>
+        </div>
+      </main>
+    </div>
+
+    <!-- 引入组件库 -->
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
