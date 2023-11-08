@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 vue-cli 生成初始项目，在这仅对 element-ui 主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将 ui 和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/li">
+<meta name="keywords" content="vue,element-ui">
+<meta property="og:type" content="article">
+<meta property="og:title" content="彻底学会element-ui按需引入和纯净主题定制">
+<meta property="og:url" content="https://wuwhs.gitee.io/2020/10/12/element-replace-theme/index.html">
+<meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 vue-cli 生成初始项目，在这仅对 element-ui 主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将 ui 和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/li">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/0.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/1.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/2.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/3.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/4.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/5.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/6.png">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/7.png">
+<meta property="og:updated_time" content="2022-09-27T03:58:43.963Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="彻底学会element-ui按需引入和纯净主题定制">
+<meta name="twitter:description" content="前言手上有些项目用的element-ui，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 vue-cli 生成初始项目，在这仅对 element-ui 主题和组件方面来优化。 1vue init webpack vuecli 完整引入完整地将 ui 和样式引入。 12import ElementUI from &apos;element-ui&apos;import &apos;element-ui/li">
+<meta name="twitter:image" content="https://wuwhs.gitee.io/gb/element-replace-theme/0.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://wuwhs.gitee.io/2020/10/12/element-replace-theme/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>彻底学会element-ui按需引入和纯净主题定制 | wuwh's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fa314f7747528620032d3194b7fccc9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuwh's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Make progress every day</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">71</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.gitee.io/2020/10/12/element-replace-theme/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">彻底学会element-ui按需引入和纯净主题定制
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-12 19:40:30" itemprop="dateCreated datePublished" datetime="2020-10-12T19:40:30+08:00">2020-10-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-27 11:58:43" itemprop="dateModified" datetime="2022-09-27T11:58:43+08:00">2022-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/vue/" itemprop="url" rel="index"><span itemprop="name">vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>手上有些项目用的<code>element-ui</code>，刚好有空琢磨一下怎么减小打包文件大小和打包速度方面，为了演示实验，用 <code>vue-cli</code> 生成初始项目，在这仅对 <code>element-ui</code> 主题和组件方面来优化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vuecli</span><br></pre></td></tr></table></figure>
+<h2 id="完整引入"><a href="#完整引入" class="headerlink" title="完整引入"></a>完整引入</h2><p>完整地将 <code>ui</code> 和样式引入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'element-ui/lib/theme-chalk/index.css'</span></span><br></pre></td></tr></table></figure>
+<p>在页面简单使用 2 个组件，看看效果。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-tabs</span> <span class="attr">v-model</span>=<span class="string">"activeName"</span> @<span class="attr">tab-click</span>=<span class="string">"handleClick"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"用户管理"</span> <span class="attr">name</span>=<span class="string">"first"</span>&gt;</span>用户管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"配置管理"</span> <span class="attr">name</span>=<span class="string">"second"</span>&gt;</span>配置管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"角色管理"</span> <span class="attr">name</span>=<span class="string">"third"</span>&gt;</span>角色管理<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-tab-pane</span> <span class="attr">label</span>=<span class="string">"定时任务补偿"</span> <span class="attr">name</span>=<span class="string">"fourth"</span>&gt;</span>定时任务补偿<span class="tag">&lt;/<span class="name">el-tab-pane</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">el-tabs</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">el-steps</span> <span class="attr">:active</span>=<span class="string">"2"</span> <span class="attr">align-center</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤1"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤2"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤3"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-step</span> <span class="attr">title</span>=<span class="string">"步骤4"</span> <span class="attr">description</span>=<span class="string">"这是一段很长很长很长的描述性文字"</span>&gt;</span><span class="tag">&lt;/<span class="name">el-step</span></span></span><br><span class="line"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">el-steps</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/gb/element-replace-theme/0.png" alt="组件效果"></p>
+<p>再看一下打包后的资源大小情况<code>npm run build --report</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hash: <span class="number">40</span>db03677fe41f7369f6</span><br><span class="line">Version: webpack <span class="number">3.12</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">20874</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks                    Chunk Names</span><br><span class="line">    <span class="keyword">static</span>/css/app.cb8131545d15085cee647fe45f1d5561.css     <span class="number">234</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.732389</span>d.ttf      <span class="number">56</span> kB          [emitted]</span><br><span class="line">               <span class="keyword">static</span>/js/vendor.a753ce0919c8d42e4488.js     <span class="number">824</span> kB       <span class="number">0</span>  [emitted]  [big]  vendor</span><br><span class="line">                  <span class="keyword">static</span>/js/app<span class="number">.8</span>c4c97edfce9c9069ea3.js    <span class="number">3.56</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">                <span class="keyword">static</span>/fonts/element-icons<span class="number">.535877</span>f.woff    <span class="number">28.2</span> kB          [emitted]</span><br><span class="line"><span class="keyword">static</span>/css/app.cb8131545d15085cee647fe45f1d5561.css.map     <span class="number">332</span> kB          [emitted]</span><br><span class="line">           <span class="keyword">static</span>/js/vendor.a753ce0919c8d42e4488.js.map    <span class="number">3.26</span> MB       <span class="number">0</span>  [emitted]         vendor</span><br><span class="line">              <span class="keyword">static</span>/js/app<span class="number">.8</span>c4c97edfce9c9069ea3.js.map    <span class="number">16.6</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">                                             index.html  <span class="number">506</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
+<p>发现打包后提取公共模块 <code>static/js/vendor.js</code> 有 <code>824kb</code></p>
+<p>再看一下各个模块占用情况：</p>
+<p><img src="/gb/element-replace-theme/1.png" alt="各个模块占用情况"></p>
+<p>发现 <code>elment-ui.common.js</code> 占用最大。所有模块资源总共有 <code>642kb</code>。怎么才能减小打包后的大小呢？很容易就会想到 <code>ui</code> 的引入和样式的引入中，实际我们只使用了三个组件，却整体都被打包了，在这里引入这三个组件即可。</p>
+<h2 id="按需引入组件样式"><a href="#按需引入组件样式" class="headerlink" title="按需引入组件样式"></a>按需引入组件样式</h2><p>新建一个 <code>element-variables.scss</code> 文件（为什么是 <code>SCSS</code> 文件，后面自定义主题会用到）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*icon字体路径变量*/</span></span><br><span class="line">$--font-path: <span class="string">"~element-ui/lib/theme-chalk/fonts"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*按需引入用到的组件的scss文件和基础scss文件*/</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/base.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/rate.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/button.scss"</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~element-ui/packages/theme-chalk/src/row.scss"</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="按需引入组件"><a href="#按需引入组件" class="headerlink" title="按需引入组件"></a>按需引入组件</h2><p>新建一个 <code>element-config.js</code> 文件，将项目用到的 <code>element</code> 组件引入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Tabs, TabPane, Steps, Step &#125; <span class="keyword">from</span> <span class="string">'element-ui'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  install(V) &#123;</span><br><span class="line">    V.use(Tabs)</span><br><span class="line">    V.use(TabPane)</span><br><span class="line">    V.use(Steps)</span><br><span class="line">    V.use(Step)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="第一次优化后打包分析"><a href="#第一次优化后打包分析" class="headerlink" title="第一次优化后打包分析"></a>第一次优化后打包分析</h2><p>将以上 <code>element-variables.scss</code> 和 <code>element-config.js</code> 引入到 <code>main.js</code> 中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">'@/assets/js/element-config'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'@/assets/css/element-variables.scss'</span></span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br></pre></td></tr></table></figure>
+<p>貌似上面一切都很顺理成章，打包后大小会减小。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hash: <span class="number">2</span>ef987c23a5d612e00e1</span><br><span class="line">Version: webpack <span class="number">3.12</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">17430</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks                    Chunk Names</span><br><span class="line">    <span class="keyword">static</span>/css/app<span class="number">.3</span>c70d8d75c176393318b232a345e3f0f.css    <span class="number">38.8</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.732389</span>d.ttf      <span class="number">56</span> kB          [emitted]</span><br><span class="line">               <span class="keyword">static</span>/js/vendor.caa5978bb1eb0a15b097.js     <span class="number">824</span> kB       <span class="number">0</span>  [emitted]  [big]  vendor</span><br><span class="line">                  <span class="keyword">static</span>/js/app<span class="number">.5</span>ebb19489355acc3167b.js    <span class="number">3.64</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">                <span class="keyword">static</span>/fonts/element-icons<span class="number">.535877</span>f.woff    <span class="number">28.2</span> kB          [emitted]</span><br><span class="line"><span class="keyword">static</span>/css/app<span class="number">.3</span>c70d8d75c176393318b232a345e3f0f.css.map    <span class="number">53.9</span> kB          [emitted]</span><br><span class="line">           <span class="keyword">static</span>/js/vendor.caa5978bb1eb0a15b097.js.map    <span class="number">3.26</span> MB       <span class="number">0</span>  [emitted]         vendor</span><br><span class="line">              <span class="keyword">static</span>/js/app<span class="number">.5</span>ebb19489355acc3167b.js.map      <span class="number">17</span> kB       <span class="number">1</span>  [emitted]         app</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]         manifest</span><br><span class="line">                                             index.html  <span class="number">506</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
+<p>结果可知，<code>static/js/vendor.js</code> 还是 <code>824kb</code>！</p>
+<p>再看各个模块占用情况：</p>
+<p><img src="/gb/element-replace-theme/2.png" alt="第一次优化后各个模块占用情况"></p>
+<p>WHAT? 竟然模块都没什么变化，岂不是竹篮打水，事与愿违。</p>
+<h2 id="再次打包优化尝试"><a href="#再次打包优化尝试" class="headerlink" title="再次打包优化尝试"></a>再次打包优化尝试</h2><p>后来查到有人同样遇到这个问题，提出一个<a href="https://github.com/ElemeFE/element/issues/6362#issuecomment-323517538" target="_blank" rel="noopener">issues#6362</a>，原来只引入需要的<code>element-ui</code>组件，<code>webpack</code>还是把整体的 <code>UI</code> 库和样式都打包了，需要一个 <code>webpack</code> 的 <code>babel</code> 插件 <code>babel-plugin-component</code>，这样才能真正按需引入打包。这块其实被写到官方文档更换 <a href="http://element-cn.eleme.io/#/zh-CN/component/custom-theme" target="_blank" rel="noopener">自定义主题</a> 的配置了。</p>
+<p>于是 <code>npm i babel-pugin-componet -D</code> 安装后，在增加 <code>.babelrc</code> 文件插件配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"presets"</span>: [</span><br><span class="line">    [<span class="string">"env"</span>, &#123;</span><br><span class="line">      <span class="string">"modules"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="string">"targets"</span>: &#123;</span><br><span class="line">        <span class="string">"browsers"</span>: [<span class="string">"&gt; 1%"</span>, <span class="string">"last 2 versions"</span>, <span class="string">"not ie &lt;= 8"</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="string">"stage-2"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"plugins"</span>: [</span><br><span class="line">    <span class="string">"transform-vue-jsx"</span>,</span><br><span class="line">    <span class="string">"transform-runtime"</span>,</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"component"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">"libraryName"</span>: <span class="string">"element-ui"</span>,</span><br><span class="line">        <span class="string">"styleLibraryName"</span>: <span class="string">"theme-chalk"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>页面运行正常，再次打包。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hash: f182f70cb4ceee63b5d5</span><br><span class="line">Version: webpack <span class="number">3.12</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">10912</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks             Chunk Names</span><br><span class="line">    <span class="keyword">static</span>/css/app<span class="number">.95</span>c94c90ab11fdd4dfb413718f444d0c.css    <span class="number">39.9</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.732389</span>d.ttf      <span class="number">56</span> kB          [emitted]</span><br><span class="line">               <span class="keyword">static</span>/js/vendor.befb0a8962f74af4b7e2.js     <span class="number">157</span> kB       <span class="number">0</span>  [emitted]  vendor</span><br><span class="line">                  <span class="keyword">static</span>/js/app<span class="number">.5343843</span>cc20a78e80469.js    <span class="number">3.86</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">                <span class="keyword">static</span>/fonts/element-icons<span class="number">.535877</span>f.woff    <span class="number">28.2</span> kB          [emitted]</span><br><span class="line"><span class="keyword">static</span>/css/app<span class="number">.95</span>c94c90ab11fdd4dfb413718f444d0c.css.map    <span class="number">93.5</span> kB          [emitted]</span><br><span class="line">           <span class="keyword">static</span>/js/vendor.befb0a8962f74af4b7e2.js.map     <span class="number">776</span> kB       <span class="number">0</span>  [emitted]  vendor</span><br><span class="line">              <span class="keyword">static</span>/js/app<span class="number">.5343843</span>cc20a78e80469.js.map    <span class="number">17.1</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">                                             index.html  <span class="number">506</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
+<p><code>static/js/vendor.js</code> 确实变小了，<code>157kB</code>。再来看各个模块分析图。</p>
+<p><img src="/gb/element-replace-theme/3.png" alt="再次优化后各个模块分析图"></p>
+<p>模块总共 <code>157.93KB</code>，少了 5 倍！</p>
+<h2 id="更换主题-覆盖样式"><a href="#更换主题-覆盖样式" class="headerlink" title="更换主题-覆盖样式"></a>更换主题-覆盖样式</h2><p><code>element-ui</code> 的 <code>theme-chalk</code> 使用 <code>SCSS</code> 编写，如果在自己的项目中也是用 <code>SCSS</code>，那么可以直接在项目中改变样式变量，因此可以在前面新建的 <code>element-variables.scss</code> 文件用新的主题颜色变量覆盖即可。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 覆盖主题色</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*主题颜色变量*/</span></span><br><span class="line"><span class="variable">$--color-primary</span>: <span class="number">#f0f</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*icon字体路径变量*/</span></span><br><span class="line"><span class="variable">$--font-path</span>: <span class="string">'~element-ui/lib/theme-chalk/fonts'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 引入全部默认样式 会引入没用到的组件样式 */</span></span><br><span class="line"><span class="comment">// @import '~element-ui/packages/theme-chalk/src/index';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 按需引入用到的组件的scss文件和基础scss文件 */</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~element-ui/packages/theme-chalk/src/base.scss'</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~element-ui/packages/theme-chalk/src/rate.scss'</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~element-ui/packages/theme-chalk/src/button.scss'</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">'~element-ui/packages/theme-chalk/src/row.scss'</span>;</span><br></pre></td></tr></table></figure>
+<p>现在我们的主题就变成了预期效果</p>
+<p><img src="/gb/element-replace-theme/4.png" alt="主题改变了"></p>
+<p>可能你已经注意到了，这里推荐的是分别引入用到的组件样式，而不是引入全部默认样式，因为这样会导致引入没有使用到的组件样式。比如当前案例中我们没有使用到 <code>ColorPicker</code> 组件，在打包输出的 <code>css</code> 文件中确有该组件样式。</p>
+<p><img src="/gb/element-replace-theme/5.png" alt="打包样式文件出现没有使用的样式"></p>
+<h2 id="更换主题-纯净样式"><a href="#更换主题-纯净样式" class="headerlink" title="更换主题-纯净样式"></a>更换主题-纯净样式</h2><p>通过以上优化可以按需的将所用到组件打包，排除没用到的组件，减少包的大小。但是，还是存在一个小瑕疵：一个用到的组件样式会被两次打包，一次是默认的样式，一次是覆盖的样式。</p>
+<p><img src="/gb/element-replace-theme/6.png" alt="还存在默认样式"></p>
+<p>出现这个问题是由于我们在两个地方对样式进行引入了，一个是在 <code>.babelrc</code> 文件中通过 <code>babel-plugin-component</code> 插件按需引入 <code>element-ui</code> 组件及其默认样式，一个是在 <code>element-variables.scss</code> 文件中覆盖默认样式生成的自定义样式。</p>
+<p>所以怎样将二者结合，即<code>babel-plugin-component</code> 插件按需引入的组件样式改成用户自定义样式，达成纯净样式目标呢？这里就要用到 <code>element-ui</code> 的主题工具进行深层次的主题定制。</p>
+<h3 id="主题和主题工具安装"><a href="#主题和主题工具安装" class="headerlink" title="主题和主题工具安装"></a>主题和主题工具安装</h3><p>首先安装主题工具 <code>element-theme</code>，可以全局安装也可安装在项目目录。这里推荐安装在项目录，方便别人 <code>clone</code> 项目时能直接安装依赖并启动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i element-theme -D</span><br></pre></td></tr></table></figure>
+<p>然后安装白垩主题，可以从 <code>npm</code> 安装或者从 <code>GitHub</code> 拉取最新代码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 从 npm</span><br><span class="line">npm i element-theme-chalk -D</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 从 GitHub</span><br><span class="line">npm i https://github.com/ElementUI/theme-chalk -D</span><br></pre></td></tr></table></figure>
+<h3 id="主题构建"><a href="#主题构建" class="headerlink" title="主题构建"></a>主题构建</h3><p><code>element-theme</code> 支持的构建有 <code>Node API</code> 和 <code>CLI</code> 方式。</p>
+<h4 id="通过-CLI-构建方式"><a href="#通过-CLI-构建方式" class="headerlink" title="通过 CLI 构建方式"></a>通过 CLI 构建方式</h4><p>如果全局安装可以在命令行里通过 <code>et</code> 调用工具，如果安装在当前目录下，需要通过 <code>node_modules/.bin/et</code> 访问到命令。执行 <code>-i</code>（<code>--init</code>） 初始化变量文件。默认输出到 <code>element-variables.scss</code>，当然你可以传参数指定文件输出目录。如果你想启用 watch 模式，实时编译主题，增加 <code>-w</code>（<code>--watch</code>） 参数；如果你在初始化时指定了自定义变量文件，则需要增加 <code>-c</code>（<code>--config</code>） 参数，并带上你的变量文件名。默认情况下编译的主题目录是放在 <code>./theme</code> 下，你可以通过 <code>-o</code>（<code>--out</code>） 参数指定打包目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 初始化变量文件</span><br><span class="line">et --init [file path]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 实时编译</span><br><span class="line">et --watch [--config variable file path] [--out theme path]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 编译</span><br><span class="line">et [--config variable file path] [--out theme path] [--minimize]</span><br></pre></td></tr></table></figure>
+<h4 id="通过-Node-API-构建方式"><a href="#通过-Node-API-构建方式" class="headerlink" title="通过 Node API 构建方式"></a>通过 Node API 构建方式</h4><p>引入 <code>element-theme</code> 通过 <code>Node API</code> 形式构建</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> et = <span class="built_in">require</span>(<span class="string">'element-theme'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实时编译模式</span></span><br><span class="line">et.watch(&#123;</span><br><span class="line">  config: <span class="string">'variables/path'</span>,</span><br><span class="line">  out: <span class="string">'output/path'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">et.run(&#123;</span><br><span class="line">  config: <span class="string">'variables/path'</span>, <span class="comment">// 配置参数文件路径 默认`./element-variables.css`</span></span><br><span class="line">  out: <span class="string">'output/path'</span>, <span class="comment">// 输出目录 默认`./theme`</span></span><br><span class="line">  minimize: <span class="literal">false</span>, <span class="comment">// 压缩文件</span></span><br><span class="line">  browsers: [<span class="string">'ie &gt; 9'</span>, <span class="string">'last 2 versions'</span>], <span class="comment">// 浏览器支持</span></span><br><span class="line">  components: [<span class="string">'button'</span>, <span class="string">'input'</span>] <span class="comment">// 选定组件构建自定义主题</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="应用-Node-API-构建自定义主题"><a href="#应用-Node-API-构建自定义主题" class="headerlink" title="应用 Node API 构建自定义主题"></a>应用 Node API 构建自定义主题</h4><p>在这里，为了让主题的构建更加直观和被项目共享，采用 <code>Node API</code> 方式构建，在项目根目录下新建 <code>theme.js</code>文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> et = <span class="built_in">require</span>(<span class="string">'element-theme'</span>)</span><br><span class="line"><span class="comment">// 第一步生成样式变量文件</span></span><br><span class="line"><span class="comment">// et.init('./src/theme.scss')</span></span><br><span class="line"><span class="comment">// 第二步根据实际需要修改该文件</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="comment">// 第三步根据该变量文件编译出自定义的主题样式文件</span></span><br><span class="line">et.run(&#123;</span><br><span class="line">  config: <span class="string">'./src/theme.scss'</span>,</span><br><span class="line">  out: <span class="string">'./src/theme'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在 <code>package.json</code> 中增加 <code>scripts</code> 指令</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"theme"</span>: <span class="string">"node theme.js"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过 <code>npm run theme</code> 指令来编译主题了。编译过程：</p>
+<ul>
+<li>运行该指令初始化主题变量文件 <code>theme.scss</code>。</li>
+<li>根据实际需要修改这个文件里主题样式。</li>
+<li>再运行该指令编译输出自定义的主题样式文件放在 <code>theme</code> 目录下。</li>
+</ul>
+<p>这样就完成了所有自定义主题样式的构建。要想将这些自定义样式随着组件按需引入，需要将 <code>.babelrc</code> 文件中按需引入插件 <code>babel-plugin-component</code> 参数 <code>styleLibraryName</code> 从原本的 <code>element-ui</code> 默认样式目录变成现在自定义目录 <code>~src/theme</code>。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">"plugins": [</span><br><span class="line">    "transform-vue-jsx",</span><br><span class="line">    "transform-runtime",</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"component"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"libraryName"</span>: <span class="string">"element-ui"</span>,</span><br><span class="line">        <span class="attr">"styleLibraryName"</span>: <span class="string">"~src/theme"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+<p>一切准备就绪，项目打包，打包后的 <code>css</code> 文件中只有唯一自定义样式，没有了默认样式，也不存在没被引入组件的样式，实现了我们预期的纯净的自定义样式！</p>
+<p><img src="/gb/element-replace-theme/7.png" alt="不存在默认样式"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Hash: c442bcf9d471bddfdccf</span><br><span class="line">Version: webpack <span class="number">3.12</span><span class="number">.0</span></span><br><span class="line">Time: <span class="number">10174</span>ms</span><br><span class="line">                                                  Asset       Size  Chunks             Chunk Names</span><br><span class="line">    <span class="keyword">static</span>/css/app<span class="number">.52</span>d411d0c1b344066ec1f456355aa7b9.css    <span class="number">38.8</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">                <span class="keyword">static</span>/fonts/element-icons<span class="number">.535877</span>f.woff    <span class="number">28.2</span> kB          [emitted]</span><br><span class="line">               <span class="keyword">static</span>/js/vendor.befb0a8962f74af4b7e2.js     <span class="number">157</span> kB       <span class="number">0</span>  [emitted]  vendor</span><br><span class="line">                  <span class="keyword">static</span>/js/app<span class="number">.43</span>c09c1f16b24d371e07.js    <span class="number">3.82</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">             <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js  <span class="number">857</span> bytes       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">                 <span class="keyword">static</span>/fonts/element-icons<span class="number">.732389</span>d.ttf      <span class="number">56</span> kB          [emitted]</span><br><span class="line"><span class="keyword">static</span>/css/app<span class="number">.52</span>d411d0c1b344066ec1f456355aa7b9.css.map    <span class="number">81.3</span> kB          [emitted]</span><br><span class="line">           <span class="keyword">static</span>/js/vendor.befb0a8962f74af4b7e2.js.map     <span class="number">776</span> kB       <span class="number">0</span>  [emitted]  vendor</span><br><span class="line">              <span class="keyword">static</span>/js/app<span class="number">.43</span>c09c1f16b24d371e07.js.map    <span class="number">17.1</span> kB       <span class="number">1</span>  [emitted]  app</span><br><span class="line">         <span class="keyword">static</span>/js/manifest<span class="number">.2</span>ae2e69a05c33dfc65f8.js.map    <span class="number">4.97</span> kB       <span class="number">2</span>  [emitted]  manifest</span><br><span class="line">                                             index.html  <span class="number">506</span> bytes          [emitted]</span><br></pre></td></tr></table></figure>
+<p>由于样式是纯净的，<code>css</code> 文件大小从原来完全引入的 <code>234KB</code> 变成 <code>38.8KB</code>，进一步减小了打包大小。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以上实验分析我们可以得知，<code>element-ui</code> 要想实现按需引入和纯净的主题样式：</p>
+<ul>
+<li>首先通过 <code>babel-plugin-component</code> 插件进行按需引入。</li>
+<li>再用 <code>element-theme</code> 工具生成样变量文件。</li>
+<li>然后根据项目需求修改自定义样式，依据该文件构建生成所有样式。</li>
+<li>最后将按需引入样式 <code>styleLibraryName</code> 指向自定义样式目录。</li>
+</ul>
+<p>如果对样式提取要求不高，可直接采取变量覆盖形式（同时存在默认样式）。<br>还有不清楚可以戳<a href="https://github.com/wuwhs/element-replace-theme" target="_blank" rel="noopener">这里</a>查看案例源码，赠人 star，手有余香。</p>
+<p>完~ps：个人见解有限，欢迎指正。</p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/16/inter-vue/" rel="bookmark">inter-vue</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/09/10/vue的数据驱动原理及简单实现/" rel="bookmark">vue的数据驱动原理及简单实现</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/05/12/vue3-composition-api/" rel="bookmark">vue3.0 修炼手册</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wuwhs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wuwhs.gitee.io/2020/10/12/element-replace-theme/" title="彻底学会element-ui按需引入和纯净主题定制">https://wuwhs.gitee.io/2020/10/12/element-replace-theme/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+            <a href="/tags/element-ui/" rel="tag"># element-ui</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/07/js-image-compressor/" rel="next" title="了解JS压缩图片，这一篇就够了">
+                <i class="fa fa-chevron-left"></i> 了解JS压缩图片，这一篇就够了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/04/FE-resource/" rel="prev" title="FE-resource">
+                FE-resource <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="wuwhs" />
+            
+              <p class="site-author-name" itemprop="name">wuwhs</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wuwhs" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://segmentfault.com/u/wuwhs" target="_blank" title="Segmentfault" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整引入"><span class="nav-number">2.</span> <span class="nav-text">完整引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按需引入组件样式"><span class="nav-number">3.</span> <span class="nav-text">按需引入组件样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按需引入组件"><span class="nav-number">4.</span> <span class="nav-text">按需引入组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次优化后打包分析"><span class="nav-number">5.</span> <span class="nav-text">第一次优化后打包分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再次打包优化尝试"><span class="nav-number">6.</span> <span class="nav-text">再次打包优化尝试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题-覆盖样式"><span class="nav-number">7.</span> <span class="nav-text">更换主题-覆盖样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换主题-纯净样式"><span class="nav-number">8.</span> <span class="nav-text">更换主题-纯净样式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主题和主题工具安装"><span class="nav-number">8.1.</span> <span class="nav-text">主题和主题工具安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题构建"><span class="nav-number">8.2.</span> <span class="nav-text">主题构建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-CLI-构建方式"><span class="nav-number">8.2.1.</span> <span class="nav-text">通过 CLI 构建方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-Node-API-构建方式"><span class="nav-number">8.2.2.</span> <span class="nav-text">通过 Node API 构建方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用-Node-API-构建自定义主题"><span class="nav-number">8.2.3.</span> <span class="nav-text">应用 Node API 构建自定义主题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">copyright by wuwh's blog</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

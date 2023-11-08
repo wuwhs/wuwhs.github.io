@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>reduce</title>
+    <style>
+      .g-scroll {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        overflow: auto;
+        transform: rotate(-90deg);
+      }
+      /* .g-pesudo {
+        width: 200px;
+        height: 200px;
+      } */
+      .g-content {
+        position: absolute;
+        left: 200px;
+        top: 0;
+        width: 400px;
+        height: 200px;
+        background-color: #7fffd4;
+        transform: rotate(90deg);
+        transform-origin: 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="g-scroll">
+      <!-- <div class="g-pesudo"></div> -->
+      <div class="g-content">
+        var numbers = [1, 2, 3, 4, 5, 6, 7]; var everyResult = numbers.every(function (item, index, array) { return
+        (item > 2); }); console.log(everyResult); // false
+      </div>
+    </div>
+    <script>
+      /* // every
+      var numbers = [1, 2, 3, 4, 5, 6, 7];
+      var everyResult = numbers.every(function (item, index, array) {
+        return (item > 2);
+      });
+      console.log(everyResult); // false
+
+      // some
+      someResult = numbers.some(function (item, index, array) {
+        return (item > 2);
+      });
+      console.log(someResult); // true
+
+      // filter
+      var filterResult = numbers.filter(function (item, index, array) {
+        return (item > 2);
+      });
+      console.log(filterResult); // [3, 4, 5, 6, 7]
+
+      // map
+      var mapResult = numbers.map(function (item, index, array) {
+        return item * 2;
+      });
+      console.log(mapResult); // [2, 4, 6, 8, 10, 12, 14] */
+
+      /* var numbers = [10, 20, 30, 40, 50];
+      var result = numbers.reduce(function (prev, cur, index) {
+        cur = cur * 2;
+        if (cur > 60) {
+          prev.push(cur);
+        }
+        return prev;
+      }, []);
+      console.log(result); // [80, 100] */
+
+      /* var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
+      var letterObj = letters.reduce(function (prev, cur) {
+        prev[cur] = prev[cur] ? ++prev[cur] : 1;
+        return prev;
+      }, {});
+      console.log(letterObj); // {A: 1, B: 2, C: 4} */
+
+      /* const person = {
+        name: 'jazz',
+        gender: 'male',
+        age: 24
+      };
+      const personUnknowAge = Object.keys(person).filter((key) => {
+        return key !== 'age';
+      })
+      .map((key) => {
+        return {
+          [key]: person[key]
+        }
+      })
+      .reduce((prev, cur) => {
+        return {...prev, ...cur};
+      }, {});
+      console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
+
+      /* const person = {
+        name: 'jazz',
+        gender: 'male',
+        age: 24
+      };
+
+      const personUnknowAge = (({name, gender}) => ({name, gender}))(person);
+      console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
+
+      /* const person = {
+        name: 'jazz',
+        gender: 'male',
+        age: 24
+      };
+      let { age, ...personUnknowAge } = person;
+      console.log(personUnknowAge); // {name: "jazz", gender: "male"} */
+
+      // var letters = ['A', 'B', 'C', 'C', 'B', 'C', 'C'];
+      // var letterArr = letters.reduce(function (acc, cur) {
+      //   if (acc.indexOf(cur) === -1) {
+      //     acc.push(cur);
+      //   }
+      //   return acc;
+      // }, []);
+      // console.log(letterArr); //  ["A", "B", "C"]
+
+      // var a = []
+      // if (true) {
+      //   a = 1
+      //   function a() {}
+      //   a = 21
+      // }
+      // console.log(a)
+
+      /*
+        const obj = {
+          a: 1,
+          b: '2',
+          [Symbol.for('foo')]: 'foo',
+          [Symbol.for('bar')]: 'bar'
+        }
+
+        const target = Object.create(obj)
+        target.c = true
+        target[Symbol.for('zoo')] = 'zoo'
+
+        Object.defineProperty(target, 'f', {
+          writable: false,
+          enumerable: false,
+          configurable: true,
+          value: 'f'
+        })
+
+        const handler = {
+          ownKeys(target) {
+            return Reflect.ownKeys(target)
+          }
+        }
+
+        const proxy = new Proxy(target, handler)
+
+        console.log('Object.getOwnPropertyNames: ', Object.getOwnPropertyNames(proxy))
+        console.log('Object.getOwnPropertySymbols: ', Object.getOwnPropertySymbols(proxy))
+        console.log('Object.keys: ', Object.keys(proxy))
+        console.log('Reflect.ownKeys: ', Reflect.ownKeys(proxy))
+
+        for (let key in proxy) {
+          console.log('key: ', key)
+        }
+        */
+
+      function sayHi() {
+        var greeting = `hi, I'm ${sayName.call(this)}`
+        console.log(greeting)
+      }
+
+      function sayName() {
+        return this.name.toLowerCase()
+      }
+
+      var me = { name: 'Winfar' }
+      sayHi.call(me)
+    </script>
+  </body>
+</html>

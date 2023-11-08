@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Front-end-Developer-Questions FE-interview 介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？ 有两种：IE 盒模型、W3C 盒模型 盒模型：内容（content）、填充（padding）、边框（border）、边界（margin） 区别：IE 盒模型box-sizing为border-box，把 border 和 padding">
+<meta name="keywords" content="css,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试之css">
+<meta property="og:url" content="https://wuwhs.gitee.io/2018/03/04/inter-css/index.html">
+<meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="Front-end-Developer-Questions FE-interview 介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？ 有两种：IE 盒模型、W3C 盒模型 盒模型：内容（content）、填充（padding）、边框（border）、边界（margin） 区别：IE 盒模型box-sizing为border-box，把 border 和 padding">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/3B3F205479D64FC89D30ECFC15B8AE35/14124">
+<meta property="og:updated_time" content="2022-09-27T03:58:43.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试之css">
+<meta name="twitter:description" content="Front-end-Developer-Questions FE-interview 介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？ 有两种：IE 盒模型、W3C 盒模型 盒模型：内容（content）、填充（padding）、边框（border）、边界（margin） 区别：IE 盒模型box-sizing为border-box，把 border 和 padding">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/3B3F205479D64FC89D30ECFC15B8AE35/14124">
+
+
+
+
+
+
+  <link rel="canonical" href="https://wuwhs.gitee.io/2018/03/04/inter-css/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>前端面试之css | wuwh's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fa314f7747528620032d3194b7fccc9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuwh's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Make progress every day</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">71</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.gitee.io/2018/03/04/inter-css/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端面试之css
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-04 22:42:30" itemprop="dateCreated datePublished" datetime="2018-03-04T22:42:30+08:00">2018-03-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-27 11:58:43" itemprop="dateModified" datetime="2022-09-27T11:58:43+08:00">2022-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试/" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers" target="_blank" rel="noopener">Front-end-Developer-Questions</a></p>
+<p><a href="https://github.com/qiu-deqing/FE-interview" target="_blank" rel="noopener">FE-interview</a></p>
+<h3 id="介绍一下标准的-CSS-的盒子模型？低版本-IE-的盒子模型有什么不同的？"><a href="#介绍一下标准的-CSS-的盒子模型？低版本-IE-的盒子模型有什么不同的？" class="headerlink" title="介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？"></a>介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？</h3><ol>
+<li>有两种：IE 盒模型、W3C 盒模型</li>
+<li>盒模型：内容（content）、填充（padding）、边框（border）、边界（margin）</li>
+<li>区别：IE 盒模型<code>box-sizing</code>为<code>border-box</code>，把 border 和 padding 计算在内</li>
+</ol>
+<h3 id="CSS-选择符有哪些？哪些属性可以继承？"><a href="#CSS-选择符有哪些？哪些属性可以继承？" class="headerlink" title="CSS 选择符有哪些？哪些属性可以继承？"></a>CSS 选择符有哪些？哪些属性可以继承？</h3><p>选择符有：</p>
+<ol>
+<li>id 选择器（#myid）</li>
+<li>类选择器（.myclass）</li>
+<li>标签选择器（div, h1, p）</li>
+<li>相邻选择器（h1 + p）</li>
+<li>子选择器（ul &gt; li）</li>
+<li>后代选择器（li a）</li>
+<li>通配符选择器（*）</li>
+<li>属性选择器（input[type=”radio”]）</li>
+<li>伪类选择器（a:hover, li:nth-child）</li>
+</ol>
+<p>可继承的样式：</p>
+<ul>
+<li>文字排版相关属性<ul>
+<li>font</li>
+<li>word-break</li>
+<li>letter-spacing</li>
+<li>text-align</li>
+<li>text-rendering</li>
+<li>word-space</li>
+<li>text-indent</li>
+<li>text-transform</li>
+<li>text-shadow</li>
+</ul>
+</li>
+<li>color</li>
+<li>line-height</li>
+<li>cursor</li>
+<li>visibility</li>
+</ul>
+<p>不可继承样式：<br>border、padding、margin、width、height</p>
+<h3 id="CSS-优先级算法如何计算？"><a href="#CSS-优先级算法如何计算？" class="headerlink" title="CSS 优先级算法如何计算？"></a>CSS 优先级算法如何计算？</h3><ol>
+<li>优先级就近原则，同权重情况下样式定义最近者为准</li>
+<li>载入样式以最后载入的定位为准</li>
+</ol>
+<p><strong>优先级</strong></p>
+<p>同权重: 内联样式表（标签内部）&gt; 嵌入样式表（当前文件中）&gt; 外部样式表（外部文件中）。</p>
+<p>!important &gt; id &gt; class &gt; tag<br>important 比 内联优先级高</p>
+<h3 id="css-sprite-是什么，有什么优缺点？"><a href="#css-sprite-是什么，有什么优缺点？" class="headerlink" title="css sprite 是什么，有什么优缺点？"></a>css sprite 是什么，有什么优缺点？</h3><p>将多个小图片拼接到一张图片种。通过<code>background-position</code>和元素尺寸调节显示的背景图片。</p>
+<p>优点：</p>
+<ul>
+<li>减少 HTTP 请求次数和图片总体大小，提高页面加载速度</li>
+<li>更换风格方便，只需再一张或几张图片上修改颜色</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>图片合并麻烦</li>
+</ul>
+<h3 id="IE6-浏览器有哪些常见的-bug-缺陷或者与标准不一致的地方-如何解决？"><a href="#IE6-浏览器有哪些常见的-bug-缺陷或者与标准不一致的地方-如何解决？" class="headerlink" title="IE6 浏览器有哪些常见的 bug,缺陷或者与标准不一致的地方,如何解决？"></a>IE6 浏览器有哪些常见的 bug,缺陷或者与标准不一致的地方,如何解决？</h3><ul>
+<li><p>IE6 不支持 min-height，解决办法使用 css hack：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.target</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  height: 100px; // IE6下内容高度超过会自动扩展高度</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ol 内 li 的序号全为 1，不递增。解决方法：为 li 设置样式<code>display: list-item;</code></p>
+</li>
+<li><p>未定位父元素<code>overflow: auto;</code>，包含<code>position: relative;</code>子元素，子元素高于父元素时会溢出。解决办法：</p>
+<ol>
+<li>子元素去掉<code>position: relative；</code>；</li>
+<li>不能为子元素去掉定位时，父元素<code>position: relative；</code>;</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-class">.outer</span> &#123;</span></span><br><span class="line"><span class="undefined">    width: 215px;</span></span><br><span class="line"><span class="undefined">    height: 100px;</span></span><br><span class="line"><span class="undefined">    border: 1px solid red;</span></span><br><span class="line"><span class="undefined">    overflow: auto;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">position</span>: <span class="selector-tag">relative</span>; <span class="comment">/* 修复bug */</span></span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="css">  <span class="selector-class">.inner</span> &#123;</span></span><br><span class="line"><span class="undefined">    width: 100px;</span></span><br><span class="line"><span class="undefined">    height: 200px;</span></span><br><span class="line"><span class="undefined">    background-color: purple;</span></span><br><span class="line"><span class="undefined">    position: relative;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"outer"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IE6 只支持 a 标签的:hover 伪类，解决方法：使用 js 为元素监听 mouseenter，mouseleave 事件，添加类实现效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">  <span class="selector-class">.p</span><span class="selector-pseudo">:hover</span>,</span></span><br><span class="line"><span class="css">  <span class="selector-class">.hover</span> &#123;</span></span><br><span class="line"><span class="undefined">    background: purple;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"p"</span> <span class="attr">id</span>=<span class="string">"target"</span>&gt;</span>aaaa bbbbb<span class="tag">&lt;<span class="name">span</span>&gt;</span>DDDDDDDDDDDd<span class="tag">&lt;/<span class="name">span</span>&gt;</span> aaaa lkjlkjdf j<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">elem, cls</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">if</span> (elem.className) &#123;</span></span><br><span class="line"><span class="javascript">      elem.className += <span class="string">' '</span> + cls</span></span><br><span class="line"><span class="javascript">    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">      elem.className = cls</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">removeClass</span>(<span class="params">elem, cls</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> className = <span class="string">' '</span> + elem.className + <span class="string">' '</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">' +'</span> + cls + <span class="string">' +'</span>, <span class="string">'g'</span>)</span></span><br><span class="line"><span class="javascript">    elem.className = className.replace(reg, <span class="string">' '</span>).replace(<span class="regexp">/^ +| +$/</span>, <span class="string">''</span>)</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> target = <span class="built_in">document</span>.getElementById(<span class="string">'target'</span>)</span></span><br><span class="line"><span class="javascript">  <span class="keyword">if</span> (target.attachEvent) &#123;</span></span><br><span class="line"><span class="javascript">    target.attachEvent(<span class="string">'onmouseenter'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      addClass(target, <span class="string">'hover'</span>)</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    target.attachEvent(<span class="string">'onmouseleave'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      removeClass(target, <span class="string">'hover'</span>)</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IE5-8 不支持 opacity，解决办法：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.opacity</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.4</span></span><br><span class="line">    filter: <span class="built_in">alpha</span>(opacity=60); <span class="comment">/* for IE5-7 */</span></span><br><span class="line">    <span class="attribute">-ms-filter</span>: <span class="string">"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)"</span>; <span class="comment">/* for IE 8*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IE6 在设置 height 小于 font-size 时高度值为 font-size，解决办法：<code>font-size: 0;</code></p>
+</li>
+<li><p>IE6 不支持 PNG 透明背景，解决办法: IE6 下使用 gif 图片</p>
+</li>
+<li><p>IE6-7 不支持 display: inline-block 解决办法：设置 inline 并触发 hasLayout</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">inline-block</span>;</span><br><span class="line">*<span class="selector-tag">display</span>: <span class="selector-tag">inline</span>;</span><br><span class="line">*<span class="selector-tag">zoom</span>: 1;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IE6 下浮动元素在浮动方向上与父元素边界接触元素的外边距会加倍。解决办法： 1. 使用 padding 控制间距。 2. 浮动元素<code>display: inline;</code>这样解决问题且无任何副作用：css 标准规定浮动元素<code>display:inline</code>会自动调整为 block</p>
+</li>
+<li><p>通过为块级元素设置宽度和左右 margin 为 auto 时，IE6 不能实现水平居中，解决方法：为父元素设置<code>text-align: center;</code></p>
+</li>
+</ul>
+<h3 id="CSS3-新增伪类有那些？"><a href="#CSS3-新增伪类有那些？" class="headerlink" title="CSS3 新增伪类有那些？"></a>CSS3 新增伪类有那些？</h3><ul>
+<li>p:first-of-type 选择属于其父元素的首个<code>&lt;p&gt;</code>元素的每个<code>&lt;p&gt;</code>元素。</li>
+<li>p:last-of-type 选择属于其父元素的最后<code>&lt;p&gt;</code>元素的每个<code>&lt;p&gt;</code>元素。</li>
+<li>p:only-of-type 选择属于其父元素唯一的<code>&lt;p&gt;</code> 元素的每个<code>&lt;p&gt;</code>元素。</li>
+<li>p:only-child 选择属于其父元素的唯一子元素的每个<code>&lt;p&gt;</code>元素。</li>
+<li><p>p:nth-child(2) 选择属于其父元素的第二个子元素的每个<code>&lt;p&gt;</code>元素。</p>
+</li>
+<li><p>::after 在元素之前添加内容,也可以用来做清除浮动。</p>
+</li>
+<li>::before 在元素之后添加内容</li>
+<li>:enabled 表单控件启用或激活状态</li>
+<li>:disabled 控制表单控件的禁用状态。</li>
+<li>:checked 单选框或复选框被选中。</li>
+</ul>
+<h3 id="实现水平、垂直居中？"><a href="#实现水平、垂直居中？" class="headerlink" title="实现水平、垂直居中？"></a>实现水平、垂直居中？</h3><p><a href="https://segmentfault.com/a/1190000013391021" target="_blank" rel="noopener">水平且垂直居中方法（9 种）</a></p>
+<h3 id="position取值有哪几种？"><a href="#position取值有哪几种？" class="headerlink" title="position取值有哪几种？"></a><code>position</code>取值有哪几种？</h3><ol>
+<li>static（默认）：元素框正常生成。块级元素生成一个矩形框，作为文档流的一部分；行内元素则会创建一个或多个行框，置于父级元素中。</li>
+<li>relative：元素框相对于之前正常文档流中的位置发生偏移，并且原先的位置仍然被占据。发生偏移的时候，可能会覆盖其他元素。</li>
+<li>absolute：元素框不再占有文档位置，并且相对于包含块进行偏移（所谓包含块就是最近一级外层元素 position 不为 static 的元素）。</li>
+<li>fixed：元素框不再占有文档流位置，并且相对于视窗进行定位。</li>
+<li>sticky：css3 新增属性值，粘性定位，相当于 relative 和 fixed 的混合。最初会被当作是 relative，相对原来位置进行偏移；一旦超过一定的阈值，会被当成 fixed 定位，相对于视口定位。</li>
+</ol>
+<h3 id="描述display-block-和display-inline-的具体区别？"><a href="#描述display-block-和display-inline-的具体区别？" class="headerlink" title="描述display: block;和display: inline;的具体区别？"></a>描述<code>display: block;</code>和<code>display: inline;</code>的具体区别？</h3><p><code>block</code>元素特点</p>
+<ol>
+<li>处于常规流中时，如果 width 没有设置，会自动填充满父容器</li>
+<li>可以应用 margin/padding</li>
+<li>在没有设置高度的情况下会扩展高度以包含常规流中的子元素</li>
+<li>处于常规流中时布局时在前后元素位置之间（独占一个水平空间）</li>
+<li>忽略<code>vertical-align</code></li>
+</ol>
+<p><code>inline</code>元素特点</p>
+<ol>
+<li>水平方向上根据 direction 依次布局</li>
+<li>不会在元素前后进行换行</li>
+<li>受 white-space 控制</li>
+<li>margin/padding 在竖直方向上无效，水平方向上有效</li>
+<li>width/height 属性对非替换行内元素无效，宽度由元素内容决定</li>
+<li>非替换行内元素的行框高由 line-height 确定，替换行内元素的行框高由 height,margin,padding,border 决定</li>
+<li>浮动或绝对定位时会转换为 block</li>
+<li><code>vertical-align</code>属性生效</li>
+</ol>
+<h3 id="用纯-CSS-创建一个三角形的原理是什么？"><a href="#用纯-CSS-创建一个三角形的原理是什么？" class="headerlink" title="用纯 CSS 创建一个三角形的原理是什么？"></a>用纯 CSS 创建一个三角形的原理是什么？</h3><p>一边设置颜色，另三边透明（颜色设为<code>transparent</code>）</p>
+<p><a href="https://segmentfault.com/a/1190000013484609" target="_blank" rel="noopener">纯 css 三角形及其应用</a></p>
+<h3 id="Chrome-中文界面下默认会将小于-12px-的文本强制按照-12px-显示？"><a href="#Chrome-中文界面下默认会将小于-12px-的文本强制按照-12px-显示？" class="headerlink" title="Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示？"></a>Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示？</h3><p>css 属性：<code>-webkit-text-size-adjust: none;</code></p>
+<h3 id="为什么要初始化-CSS-样式？"><a href="#为什么要初始化-CSS-样式？" class="headerlink" title="为什么要初始化 CSS 样式？"></a>为什么要初始化 CSS 样式？</h3><p>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对 CSS 初始化往往会出现浏览器之间的页面显示差异。当然，初始化样式会对 SEO 有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。</p>
+<p>淘宝初始样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>,</span><br><span class="line"><span class="selector-tag">h1</span>,</span><br><span class="line"><span class="selector-tag">h2</span>,</span><br><span class="line"><span class="selector-tag">h3</span>,</span><br><span class="line"><span class="selector-tag">h4</span>,</span><br><span class="line"><span class="selector-tag">h5</span>,</span><br><span class="line"><span class="selector-tag">h6</span>,</span><br><span class="line"><span class="selector-tag">hr</span>,</span><br><span class="line"><span class="selector-tag">p</span>,</span><br><span class="line"><span class="selector-tag">blockquote</span>,</span><br><span class="line"><span class="selector-tag">dl</span>,</span><br><span class="line"><span class="selector-tag">dt</span>,</span><br><span class="line"><span class="selector-tag">dd</span>,</span><br><span class="line"><span class="selector-tag">ul</span>,</span><br><span class="line"><span class="selector-tag">ol</span>,</span><br><span class="line"><span class="selector-tag">li</span>,</span><br><span class="line"><span class="selector-tag">pre</span>,</span><br><span class="line"><span class="selector-tag">form</span>,</span><br><span class="line"><span class="selector-tag">fieldset</span>,</span><br><span class="line"><span class="selector-tag">legend</span>,</span><br><span class="line"><span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-tag">input</span>,</span><br><span class="line"><span class="selector-tag">textarea</span>,</span><br><span class="line"><span class="selector-tag">th</span>,</span><br><span class="line"><span class="selector-tag">td</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span>,</span><br><span class="line"><span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-tag">input</span>,</span><br><span class="line"><span class="selector-tag">select</span>,</span><br><span class="line"><span class="selector-tag">textarea</span> &#123;</span><br><span class="line">  <span class="attribute">font</span>: <span class="number">12px</span>/<span class="number">1.5</span>tahoma, arial, \<span class="number">5</span>b8b\<span class="number">4</span>f53;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span>,</span><br><span class="line"><span class="selector-tag">h2</span>,</span><br><span class="line"><span class="selector-tag">h3</span>,</span><br><span class="line"><span class="selector-tag">h4</span>,</span><br><span class="line"><span class="selector-tag">h5</span>,</span><br><span class="line"><span class="selector-tag">h6</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">address</span>,</span><br><span class="line"><span class="selector-tag">cite</span>,</span><br><span class="line"><span class="selector-tag">dfn</span>,</span><br><span class="line"><span class="selector-tag">em</span>,</span><br><span class="line"><span class="selector-tag">var</span> &#123;</span><br><span class="line">  <span class="attribute">font-style</span>: normal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">code</span>,</span><br><span class="line"><span class="selector-tag">kbd</span>,</span><br><span class="line"><span class="selector-tag">pre</span>,</span><br><span class="line"><span class="selector-tag">samp</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: couriernew, courier, monospace;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">small</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">ul</span>,</span><br><span class="line"><span class="selector-tag">ol</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">sup</span> &#123;</span><br><span class="line">  <span class="attribute">vertical-align</span>: text-top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">sub</span> &#123;</span><br><span class="line">  <span class="attribute">vertical-align</span>: text-bottom;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">legend</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">fieldset</span>,</span><br><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">button</span>,</span><br><span class="line"><span class="selector-tag">input</span>,</span><br><span class="line"><span class="selector-tag">select</span>,</span><br><span class="line"><span class="selector-tag">textarea</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">table</span> &#123;</span><br><span class="line">  <span class="attribute">border-collapse</span>: collapse;</span><br><span class="line">  <span class="attribute">border-spacing</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="position-跟-display、margin-collapse、overflow、float-这些特性相互叠加后会怎么样？"><a href="#position-跟-display、margin-collapse、overflow、float-这些特性相互叠加后会怎么样？" class="headerlink" title="position 跟 display、margin collapse、overflow、float 这些特性相互叠加后会怎么样？"></a>position 跟 display、margin collapse、overflow、float 这些特性相互叠加后会怎么样？</h3><ul>
+<li>如果元素的 display 为 none，那么元素不被渲染，position 和 float 不起作用</li>
+<li>如果元素拥有<code>position:absolute;</code>或者<code>position:fixed;</code>属性那么元素将为绝对定位，float 不起作用</li>
+<li>如果元素 float 属性不是 none,元素会脱离文档流，根据 float 属性值来显示</li>
+<li>有浮动、绝对定位、inline-block 属性的元素，margin 不会和垂直方向上的其他元素 margin 折叠</li>
+</ul>
+<h3 id="css-定义权重"><a href="#css-定义权重" class="headerlink" title="css 定义权重"></a>css 定义权重</h3><p>以下是权重的规则：标签的权重为 1，class 的权重为 10，id 的权重为 100</p>
+<h3 id="zoom-1-的清除浮动原理？"><a href="#zoom-1-的清除浮动原理？" class="headerlink" title="zoom:1 的清除浮动原理？"></a>zoom:1 的清除浮动原理？</h3><ul>
+<li>清除浮动，触发 hasLayout；</li>
+<li>Zoom 属性是 IE 浏览器的专有属性，它可以设置或检索对象的缩放比例。解决 ie 下比较奇葩的 bug。</li>
+</ul>
+<h3 id="移动端布局有哪几种方法？"><a href="#移动端布局有哪几种方法？" class="headerlink" title="移动端布局有哪几种方法？"></a>移动端布局有哪几种方法？</h3><p>待写…</p>
+<h3 id="CSS-优化、提高性能的方法有哪些？"><a href="#CSS-优化、提高性能的方法有哪些？" class="headerlink" title="CSS 优化、提高性能的方法有哪些？"></a>CSS 优化、提高性能的方法有哪些？</h3><ul>
+<li>关键选择器（key selector）。选择器的最后面的部分为关键选择器（即用来匹配目标元素的部分）；</li>
+<li>如果规则拥有 ID 选择器作为其关键选择器，则不要为规则增加标签。过滤掉无关的规则（这样样式系统就不会浪费时间去匹配它们了）；</li>
+<li>提取项目的通用公有样式，增强可复用性，按模块编写组件；增强项目的协同开发性、可维护性和可扩展性;</li>
+<li>使用预处理工具或构建工具（gulp 对 css 进行语法检查、自动补前缀、打包压缩、自动优雅降级）；</li>
+</ul>
+<h3 id="margin-和-padding-分别适合什么场景使用？"><a href="#margin-和-padding-分别适合什么场景使用？" class="headerlink" title="margin 和 padding 分别适合什么场景使用？"></a>margin 和 padding 分别适合什么场景使用？</h3><p>margin 是用来隔开元素与元素的间距；padding 是用来隔开元素与内容的间隔。</p>
+<h3 id="before-和-before中双冒号和单冒号-有什么区别？解释一下这-2-个伪元素的作用。"><a href="#before-和-before中双冒号和单冒号-有什么区别？解释一下这-2-个伪元素的作用。" class="headerlink" title="::before 和 :before中双冒号和单冒号 有什么区别？解释一下这 2 个伪元素的作用。"></a><code>::before</code> 和 <code>:before</code>中双冒号和单冒号 有什么区别？解释一下这 2 个伪元素的作用。</h3><p><code>:</code>表示伪类，<code>::</code>表示伪元素</p>
+<p>w3c 定义：</p>
+<ul>
+<li>CSS 伪类用于向某些选择器添加特殊的效果</li>
+<li>css 伪元素用于将特殊的效果添加到某些选择器</li>
+</ul>
+<p>伪类偏选择，伪元素偏元素</p>
+<p>伪类有：<code>:active</code>, <code>:focus</code>, <code>:hover</code>, <code>:link</code>, <code>:visited</code>, <code>:first-child</code>, <code>:lang</code></p>
+<p>伪元素有：<code>::first-letter</code>, <code>::first-line</code>, <code>::before</code>, <code>::after</code></p>
+<h3 id="font-style-属性可以让它赋值为“oblique”-oblique-是什么意思？"><a href="#font-style-属性可以让它赋值为“oblique”-oblique-是什么意思？" class="headerlink" title="font-style 属性可以让它赋值为“oblique” oblique 是什么意思？"></a>font-style 属性可以让它赋值为“oblique” oblique 是什么意思？</h3><p>让没有倾斜的字体倾斜</p>
+<h3 id="让页面里的字体变清晰，变细用-CSS-怎么做？"><a href="#让页面里的字体变清晰，变细用-CSS-怎么做？" class="headerlink" title="让页面里的字体变清晰，变细用 CSS 怎么做？"></a>让页面里的字体变清晰，变细用 CSS 怎么做？</h3><p><code>-webkit-font-smoothing: antialiased;</code></p>
+<h3 id="如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）"><a href="#如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）" class="headerlink" title="如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）"></a>如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）</h3><p>多数显示器默认频率是 60Hz，即 1 秒刷新 60 次，所以理论上最小间隔为<code>1/60*1000ms =16.7ms</code></p>
+<h3 id="display-inline-block-什么时候会显示间隙？-携程"><a href="#display-inline-block-什么时候会显示间隙？-携程" class="headerlink" title="display:inline-block 什么时候会显示间隙？(携程)"></a><code>display:inline-block</code> 什么时候会显示间隙？(携程)</h3><p>移除空格、使用<code>margin</code>负值、使用<code>font-size:0</code>、<code>letter-spacing</code>、<code>word-spacing</code></p>
+<h3 id="什么是-Cookie-隔离？（或者说：请求资源的时候不要让它带-cookie-怎么做）"><a href="#什么是-Cookie-隔离？（或者说：请求资源的时候不要让它带-cookie-怎么做）" class="headerlink" title="什么是 Cookie 隔离？（或者说：请求资源的时候不要让它带 cookie 怎么做）"></a>什么是 Cookie 隔离？（或者说：请求资源的时候不要让它带 cookie 怎么做）</h3><p>如果静态文件都放在主域名下，那静态文件请求的时候都带有的 cookie 的数据提交给 server 的，非常浪费流量，<br>所以不如隔离开。</p>
+<p>因为 cookie 有域的限制，因此不能跨域提交请求，故使用非主要域名的时候，请求头中就不会带有 cookie 数据，<br>这样可以降低请求头的大小，降低请求时间，从而达到降低整体请求延时的目的。</p>
+<h3 id="style-标签写在-body-后与-body-前有什么区别？"><a href="#style-标签写在-body-后与-body-前有什么区别？" class="headerlink" title="style 标签写在 body 后与 body 前有什么区别？"></a>style 标签写在 body 后与 body 前有什么区别？</h3><p>标准一直是规定 style 元素不应出现在 body 元素中，不过网页浏览器一直有容错设计。如果 style 元素出现在 body 元素，最终效果和 style 元素出现在 head 里是一样的。但是可能引起 FOUC、重绘或重新布局。</p>
+<h3 id="什么是-CSS-预处理器-后处理器？"><a href="#什么是-CSS-预处理器-后处理器？" class="headerlink" title="什么是 CSS 预处理器 / 后处理器？"></a>什么是 CSS 预处理器 / 后处理器？</h3><ul>
+<li>预处理器例如：LESS、Sass、Stylus，用来预编译 Sass 或 less，增强了 css 代码的复用性，还有层级、mixin、变量、循环、函数等，具有很方便的 UI 组件模块化开发能力，极大的提高工作效率。</li>
+<li>后处理器例如：PostCSS，通常被视为在完成的样式表中根据 CSS 规范处理 CSS，让其更有效；目前最常做的是给 CSS 属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。</li>
+</ul>
+<h3 id="display-none-和visibility-hidden-的区别？"><a href="#display-none-和visibility-hidden-的区别？" class="headerlink" title="display: none;和visibility: hidden;的区别？"></a><code>display: none;</code>和<code>visibility: hidden;</code>的区别？</h3><p>共同点：</p>
+<ul>
+<li>都让元素不可见</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li><code>display: none;</code>会让元素完全从渲染树中消失，渲染的时候不占据任何空间；<code>visibility: hidden;</code>不会让元素从渲染树消失，元素仍占据空间，只是内容不可见。</li>
+<li><code>display: none;</code>是继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示；<code>visibility: hidden;</code>是继承属性，子孙节点消失由于继承了该属性，通过设置<code>visibility: visible;</code>可以让其显示。</li>
+<li>修改常规流中元素的<code>display</code>通常会造成文档重排。修改<code>visibility</code>只会造成元素的重绘。</li>
+<li>读屏器不会读取<code>display: none;</code>元素内容，但会读取<code>visibility: hidden;</code>元素内容。</li>
+</ul>
+<h3 id="link和-import的区别？"><a href="#link和-import的区别？" class="headerlink" title="link和@import的区别？"></a><code>link</code>和<code>@import</code>的区别？</h3><ul>
+<li><code>link</code>是 HTML 方式，<code>@import</code>是 css 方式。</li>
+<li><code>link</code>最大限度支持并行下载，<code>@import</code>过多嵌套导致串行下载，出现 FOUC。</li>
+<li><code>link</code>可以通过<code>rel=&quot;alternate stylesheet&quot;</code>指定候选样式。</li>
+<li>浏览器对<code>link</code>支持早于<code>@import</code>，可以使用<code>@import</code>对老浏览器隐藏样式。</li>
+<li><code>@import</code>必须再样式规则之前，可以再 css 文件中引用其他文件。</li>
+<li>总体来说：<code>link</code>优于<code>@import</code>。</li>
+</ul>
+<h3 id="什么是-FOUC？如何避免？"><a href="#什么是-FOUC？如何避免？" class="headerlink" title="什么是 FOUC？如何避免？"></a>什么是 FOUC？如何避免？</h3><ul>
+<li><code>Flash Of Unstyled Content</code>，用户定义样式表加载之前浏览器使用默认样式显示文档，用户样式加载渲染之后再重新显示文档，造成页面闪烁。</li>
+<li>解决方法：把样式表放到文档的<code>&lt;head&gt;</code>。</li>
+</ul>
+<h3 id="清除浮动有哪几种方式？"><a href="#清除浮动有哪几种方式？" class="headerlink" title="清除浮动有哪几种方式？"></a>清除浮动有哪几种方式？</h3><ul>
+<li>父级元素设置属性<code>height</code></li>
+<li>结尾处加一个块级空元素并<code>clear: both;</code></li>
+<li>父级定义伪元素<code>::after</code>并且属性为<code>zoom: 1; clear: both;</code></li>
+<li>父级元素设置属性<code>overflow</code>不为<code>visible</code></li>
+<li>父级也浮动，同时设置宽度</li>
+</ul>
+<h3 id="PNG，GIF，JPG-的区别及如何选择？"><a href="#PNG，GIF，JPG-的区别及如何选择？" class="headerlink" title="PNG，GIF，JPG 的区别及如何选择？"></a>PNG，GIF，JPG 的区别及如何选择？</h3><ul>
+<li><p>PNG</p>
+<ul>
+<li>有 PNG8 和 truecolor PNG</li>
+<li>PNG8 是 256 色</li>
+<li>文件小，支持<code>alpha</code>透明度，无动画</li>
+<li>适合背景图，图标，按钮</li>
+</ul>
+</li>
+<li><p>GIF</p>
+<ul>
+<li>8 位像素，256 色</li>
+<li>无损压缩</li>
+<li>支持动画</li>
+<li>支持<code>boolean</code>透明</li>
+<li>适合简单动画</li>
+</ul>
+</li>
+<li><p>JPG</p>
+<ul>
+<li>256 色</li>
+<li>有损压缩</li>
+<li>不支持透明</li>
+<li>适合照片</li>
+</ul>
+</li>
+</ul>
+<h3 id="浏览器渲染机制是什么"><a href="#浏览器渲染机制是什么" class="headerlink" title="浏览器渲染机制是什么"></a>浏览器渲染机制是什么</h3><p><img src="https://note.youdao.com/yws/public/resource/bb7792e904a30442f11cb6c88c33cce8/xmlnote/3B3F205479D64FC89D30ECFC15B8AE35/14124" alt="浏览器渲染机制"></p>
+<p>浏览器渲染页面整个过程：</p>
+<ol>
+<li>首先，解析 HTML Source，构建 DOM Tree；</li>
+<li>同时，解析 CSS Style，构建 CSSOM Tree；</li>
+<li>然后，组合 DOM Tree 与 CSSOM Tree，去除不可见元素，构建 Render Tree；</li>
+<li>再执行 Reflow，根据 Render Tree 计算每个可见元素的布局；</li>
+<li>最后，执行 Repaint，通过绘制流程，将每个像素渲染到屏幕上；</li>
+</ol>
+<p>注意：</p>
+<ul>
+<li>Render Tree 只包含渲染网页所需要的节点；</li>
+<li>Reflow 过程是布局计算每个对象的精确位置和大小；</li>
+<li>Repaint 过程则是将 Render Tree 的每个像素渲染到屏幕上；</li>
+</ul>
+<h3 id="重排（reflow）和重绘（repaint）"><a href="#重排（reflow）和重绘（repaint）" class="headerlink" title="重排（reflow）和重绘（repaint）"></a>重排（reflow）和重绘（repaint）</h3><ul>
+<li>重排（又称回流），发生在 Render Tree 阶段，它主要用来确定元素的几何属性和位置</li>
+<li>重绘，发生在重排（reflow）过程之后，将元素的颜色、背景属性绘制出来</li>
+</ul>
+<h3 id="怎样触发-reflow-和-repaint"><a href="#怎样触发-reflow-和-repaint" class="headerlink" title="怎样触发 reflow 和 repaint"></a>怎样触发 reflow 和 repaint</h3><p>触发 Reflow</p>
+<ul>
+<li>增加、删除和修改 DOM 节点时，会导致 Reflow 或 Repaint</li>
+<li>移动 DOM 位置，或者动画</li>
+<li>修改位置样式</li>
+<li>Resize 窗口，或者是滚动</li>
+<li>修改网页默认字体</li>
+</ul>
+<p>触发 Repaint</p>
+<ul>
+<li>增加、删除和修改 DOM 节点</li>
+<li>css 改动</li>
+</ul>
+<h3 id="如何减少-reflow-和-Repaint-过程"><a href="#如何减少-reflow-和-Repaint-过程" class="headerlink" title="如何减少 reflow 和 Repaint 过程"></a>如何减少 reflow 和 Repaint 过程</h3><ul>
+<li>减少 js 逐个修改样式，而是用添加、修改 css 类</li>
+<li>通过<code>documentFragment</code>集中处理临时操作</li>
+<li>克隆节点进行操作，然后进行原节点替换</li>
+<li>使用<code>display: none;</code>进行批量操作</li>
+<li>减少样式重新计算，即减少<code>offset</code>、<code>scroll</code>、<code>clientX/Y</code>、<code>getComputedStyle</code>、<code>currentStyle</code>的使用，因为每次使用都会刷新操作缓冲区，执行 reflow 和 repaint</li>
+</ul>
+<h3 id="解决移动端-1px-问题"><a href="#解决移动端-1px-问题" class="headerlink" title="解决移动端 1px 问题"></a>解决移动端 1px 问题</h3><ul>
+<li>首先移动端 1px 问题的背景是因为在移动端设备存在高清 Retina 屏，也就是 2 倍 3 倍屏幕，它们的 dpr（物理像素比）更高，比如 1 x 1 px 在 2 倍屏幕上会用 2x2 物理像素显示，比普通设备看起来更粗。要解决 1px 问题，本质就是解决让高清屏用一个物理像素展示一个 CSS 像素。</li>
+<li>方案一：<code>border-image: url(svg);</code>使用 svg 做边框图片，svg 可以是 4x4px 图片，stroke=1，<code>border-image-slice: xxx</code>将 svg 图片切割成 9 部分，除中间一块，其他八块当做边框使用。</li>
+<li>方案二：利用伪元素，比如<code>::after</code>，设置元素绝对定位，<code>left`</code>top <code>均为 0，使用媒体查询识别 dpr（</code>@media(device-pixel-radio:2)<code>），比如 dpr 为 2，将</code>width: 200%; height: 200%<code>，然后再通过</code>transform: scale(0.5)<code>，</code>pointer-events: none;`鼠标点击穿透。</li>
+<li>方案三：viewPort + scale</li>
+</ul>
+<p>参考<br><a href="https://mp.weixin.qq.com/s/cJB-MDY_YyXuEyD0lALrvQ" target="_blank" rel="noopener">移动端 1px 解决方案</a></p>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/05/06/css中的一些坑/" rel="bookmark">css中的一些坑</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/11/06/draw-ring/" rel="bookmark">draw-ring</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/07/23/flex布局/" rel="bookmark">flex 布局</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/06/01/horizontally-centered-vertically/" rel="bookmark">水平且垂直居中方法（10种）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2018/06/15/grid栅格布局/" rel="bookmark">grid栅格布局</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wuwhs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wuwhs.gitee.io/2018/03/04/inter-css/" title="前端面试之css">https://wuwhs.gitee.io/2018/03/04/inter-css/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/04/inter-js/" rel="next" title="前端面试之javascript">
+                <i class="fa fa-chevron-left"></i> 前端面试之javascript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/05/inter-html/" rel="prev" title="前端面试之html">
+                前端面试之html <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="wuwhs" />
+            
+              <p class="site-author-name" itemprop="name">wuwhs</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wuwhs" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://segmentfault.com/u/wuwhs" target="_blank" title="Segmentfault" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍一下标准的-CSS-的盒子模型？低版本-IE-的盒子模型有什么不同的？"><span class="nav-number">1.</span> <span class="nav-text">介绍一下标准的 CSS 的盒子模型？低版本 IE 的盒子模型有什么不同的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-选择符有哪些？哪些属性可以继承？"><span class="nav-number">2.</span> <span class="nav-text">CSS 选择符有哪些？哪些属性可以继承？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-优先级算法如何计算？"><span class="nav-number">3.</span> <span class="nav-text">CSS 优先级算法如何计算？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-sprite-是什么，有什么优缺点？"><span class="nav-number">4.</span> <span class="nav-text">css sprite 是什么，有什么优缺点？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IE6-浏览器有哪些常见的-bug-缺陷或者与标准不一致的地方-如何解决？"><span class="nav-number">5.</span> <span class="nav-text">IE6 浏览器有哪些常见的 bug,缺陷或者与标准不一致的地方,如何解决？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS3-新增伪类有那些？"><span class="nav-number">6.</span> <span class="nav-text">CSS3 新增伪类有那些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现水平、垂直居中？"><span class="nav-number">7.</span> <span class="nav-text">实现水平、垂直居中？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#position取值有哪几种？"><span class="nav-number">8.</span> <span class="nav-text">position取值有哪几种？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#描述display-block-和display-inline-的具体区别？"><span class="nav-number">9.</span> <span class="nav-text">描述display: block;和display: inline;的具体区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用纯-CSS-创建一个三角形的原理是什么？"><span class="nav-number">10.</span> <span class="nav-text">用纯 CSS 创建一个三角形的原理是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chrome-中文界面下默认会将小于-12px-的文本强制按照-12px-显示？"><span class="nav-number">11.</span> <span class="nav-text">Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要初始化-CSS-样式？"><span class="nav-number">12.</span> <span class="nav-text">为什么要初始化 CSS 样式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#position-跟-display、margin-collapse、overflow、float-这些特性相互叠加后会怎么样？"><span class="nav-number">13.</span> <span class="nav-text">position 跟 display、margin collapse、overflow、float 这些特性相互叠加后会怎么样？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css-定义权重"><span class="nav-number">14.</span> <span class="nav-text">css 定义权重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zoom-1-的清除浮动原理？"><span class="nav-number">15.</span> <span class="nav-text">zoom:1 的清除浮动原理？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端布局有哪几种方法？"><span class="nav-number">16.</span> <span class="nav-text">移动端布局有哪几种方法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-优化、提高性能的方法有哪些？"><span class="nav-number">17.</span> <span class="nav-text">CSS 优化、提高性能的方法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#margin-和-padding-分别适合什么场景使用？"><span class="nav-number">18.</span> <span class="nav-text">margin 和 padding 分别适合什么场景使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#before-和-before中双冒号和单冒号-有什么区别？解释一下这-2-个伪元素的作用。"><span class="nav-number">19.</span> <span class="nav-text">::before 和 :before中双冒号和单冒号 有什么区别？解释一下这 2 个伪元素的作用。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#font-style-属性可以让它赋值为“oblique”-oblique-是什么意思？"><span class="nav-number">20.</span> <span class="nav-text">font-style 属性可以让它赋值为“oblique” oblique 是什么意思？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#让页面里的字体变清晰，变细用-CSS-怎么做？"><span class="nav-number">21.</span> <span class="nav-text">让页面里的字体变清晰，变细用 CSS 怎么做？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）"><span class="nav-number">22.</span> <span class="nav-text">如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#display-inline-block-什么时候会显示间隙？-携程"><span class="nav-number">23.</span> <span class="nav-text">display:inline-block 什么时候会显示间隙？(携程)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Cookie-隔离？（或者说：请求资源的时候不要让它带-cookie-怎么做）"><span class="nav-number">24.</span> <span class="nav-text">什么是 Cookie 隔离？（或者说：请求资源的时候不要让它带 cookie 怎么做）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#style-标签写在-body-后与-body-前有什么区别？"><span class="nav-number">25.</span> <span class="nav-text">style 标签写在 body 后与 body 前有什么区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-CSS-预处理器-后处理器？"><span class="nav-number">26.</span> <span class="nav-text">什么是 CSS 预处理器 / 后处理器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#display-none-和visibility-hidden-的区别？"><span class="nav-number">27.</span> <span class="nav-text">display: none;和visibility: hidden;的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#link和-import的区别？"><span class="nav-number">28.</span> <span class="nav-text">link和@import的区别？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-FOUC？如何避免？"><span class="nav-number">29.</span> <span class="nav-text">什么是 FOUC？如何避免？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清除浮动有哪几种方式？"><span class="nav-number">30.</span> <span class="nav-text">清除浮动有哪几种方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PNG，GIF，JPG-的区别及如何选择？"><span class="nav-number">31.</span> <span class="nav-text">PNG，GIF，JPG 的区别及如何选择？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器渲染机制是什么"><span class="nav-number">32.</span> <span class="nav-text">浏览器渲染机制是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重排（reflow）和重绘（repaint）"><span class="nav-number">33.</span> <span class="nav-text">重排（reflow）和重绘（repaint）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎样触发-reflow-和-repaint"><span class="nav-number">34.</span> <span class="nav-text">怎样触发 reflow 和 repaint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何减少-reflow-和-Repaint-过程"><span class="nav-number">35.</span> <span class="nav-text">如何减少 reflow 和 Repaint 过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决移动端-1px-问题"><span class="nav-number">36.</span> <span class="nav-text">解决移动端 1px 问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">copyright by wuwh's blog</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

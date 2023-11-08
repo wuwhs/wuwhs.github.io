@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.0">
+
+
+  <link rel="mask-icon" href="/images/logo.png?v=6.4.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="递归和回溯的关系密不可分：递归的基本性质就是函数调用，在处理问题的时候，递归往往是把一个大规模的问题不断地变小然后进行推导的过程。回溯则是利用递归的性质，从问题的起始点出发，不断地进行尝试，回头一步甚至多步再做选择，直到最终抵达终点的过程。  递归（Recursion）递归算法思想递归算法是一种调用自身函数的算法（二叉树的许多性质在定义上就满足递归）。 汉诺塔问题有三个塔 A、B、C，一开始的时">
+<meta name="keywords" content="javascript,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「超详笔记」算法——递归与回溯（JS版）">
+<meta property="og:url" content="https://wuwhs.gitee.io/2020/11/06/algorithm-recursion-backtracking/index.html">
+<meta property="og:site_name" content="wuwh&#39;s blog">
+<meta property="og:description" content="递归和回溯的关系密不可分：递归的基本性质就是函数调用，在处理问题的时候，递归往往是把一个大规模的问题不断地变小然后进行推导的过程。回溯则是利用递归的性质，从问题的起始点出发，不断地进行尝试，回头一步甚至多步再做选择，直到最终抵达终点的过程。  递归（Recursion）递归算法思想递归算法是一种调用自身函数的算法（二叉树的许多性质在定义上就满足递归）。 汉诺塔问题有三个塔 A、B、C，一开始的时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-recursion-backtracking/hano.gif">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-recursion-backtracking/symmetric-number.gif">
+<meta property="og:image" content="https://wuwhs.gitee.io/gb/algorithm-recursion-backtracking/nqueen.gif">
+<meta property="og:updated_time" content="2022-09-27T03:58:43.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「超详笔记」算法——递归与回溯（JS版）">
+<meta name="twitter:description" content="递归和回溯的关系密不可分：递归的基本性质就是函数调用，在处理问题的时候，递归往往是把一个大规模的问题不断地变小然后进行推导的过程。回溯则是利用递归的性质，从问题的起始点出发，不断地进行尝试，回头一步甚至多步再做选择，直到最终抵达终点的过程。  递归（Recursion）递归算法思想递归算法是一种调用自身函数的算法（二叉树的许多性质在定义上就满足递归）。 汉诺塔问题有三个塔 A、B、C，一开始的时">
+<meta name="twitter:image" content="https://wuwhs.gitee.io/gb/algorithm-recursion-backtracking/hano.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="https://wuwhs.gitee.io/2020/11/06/algorithm-recursion-backtracking/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「超详笔记」算法——递归与回溯（JS版） | wuwh's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?fa314f7747528620032d3194b7fccc9a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">wuwh's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Make progress every day</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签<span class="badge">39</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类<span class="badge">12</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档<span class="badge">71</span></a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wuwhs.gitee.io/2020/11/06/algorithm-recursion-backtracking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuwhs">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wuwh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">「超详笔记」算法——递归与回溯（JS版）
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-11-06 23:11:35" itemprop="dateCreated datePublished" datetime="2020-11-06T23:11:35+08:00">2020-11-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-09-27 11:58:43" itemprop="dateModified" datetime="2022-09-27T11:58:43+08:00">2022-09-27</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>递归和回溯的关系密不可分：<br>递归的基本性质就是函数调用，在处理问题的时候，递归往往是把一个大规模的问题不断地变小然后进行推导的过程。<br>回溯则是利用递归的性质，从问题的起始点出发，不断地进行尝试，回头一步甚至多步再做选择，直到最终抵达终点的过程。</p>
+</blockquote>
+<h2 id="递归（Recursion）"><a href="#递归（Recursion）" class="headerlink" title="递归（Recursion）"></a>递归（Recursion）</h2><h3 id="递归算法思想"><a href="#递归算法思想" class="headerlink" title="递归算法思想"></a>递归算法思想</h3><p>递归算法是一种调用自身函数的算法（二叉树的许多性质在定义上就满足递归）。</p>
+<h3 id="汉诺塔问题"><a href="#汉诺塔问题" class="headerlink" title="汉诺塔问题"></a>汉诺塔问题</h3><p>有三个塔 <code>A</code>、<code>B</code>、<code>C</code>，一开始的时候，在塔 <code>A</code> 上放着 <code>n</code> 个盘子，它们自底向上按照从大到小的顺序叠放。现在要求将塔 <code>A</code> 中所有的盘子搬到塔 <code>C</code> 上，让你打印出搬运的步骤。在搬运的过程中，每次只能搬运一个盘子，另外，任何时候，无论在哪个塔上，大盘子不能放在小盘子的上面。</p>
+<p><img src="/gb/algorithm-recursion-backtracking/hano.gif" alt="hano"></p>
+<h3 id="汉诺塔问题解法"><a href="#汉诺塔问题解法" class="headerlink" title="汉诺塔问题解法"></a>汉诺塔问题解法</h3><ul>
+<li>从最终的结果出发，要把 <code>n</code> 个盘子按照大小顺序叠放在塔 <code>C</code> 上，就需要将塔 <code>A</code> 的底部最大的盘子搬到塔 <code>C</code>；</li>
+<li>为了实现步骤 <code>1</code>，需要将除了这个最大盘子之外的其余盘子都放到塔 <code>B</code> 上。</li>
+</ul>
+<p>由上可知，将原来的问题规模从 <code>n</code> 个盘子变成了 <code>n-1</code> 个盘子，即将 <code>n-1</code> 个盘子转移到塔 <code>B</code> 上。</p>
+<p>如果一个函数，能将 <code>n</code> 个盘子从塔 <code>A</code>，借助塔 <code>B</code>，搬到塔 <code>C</code>。那么，也可以利用该函数将 <code>n-1</code> 个盘子从塔 <code>A</code>，借助塔 <code>C</code>，搬到塔 <code>B</code>。同理，不断地把问题规模变小，当 <code>n</code> 为 <code>1</code>，也就是只有 <code>1</code> 个盘子的时候，直接打印出步骤。</p>
+<h3 id="汉诺塔问题代码示例"><a href="#汉诺塔问题代码示例" class="headerlink" title="汉诺塔问题代码示例"></a>汉诺塔问题代码示例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汉诺塔问题</span></span><br><span class="line"><span class="keyword">const</span> hano = <span class="function"><span class="keyword">function</span> (<span class="params">A, B, C, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    hano(A, C, B, n - <span class="number">1</span>)</span><br><span class="line">    move(A, C)</span><br><span class="line">    hano(B, A, C, n - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> move = <span class="function"><span class="keyword">function</span> (<span class="params">p, c</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> temp = p.pop()</span><br><span class="line">  c.push(temp)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> b = []</span><br><span class="line"><span class="keyword">const</span> c = []</span><br><span class="line">hano(a, b, c, a.length)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'----after----'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'a: '</span>, <span class="built_in">String</span>(a)) <span class="comment">//</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'b: '</span>, <span class="built_in">String</span>(b)) <span class="comment">//</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'c: '</span>, <span class="built_in">String</span>(c)) <span class="comment">// 1, 2, 3, 4, 5</span></span><br></pre></td></tr></table></figure>
+<p>由上述总结出递归的算法思想，将一个问题的规模变小，然后再利用从小规模问题中得出的结果，结合当前的值或者情况，得出最终的结果。</p>
+<p>通俗来说，把要实现的递归函数看成是已经实现好的， 直接利用解决一些子问题，然后需要考虑的就是如何根据子问题的解以及当前面对的情况得出答案。这种算法也被称为自顶向下（<code>Top-Down</code>）的算法。</p>
+<h3 id="数字解码问题"><a href="#数字解码问题" class="headerlink" title="数字解码问题"></a>数字解码问题</h3><p>LeetCode 第 91 题，解码的方法。<br>一条包含字母  A-Z  的消息通过以下方式进行了编码：<br>‘A’ -&gt; 1<br>‘B’ -&gt; 2<br>…<br>‘Z’ -&gt; 26<br>给定一个只包含数字的非空字符串，请计算解码方法的总数。</p>
+<h3 id="数字解码解题思路"><a href="#数字解码解题思路" class="headerlink" title="数字解码解题思路"></a>数字解码解题思路</h3><ul>
+<li>就例题中的第二个例子，给定编码后的消息是字符串“226”，如果对其中“22”的解码有 <code>m</code> 种可能，那么，加多一个“6”在最后，相当于在最终解密出来的字符串里多了一个“F”字符而已，总体的解码还是只有 m 种。</li>
+<li>对于“6”而言，如果它的前面是”1”或者“2”，那么它就有可能是“16”，“26”，所以还可以再往前看一个字符，发现它是“26”。而前面的解码组合是 <code>k</code> 个，那么在这 <code>k</code> 个解出的编码里，添加一个“Z”，所以总的解码个数就是 <code>m+k</code>。</li>
+</ul>
+<h3 id="数字解码代码实现"><a href="#数字解码代码实现" class="headerlink" title="数字解码代码实现"></a>数字解码代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> numDecoding = <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (str.charAt(<span class="number">0</span>) === <span class="string">'0'</span>) <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">const</span> chars = [...str]</span><br><span class="line">  <span class="keyword">return</span> decode(chars, chars.length - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符串转化成字符组，利用递归函数 decode，从最后一个字符串向前递归</span></span><br><span class="line"><span class="keyword">const</span> decode = <span class="function"><span class="keyword">function</span> (<span class="params">chars, index</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (index &lt;= <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">  <span class="keyword">let</span> curr = chars[index]</span><br><span class="line">  <span class="keyword">let</span> prev = chars[index - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 当前字符比 `0` 大，则直接利用它之前的字符串所求得结果</span></span><br><span class="line">  <span class="keyword">if</span> (curr &gt; <span class="string">'0'</span>) &#123;</span><br><span class="line">    count = decode(chars, index - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 由前一个字符和当前字符构成的数字，值必须要在1和26之间，否则无法编码</span></span><br><span class="line">  <span class="keyword">if</span> (prev === <span class="string">'1'</span> || (prev == <span class="string">'2'</span> &amp;&amp; curr &lt;= <span class="string">'6'</span>)) &#123;</span><br><span class="line">    count += decode(chars, index - <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> count</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'count: '</span>, numDecoding(<span class="string">'1213'</span>)) <span class="comment">// count: 5</span></span><br></pre></td></tr></table></figure>
+<h3 id="递归问题解题模板"><a href="#递归问题解题模板" class="headerlink" title="递归问题解题模板"></a>递归问题解题模板</h3><p>通过上述例题，来归纳总结一下递归函数的解题模版。</p>
+<p>解题步骤</p>
+<ul>
+<li>判断当前情况是否非法，如果非法就立即返回，这一步也被称为完整性检查（<code>Sanity Check</code>）。例如，看看当前处理的情况是否越界，是否出现了不满足条件的情况。通常，这一部分代码都是写在最前面的。</li>
+<li>判断是否满足结束递归的条件。在这一步当中，处理的基本上都是一些推导过程当中所定义的初始情况。</li>
+<li>将问题的规模缩小，递归调用。在归并排序和快速排序中，我们将问题的规模缩小了一半，而在汉诺塔和解码的例子中，我们将问题的规模缩小了一个。</li>
+<li>利用在小规模问题中的答案，结合当前的数据进行整合，得出最终的答案。</li>
+</ul>
+<h3 id="递归问题解题模板代码实现"><a href="#递归问题解题模板代码实现" class="headerlink" title="递归问题解题模板代码实现"></a>递归问题解题模板代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 第一步：判断输入或者状态是否非法？</span></span><br><span class="line">    <span class="keyword">if</span> (input/state is invalid) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二步：判读递归是否应当结束?</span></span><br><span class="line">    <span class="keyword">if</span> (match condition) &#123;</span><br><span class="line">        <span class="keyword">return</span> some value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第三步：缩小问题规模</span></span><br><span class="line">    result1 = fn(n1)</span><br><span class="line">    result2 = fn(n2)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第四步: 整合结果</span></span><br><span class="line">    <span class="keyword">return</span> combine(result1, result2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="中心对称数问题"><a href="#中心对称数问题" class="headerlink" title="中心对称数问题"></a>中心对称数问题</h3><p>LeetCode 第 247 题：找到所有长度为 <code>n</code> 的中心对称数。</p>
+<p>示例<br>输入:  n = 2<br>输出: [“11”,”69”,”88”,”96”]</p>
+<h3 id="中心对称数问题解题思路"><a href="#中心对称数问题解题思路" class="headerlink" title="中心对称数问题解题思路"></a>中心对称数问题解题思路</h3><p><img src="/gb/algorithm-recursion-backtracking/symmetric-number.gif" alt="symmetric-number"></p>
+<ul>
+<li>当 <code>n=0</code> 的时候，应该输出空字符串：<code>“ ”</code>。</li>
+<li>当 <code>n=1</code> 的时候，也就是长度为 <code>1</code> 的中心对称数有：<code>0，1，8</code>。</li>
+<li>当 <code>n=2</code> 的时候，长度为 <code>2</code> 的中心对称数有：<code>11， 69，88，96</code>。注意：<code>00</code> 并不是一个合法的结果。</li>
+<li>当 <code>n=3</code> 的时候，只需要在长度为 <code>1</code> 的合法中心对称数的基础上，不断地在两边添加 <code>11，69，88，96</code> 就可以了。</li>
+</ul>
+<p>[101, 609, 808, 906, 111, 619, 818, 916, 181, 689, 888, 986]</p>
+<p>随着 <code>n</code> 不断地增长，我们只需要在长度为 <code>n-2</code> 的中心对称数两边添加 <code>11，69，88，96</code> 即可。</p>
+<h3 id="中心对称数问题代码实现"><a href="#中心对称数问题代码实现" class="headerlink" title="中心对称数问题代码实现"></a>中心对称数问题代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> helper = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">debugger</span></span><br><span class="line">  <span class="comment">// 第一步：判断输入或状态是否非法</span></span><br><span class="line">  <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'illegal argument'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第二步：判读递归是否应当结束</span></span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">''</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'8'</span>]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第三步：缩小问题规模</span></span><br><span class="line">  <span class="keyword">const</span> list = helper(n - <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第四步：整合结果</span></span><br><span class="line">  <span class="keyword">const</span> res = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> s = list[i]</span><br><span class="line">    res.push(<span class="string">'1'</span> + s + <span class="string">'1'</span>)</span><br><span class="line">    res.push(<span class="string">'6'</span> + s + <span class="string">'9'</span>)</span><br><span class="line">    res.push(<span class="string">'8'</span> + s + <span class="string">'8'</span>)</span><br><span class="line">    res.push(<span class="string">'9'</span> + s + <span class="string">'6'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(helper(<span class="number">2</span>)) <span class="comment">// [ '11', '69', '88', '96' ]</span></span><br></pre></td></tr></table></figure>
+<h2 id="回溯（Backtracking）"><a href="#回溯（Backtracking）" class="headerlink" title="回溯（Backtracking）"></a>回溯（Backtracking）</h2><h3 id="回溯算法思想"><a href="#回溯算法思想" class="headerlink" title="回溯算法思想"></a>回溯算法思想</h3><p>回溯实际上是一种试探算法，这种算法跟暴力搜索最大的不同在于，在回溯算法里，是一步一步地小心翼翼地进行向前试探，会对每一步探测到的情况进行评估，如果当前的情况已经无法满足要求，那么就没有必要继续进行下去，也就是说，它可以帮助我们避免走很多的弯路。</p>
+<p>回溯算法的特点在于，当出现非法的情况时，算法可以回退到之前的情景，可以是返回一步，有时候甚至可以返回多步，然后再去尝试别的路径和办法。这也就意味着，想要采用回溯算法，就必须保证，每次都有多种尝试的可能。</p>
+<h3 id="回溯算法解题模板"><a href="#回溯算法解题模板" class="headerlink" title="回溯算法解题模板"></a>回溯算法解题模板</h3><p>解题步骤：</p>
+<ul>
+<li>判断当前情况是否非法，如果非法就立即返回；</li>
+<li>当前情况是否已经满足递归结束条件，如果是就将当前结果保存起来并返回；</li>
+<li>当前情况下，遍历所有可能出现的情况并进行下一步的尝试；</li>
+<li>递归完毕后，立即回溯，回溯的方法就是取消前一步进行的尝试。</li>
+</ul>
+<h3 id="回溯算法解题代码"><a href="#回溯算法解题代码" class="headerlink" title="回溯算法解题代码"></a>回溯算法解题代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 第一步：判断输入或者状态是否非法？</span></span><br><span class="line">  <span class="keyword">if</span> (input/state is invalid) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 第二步：判读递归是否应当结束?</span></span><br><span class="line">  <span class="keyword">if</span> (match condition) &#123;</span><br><span class="line">    <span class="keyword">return</span> some value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 遍历所有可能出现的情况</span></span><br><span class="line">  <span class="keyword">for</span> (all possible cases) &#123;  </span><br><span class="line">    <span class="comment">// 第三步: 尝试下一步的可能性</span></span><br><span class="line">    solution.push(<span class="keyword">case</span>)</span><br><span class="line">    <span class="comment">// 递归</span></span><br><span class="line">    result = fn(m)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第四步：回溯到上一步</span></span><br><span class="line">    solution.pop(<span class="keyword">case</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="凑整数问题"><a href="#凑整数问题" class="headerlink" title="凑整数问题"></a>凑整数问题</h3><p>LeetCode 第 39 题：给定一个无重复元素的数组 <code>candidates</code> 和一个目标数  <code>target</code> ，找出 <code>candidates</code> 中所有可以使数字和为 <code>target</code> 的组合。candidates  中的数字可以无限制重复被选取。</p>
+<p>说明：<br>所有数字（包括 <code>target</code>）都是正整数。<br>解集不能包含重复的组合。</p>
+<h3 id="凑整数问题解题思路"><a href="#凑整数问题解题思路" class="headerlink" title="凑整数问题解题思路"></a>凑整数问题解题思路</h3><p>题目要求的是所有不重复的子集，而且子集里的元素的值的总和等于一个给定的目标。</p>
+<p><strong>思路 1</strong>：暴力法。</p>
+<p>罗列出所有的子集组合，然后逐个判断它们的总和是否为给定的目标值。解法非常慢。</p>
+<p><strong>思路 2</strong>：回溯法。</p>
+<p>从一个空的集合开始，小心翼翼地往里面添加元素。</p>
+<p>每次添加，检查一下当前的总和是否等于给定的目标。</p>
+<p>如果总和已经超出了目标，说明没有必要再尝试其他的元素了，返回并尝试其他的元素；</p>
+<p>如果总和等于目标，就把当前的组合添加到结果当中，表明我们找到了一种满足要求的组合，同时返回，并试图寻找其他的集合。</p>
+<h3 id="凑整数问题代码实现"><a href="#凑整数问题代码实现" class="headerlink" title="凑整数问题代码实现"></a>凑整数问题代码实现</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> combinationSum = <span class="function"><span class="keyword">function</span> (<span class="params">candidates, target</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> results = []</span><br><span class="line">  backtracking(candidates, target, <span class="number">0</span>, [], results)</span><br><span class="line">  <span class="keyword">return</span> results</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> backtracking = <span class="function"><span class="keyword">function</span> (<span class="params">candidates, target, start, solution, results</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (target &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (target === <span class="number">0</span>) &#123;</span><br><span class="line">    results.push([...solution])</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; candidates.length; i++) &#123;</span><br><span class="line">    solution.push(candidates[i])</span><br><span class="line">    backtracking(candidates, target - candidates[i], i, solution, results)</span><br><span class="line">    solution.pop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(combinationSum([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="number">5</span>))</span><br><span class="line"><span class="comment">// [ [ 1, 1, 1, 1, 1 ],</span></span><br><span class="line"><span class="comment">//   [ 1, 1, 1, 2 ],</span></span><br><span class="line"><span class="comment">//   [ 1, 1, 3 ],</span></span><br><span class="line"><span class="comment">//   [ 1, 2, 2 ],</span></span><br><span class="line"><span class="comment">//   [ 2, 3 ] ]</span></span><br></pre></td></tr></table></figure>
+<p>在主函数里：</p>
+<ul>
+<li>定义一个 <code>results</code> 数组用来保存最终的结果；</li>
+<li>调用函数 <code>backtracking</code>，并将初始的情况以及 <code>results</code> 传递进去，这里的初始情况就是从第一个元素开始尝试，而且初始的子集为空。</li>
+</ul>
+<p>在 <code>backtracking</code> 函数里：</p>
+<ul>
+<li>检查当前的元素总和是否已经超出了目标给定的值，每添加进一个新的元素时，就将它从目标总和中减去；</li>
+<li>如果总和已经超出了目标给定值，就立即返回，去尝试其他的数值；</li>
+<li>如果总和刚好等于目标值，就把当前的子集添加到结果中。</li>
+</ul>
+<p>在循环体内：</p>
+<ul>
+<li>每次添加了一个新的元素，立即递归调用 <code>backtracking</code>，看是否找到了合适的子集</li>
+<li>递归完毕后，要把上次尝试的元素从子集里删除，这是最重要的。</li>
+</ul>
+<p>以上，就完成了回溯。</p>
+<p>提示：这是一个最经典的回溯的题目，麻雀虽小，但五脏俱全。它完整地体现了回溯算法的各个阶段。</p>
+<h3 id="N-皇后问题"><a href="#N-皇后问题" class="headerlink" title="N 皇后问题"></a>N 皇后问题</h3><p>LeetCode 第 51 题， 在一个 <code>N×N</code> 的国际象棋棋盘上放置 <code>N</code> 个皇后，每行一个并使她们不能互相攻击。给定一个整数 <code>N</code>，返回 <code>N</code> 皇后不同的的解决方案的数量。</p>
+<h3 id="N-皇后问题解题思路"><a href="#N-皇后问题解题思路" class="headerlink" title="N 皇后问题解题思路"></a>N 皇后问题解题思路</h3><p>解决 <code>N</code> 皇后问题的关键就是如何判断当前各个皇后的摆放是否合法。</p>
+<p><img src="/gb/algorithm-recursion-backtracking/nqueen.gif" alt="nqueen"></p>
+<p>利用一个数组 <code>columns[]</code> 来记录每一行里皇后所在的列。例如，第一行的皇后如果放置在第 <code>5</code> 列的位置上，那么 <code>columns[0] = 6</code>。从第一行开始放置皇后，每行只放置一个，假设之前的摆放都不会产生冲突，现在将皇后放在第 <code>row</code> 行第 <code>col</code> 列上，检查一下这样的摆放是否合理。</p>
+<p>方法就是沿着两个方向检查是否存在冲突就可以了。</p>
+<h3 id="N-皇后问题代码实现"><a href="#N-皇后问题代码实现" class="headerlink" title="N 皇后问题代码实现"></a>N 皇后问题代码实现</h3><p>首先，从第一行开始直到第 <code>row</code> 行的前一行为止，看那一行所放置的皇后是否在 <code>col</code> 列上，或者是不是在它的对角线上，代码如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> check = <span class="function"><span class="keyword">function</span> (<span class="params">row, col, columns</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> r = <span class="number">0</span>; r &lt; row; r++) &#123;</span><br><span class="line">    <span class="comment">// 其他皇后是否在当前放置皇后的列和对角线上</span></span><br><span class="line">    <span class="keyword">if</span> ((columns[r] = col || row - r == <span class="built_in">Math</span>.abs(columns[r] - col))) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后进行回溯的操作，代码如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> totalNQueens = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> results = []</span><br><span class="line">  backtracking(n, <span class="number">0</span>, [], [], results)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'results: '</span>, results) <span class="comment">// results: [ [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ] ],[ [ 0, 2 ], [ 1, 0 ], [ 2, 0 ] ] ]</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'count: '</span>, results.length) <span class="comment">// count: 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> backtracking = <span class="function"><span class="keyword">function</span> (<span class="params">n, row, columns, solution, results</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 是否在所有 n 行里都摆好了皇后</span></span><br><span class="line">  <span class="keyword">if</span> (row === n) &#123;</span><br><span class="line">    results.push([...solution])</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 尝试将皇后放置到当前行中的每一列</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> col = <span class="number">0</span>; col &lt; n; col++) &#123;</span><br><span class="line">    columns[row] = col</span><br><span class="line">    solution.push([row, col])</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查是否合法，如果合法就继续到下一行</span></span><br><span class="line">    <span class="keyword">if</span> (check(row, col, columns)) &#123;</span><br><span class="line">      backtracking(n, row + <span class="number">1</span>, columns, solution, results)</span><br><span class="line">    &#125;</span><br><span class="line">    solution.pop()</span><br><span class="line">    <span class="comment">// 如果不合法，就不要把皇后放在这列中</span></span><br><span class="line">    columns[row] = <span class="number">-1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">totalNQueens(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/23/algorithm-dp/" rel="bookmark">「超详笔记」算法——动态规划（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/08/algorithm-dfs-bfs/" rel="bookmark">「超详笔记」算法——深度与广度优先（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/11/05/algorithm-sort/" rel="bookmark">「超详笔记」算法——排序（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/12/12/algorithm-binary-search-greedy/" rel="bookmark">「超详笔记」算法——二分搜索与贪婪（JS版）</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2017/04/04/JavaScript思维导图/" rel="bookmark">JavaScript思维导图</a></div>
+      
+    </li>
+  
+  </ul>
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>wuwhs</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wuwhs.gitee.io/2020/11/06/algorithm-recursion-backtracking/" title="「超详笔记」算法——递归与回溯（JS版）">https://wuwhs.gitee.io/2020/11/06/algorithm-recursion-backtracking/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/05/algorithm-sort/" rel="next" title="「超详笔记」算法——排序（JS版）">
+                <i class="fa fa-chevron-left"></i> 「超详笔记」算法——排序（JS版）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/08/algorithm-dfs-bfs/" rel="prev" title="「超详笔记」算法——深度与广度优先（JS版）">
+                「超详笔记」算法——深度与广度优先（JS版） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="wuwhs" />
+            
+              <p class="site-author-name" itemprop="name">wuwhs</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/wuwhs" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://segmentfault.com/u/wuwhs" target="_blank" title="Segmentfault" rel="external nofollow"><i class="fa fa-fw fa-globe"></i>Segmentfault</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归（Recursion）"><span class="nav-number">1.</span> <span class="nav-text">递归（Recursion）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归算法思想"><span class="nav-number">1.1.</span> <span class="nav-text">递归算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汉诺塔问题"><span class="nav-number">1.2.</span> <span class="nav-text">汉诺塔问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汉诺塔问题解法"><span class="nav-number">1.3.</span> <span class="nav-text">汉诺塔问题解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#汉诺塔问题代码示例"><span class="nav-number">1.4.</span> <span class="nav-text">汉诺塔问题代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字解码问题"><span class="nav-number">1.5.</span> <span class="nav-text">数字解码问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字解码解题思路"><span class="nav-number">1.6.</span> <span class="nav-text">数字解码解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字解码代码实现"><span class="nav-number">1.7.</span> <span class="nav-text">数字解码代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归问题解题模板"><span class="nav-number">1.8.</span> <span class="nav-text">递归问题解题模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归问题解题模板代码实现"><span class="nav-number">1.9.</span> <span class="nav-text">递归问题解题模板代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中心对称数问题"><span class="nav-number">1.10.</span> <span class="nav-text">中心对称数问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中心对称数问题解题思路"><span class="nav-number">1.11.</span> <span class="nav-text">中心对称数问题解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中心对称数问题代码实现"><span class="nav-number">1.12.</span> <span class="nav-text">中心对称数问题代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯（Backtracking）"><span class="nav-number">2.</span> <span class="nav-text">回溯（Backtracking）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯算法思想"><span class="nav-number">2.1.</span> <span class="nav-text">回溯算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯算法解题模板"><span class="nav-number">2.2.</span> <span class="nav-text">回溯算法解题模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯算法解题代码"><span class="nav-number">2.3.</span> <span class="nav-text">回溯算法解题代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#凑整数问题"><span class="nav-number">2.4.</span> <span class="nav-text">凑整数问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#凑整数问题解题思路"><span class="nav-number">2.5.</span> <span class="nav-text">凑整数问题解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#凑整数问题代码实现"><span class="nav-number">2.6.</span> <span class="nav-text">凑整数问题代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-皇后问题"><span class="nav-number">2.7.</span> <span class="nav-text">N 皇后问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-皇后问题解题思路"><span class="nav-number">2.8.</span> <span class="nav-text">N 皇后问题解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-皇后问题代码实现"><span class="nav-number">2.9.</span> <span class="nav-text">N 皇后问题代码实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">copyright by wuwh's blog</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
