@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>stacking-context-order</title>
+    <style>
+        body {
+            padding: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- <section>
+        <style>
+            .red-wrapper {
+                position: relative;
+                z-index: 0;
+            }
+
+            .red {
+                position: absolute;
+                z-index: 2;
+                width: 300px;
+                height: 200px;
+                text-align: center;
+                background-color: brown;
+            }
+
+            .gray-wrapper {
+                position: relative;
+                z-index: 0;
+            }
+
+            .gray {
+                position: relative;
+                z-index: 1;
+                width: 200px;
+                height: 300px;
+                text-align: center;
+                background-color: gray;
+            }
+        </style>
+        <div class="red-wrapper">
+            <div class="red">小红</div>
+        </div>
+
+        <div class="gray-wrapper">
+            <div class="gray">小灰</div>
+        </div>
+    </section> -->
+
+
+    <section>
+        <style>
+            .wrapper {
+                /* display: flex; */
+                /* background-image: url("./jz.png"); */
+            }
+
+            .gray {
+                z-index: 1;
+                width: 200px;
+                height: 300px;
+                text-align: center;
+                background-color: gray;
+                /* opacity: 0.5; */
+                transform: rotate(30deg);
+                /* mix-blend-mode: multiply; */
+                /* filter: blur(5px); */
+                /* will-change: transform; */
+
+            }
+
+            .red {
+                z-index: -1;
+                width: 300px;
+                height: 200px;
+                text-align: center;
+                background-color: brown;
+                position: relative;
+            }
+        </style>
+        <div class="wrapper">
+            <div class="gray">
+                小灰
+                <div class="red">小红</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section>
+        <style>
+
+            .red {
+                position: absolute;
+                z-index: 2;
+                width: 300px;
+                height: 200px;
+                text-align: center;
+                background-color: brown;
+                mix-blend-mode: darken;
+            }
+
+            .gray {
+                position: relative;
+                z-index: 1;
+                width: 200px;
+                height: 300px;
+                text-align: center;
+                background-color: gray;
+                isolation: isolate;
+            }
+        </style>
+
+        <div class="red">小红</div>
+        <div class="gray">小灰</div>
+    </section> -->
+
+</body>
+
+</html>
